@@ -1,10 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Community from "./Tabs/Community";
-import PostDetail from "./Post/PostDetail";
-import NewPost from "./Post/NewPost";
-import SearchPost from "./Search/SearchPost";
-import Notification from "./Tabs/Notification";
+
+import Community from "../../screen/Tabs/Community";
+import PostDetail from "../../screen/Post/PostDetail";
+import NewPost from "../../screen/Post/NewPost";
+import SearchPost from "../../screen/Search/SearchPost";
+import Notification from "../../screen/Tabs/Notification";
 
 const Stack = createStackNavigator();
 export default function CommunityStack() {

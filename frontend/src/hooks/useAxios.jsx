@@ -4,16 +4,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { BACKEND_HOST, BACKEND_PORT } from '@env'
 import { useNavigation } from '@react-navigation/native'
 const instance = axios.create({
-    baseURL: `http://${"172.20.10.5"}:${8080}/api`,
+    baseURL: `http://${BACKEND_HOST}:${BACKEND_PORT}/api`,
     withCredentials: true,
 })
 
 const getToken = async() => {
-    return await AsyncStorage.getItem("userToken")
+    return await AsyncStorage.getItem("token")
 }
 
 export default function useAxios() {
-    const navigation = useNavigation()
+    // const navigation = useNavigation()
 
     React.useEffect(() => {
         const requestIntercept = instance.interceptors.request.use(async(config) => {
@@ -25,7 +25,7 @@ export default function useAxios() {
 
         const responseIntercept = instance.interceptors.response.use((response) => {
             if (response.status === 401) {
-                navigation.navigate("LoginScreen")
+                // navigation.navigate("LoginScreen")
                 return 
             }
             return response;

@@ -3,7 +3,7 @@ import CustomError from "../error/CustomError";
 import { User } from "../models";
 import { comparePassword } from "../utils/bcrypt";
 import { Op } from 'sequelize'
-import {generateAccessToken} from '../utils/jwt'
+import {generateAccessToken, verifyToken} from '../utils/jwt'
 import { CreateUserDTO } from "../dtos/user.dto";
 import { validateCreateUser } from "../validator/user";
 
@@ -47,4 +47,8 @@ export const signup = async(user: CreateUserDTO) => {
         throw new CustomError(StatusCodes.CONFLICT, `Email: ${user.email} was already used`)
     }
     await User.create({ ...user })
+}
+
+export const parseToken = (token: string) => {
+    return verifyToken(token)
 }

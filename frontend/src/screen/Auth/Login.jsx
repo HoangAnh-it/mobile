@@ -1,13 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesome, Feather } from '@expo/vector-icons'
-import React, { useContext } from 'react';
+import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { AuthContext } from '../../component/context';
 import useAxios from '../../hooks/useAxios';
 import useSocket from '../../hooks/useSocket'
+import useAuth from '../../hooks/useAuth';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -16,8 +17,8 @@ export default function Login({navigation}) {
   })
 
   const [checkLogin, setCheckLogin] = React.useState(true);
-  const { login } = useContext(AuthContext)
-  
+  const {authDispatch} = useAuth()._j
+
   const axios = useAxios()
   const socket = useSocket()
 
@@ -62,12 +63,28 @@ export default function Login({navigation}) {
       if (res.status === 200) {
         const { userId, role, token } = res.data.data
         socket.emit("join room", userId)
-        login(userId, role, token)
+        authDispatch({
+          type: "LOGIN",
+          payload: {
+            id: userId,
+            role: role,
+            token: token
+          }
+        })
+        return token
       }
-    }).catch(err => {
-      console.log(JSON.stringify(err))
-      setCheckLogin(false);
+    }).then(async (token) => {
+      console.log("Save token:::", token)
+      AsyncStorage.setItem("token", token)
+        .then(() => {
+          // navigation.navigate("Trang chủ")
+        })
+        .catch(console.log)
     })
+      .catch(err => {
+        console.log(JSON.stringify(err))
+        setCheckLogin(false);
+      })
   }
 
   return (

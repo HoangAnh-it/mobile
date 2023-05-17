@@ -26,3 +26,10 @@ export const register = ErrorWrapperHandler(async (req: Request, res: Response) 
         message: `Register successfully.`,
     })
 })
+
+// [GET] /auth/token/:token
+export const parseToken = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const { token } = req.params
+    const data = await authService.parseToken(token)
+    return res.status(StatusCodes.OK).json(data)
+})

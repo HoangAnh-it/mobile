@@ -2,28 +2,28 @@ import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, ScrollView 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesome, Feather, MaterialCommunityIcons, AntDesign, Octicons } from '@expo/vector-icons'
 
-import { AuthContext } from '../../component/context';
 import React from 'react';
+import useAuth from '../../hooks/useAuth';
 
-export default function Signup({navigation}) {
-    const [data, setData] = React.useState({
-        username: '',
-        email: '',
-        birthDay: '',
-        phone: '',
-        address: '',
-        password: '',
-        rePassword: '',
-        check_userChange: false,
-        check_emailChange: false,
-        check_birthDayChange: false,
-        check_phoneChange: false,
-        check_addressChange: false,
-        check_pwChange: false,
-        check_rePwChange: false,
-      })
-    
-      const { signup } = React.useContext(AuthContext);
+export default function Signup({ navigation }) {
+  const [data, setData] = React.useState({
+    username: '',
+    email: '',
+    birthDay: '',
+    phone: '',
+    address: '',
+    password: '',
+    rePassword: '',
+    check_userChange: false,
+    check_emailChange: false,
+    check_birthDayChange: false,
+    check_phoneChange: false,
+    check_addressChange: false,
+    check_pwChange: false,
+    check_rePwChange: false,
+  })
+  
+  const {auth, authDispatch} = useAuth()._j
     
       const userChange = (val) => {
         if (val.length != 0) {
@@ -138,7 +138,7 @@ export default function Signup({navigation}) {
       }
 
     const handleSignup = () => {
-      signup(username, password);
+      // signup(username, password);
     }
 
     return (

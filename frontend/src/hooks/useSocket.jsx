@@ -3,16 +3,19 @@ import { BACKEND_HOST, BACKEND_PORT } from '@env'
 import React from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const endpoint = `http://172.20.10.5:8080`
+import useAuth from "./useAuth";
+
+const endpoint = `http://${BACKEND_HOST}:${BACKEND_PORT}`
 console.log("Socket endpoint", endpoint)
-const socket = io(endpoint, {transports: ['websocket']});
+const socket = io(endpoint, { transports: ['websocket'] });
+
 
 export default function useSocket() {
+    const { auth } = useAuth()._j;
+
     React.useEffect(() => {
-        const handshakeListener = async (id) => {
-            const u = await AsyncStorage.getItem('user')
-            const userId = JSON.parse(u || {})?.id
-            socket.emit("handshake", {userId, socketId: id})
+        const handshakeListener = (id) => {
+            socket.emit("handshake", {userId: auth?.user.id, socketId: id})
         }
         socket.on("handshake", handshakeListener)
         

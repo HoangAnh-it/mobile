@@ -119,14 +119,8 @@ export default function Chat({ navigation }) {
 }
 
 const ChatItem = ({ chatItem }) => {
-    const [auth, setAuth] = React.useState({})
 
-    React.useEffect(() => {
-        (async function () {
-            const u = await useAuth()
-            setAuth(u)
-        })()
-    }, [])
+    const {auth} = useAuth()._j
 
     return (
         <View className="mx-4 my-2 flex-col ">
@@ -139,7 +133,7 @@ const ChatItem = ({ chatItem }) => {
                     <Text className="font-semibold text-base ml-3">{chatItem.user.name}</Text>
                     <Text className="text-gray-400 ml-3 text-sm" numberOfLines={1}>
                         {
-                            Object.keys(auth).length > 0 && auth.id === chatItem.lastMessage.sender.userId ?
+                            auth && auth?.user?.id === chatItem.lastMessage.sender.userId ?
                                 "You"
                                 :
                                 chatItem.lastMessage.sender.name

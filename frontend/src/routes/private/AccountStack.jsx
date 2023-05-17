@@ -1,12 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Account from "./Tabs/Account";
-import ListHospital from "./Account/ListHospital";
-import HospitalDetails from "./Hospital/HospitalDetails";
-import ListDoctor from "./Account/ListDoctor";
-import DoctorDetails from "./Doctors/DoctorDetails";
-import ChangePassword from "./Account/ChangePassword";
-import CreateMedicalRecord from "./Appointments/CreateMedicalRecord";
+import Account from "../../screen/Tabs/Account";
+import ChangePassword from "../../screen/Account/ChangePassword";
+import CreateMedicalRecord from "../../screen/Appointments/CreateMedicalRecord";
+import ViewSchedules from "../../screen/Schedule/ViewSchedules";
+import ListProfile from "../../screen/Appointments/ListProfile";
 
 const Stack = createStackNavigator();
 export default function AccountStack() {
@@ -18,7 +16,15 @@ export default function AccountStack() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="Hồ sơ khám bệnh"
+                name="Hồ sơ"
+                component={ListProfile}
+            />
+            <Stack.Screen
+                name="Xem lịch khám"
+                component={ViewSchedules}
+            />
+            <Stack.Screen
+                name="Tạo hồ sơ"
                 component={CreateMedicalRecord}
             />
             <Stack.Screen

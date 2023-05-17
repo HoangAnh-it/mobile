@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 
+import AuthContext from '../context/AuthProvider';
+
 export default async function useAuth() {
-    const user = await AsyncStorage.getItem('user')
-    return JSON.parse(user || "{}")
+    return React.useContext(AuthContext)
 }

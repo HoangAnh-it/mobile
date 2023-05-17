@@ -56,7 +56,6 @@ export default function Home({ navigation }) {
     }, [])
    
   const InfoHospital = (props) => {
-      console.log(props)
         return (
             <View className="bg-white rounded-xl w-40 h-full mr-4">
                 <Image

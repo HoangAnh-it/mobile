@@ -1,29 +1,20 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
-import { AuthContext } from "../../component/context";
 import React, { useEffect, useRef } from "react";
 import { Ionicons, FontAwesome, Feather, AntDesign, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-export default function Account({navigation}) {
-    const { logout } = React.useContext(AuthContext);
+export default function Account({ navigation }) {
     const [user, setUser] = React.useState({})
-    const [auth, setAuth] = React.useState({})
     const axios = useAxios()
-
-    React.useEffect(() => {
-        (async function () {
-            const u = await useAuth()
-           setAuth(u) 
-        })()
-    }, [])
+    const {auth, authDispatch} = useAuth()._j
 
     useEffect(() => {
-        if(Object.keys(auth).length === 0 || !auth.id) {
+        if(!auth?.user.id) {
             return
         }
-        axios.get(`/user/profile/${auth.id}`)
+        axios.get(`/user/profile/${auth?.user.id}`)
             .then(res => res.data.data)
             .then(info => {
                 setUser(info)
@@ -32,6 +23,13 @@ export default function Account({navigation}) {
                 console.log(JSON.stringify(err))
             })
     }, [auth]);
+
+    const logout = async () => {
+        AsyncStorage.removeItem("token")
+            .then(() => {
+                authDispatch({ type: 'LOGOUT' })
+            }).catch(console.log)
+    }
 
     return (
         <View className="flex-1 items-center bg-white">
@@ -75,11 +73,11 @@ export default function Account({navigation}) {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     className="w-screen items-center"
-                    onPress={() => {navigation.navigate("Đổi mật khẩu")}}
+                    onPress={() => {navigation.push("Đổi mật khẩu")}}
                 >
                     <Item title="Đổi mật khẩu" />
                 </TouchableOpacity>
-                <TouchableOpacity className="w-screen items-center" onPress={() => { logout() }}>
+                <TouchableOpacity className="w-screen items-center" onPress={logout}>
                     <Item title="Đăng xuất" />
                 </TouchableOpacity>
             </View>

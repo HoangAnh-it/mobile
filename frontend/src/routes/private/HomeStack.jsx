@@ -1,25 +1,25 @@
-import Home from "./Tabs/Home";
-import Packages from "./Test/Packages";
-import PackageDetails from "./Test/PackageDetails";
-import DoctorList from "./Doctors/DoctorList";
-import DoctorDetails from "./Doctors/DoctorDetails";
-import HospitalDetails from "./Hospital/HospitalDetails";
-import ListProfile from "./Appointments/ListProfile";
-import ListDepartment from "./Appointments/ListDepartment";
-import Book from "./Appointments/Book";
-import Confirm from "./Appointments/Confirm";
-import Notification from "./Tabs/Notification";
-import Scheduling from "./Test/Scheduling";
-import Search from "./Search/Search";
-import ViewSchedules from "./Schedule/ViewSchedules";
-import ConfirmTest from "./Test/Confirm";
-import ListProfileTest from "./Test/ListProfile";
-
-import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import ChatDetail from "./Chat/ChatDetail";
-import CreateMedicalRecord from "./Appointments/CreateMedicalRecord";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Home from "../../screen/Tabs/Home";
+import Packages from "../../screen/Test/Packages";
+import PackageDetails from "../../screen/Test/PackageDetails";
+import DoctorList from "../../screen/Doctors/DoctorList";
+import DoctorDetails from "../../screen/Doctors/DoctorDetails";
+import HospitalDetails from "../../screen/Hospital/HospitalDetails";
+import ListProfile from "../../screen/Appointments/ListProfile";
+import ListDepartment from "../../screen/Appointments/ListDepartment";
+import Book from "../../screen/Appointments/Book";
+import Confirm from "../../screen/Appointments/Confirm";
+import Notification from "../../screen/Tabs/Notification";
+import Scheduling from "../../screen/Test/Scheduling";
+import Search from "../../screen/Search/Search";
+import ViewSchedules from "../../screen/Schedule/ViewSchedules";
+import ConfirmTest from "../../screen/Test/Confirm";
+import ListProfileTest from "../../screen/Test/ListProfile";
+import ChatDetail from "../../screen/Chat/ChatDetail";
+import CreateMedicalRecord from "../../screen/Appointments/CreateMedicalRecord";
 
 const Stack = createStackNavigator();
 export default function HomeStack() {

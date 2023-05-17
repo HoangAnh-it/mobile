@@ -14,17 +14,10 @@ export default function ChatDetail({ navigation, route }) {
     const { user } = route.params;
     const [messages, setMessages] = React.useState([]);
     const [chat, setChat] = React.useState(route.params?.chat || {})
-
+    
     const axios = useAxios()
     const socket = useSocket()
-    const [auth, setAuth] = React.useState({})
-
-    React.useEffect(() => {
-        (async function () {
-            const u = await useAuth()
-            setAuth(u)
-        })()
-    }, [])
+    const {auth} = useAuth()._j
 
     React.useEffect(() => {
         axios.get(`/chat/${user.id}`)
@@ -161,7 +154,7 @@ export default function ChatDetail({ navigation, route }) {
             <GiftedChat
                 messages={messages}
                 user={{
-                    _id: auth.id,
+                    _id: auth?.user.id,
                 }}
                 onSend={messages => onSend(messages)}
                 renderSend={props => SendIcon(props)}

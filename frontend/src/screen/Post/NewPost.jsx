@@ -7,14 +7,6 @@ import useAuth from "../../hooks/useAuth";
 export default function NewPost({ navigation }) {
     const [content, setContent] = React.useState("");
     const axios = useAxios()
-    const [auth, setAuth] = React.useState({})
-
-    React.useEffect(() => {
-        (async function () {
-            const u = await useAuth()
-            setAuth(u)
-        })()
-    }, [])
 
     const post = () => {
         if (!content || !content.trim()) {
