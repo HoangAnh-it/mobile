@@ -1,15 +1,20 @@
 import { View, Text } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Feather, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 
 import useAxios from "../../hooks/useAxios";
 import useSocket from "../../hooks/useSocket";
+import useConfirmModal from "../../hooks/useConfirmModal";
+import { setActive } from "@material-tailwind/react/components/Tabs/TabsContext";
 
 export default function Profile(props) {
     const onlyShow = props.onlyShow
 
     const axios = useAxios()
     const socket = useSocket()
+    const navigation = useNavigation()
+    const {setTitle, setVisible, setAction} = useConfirmModal()
 
     const deleteProfile = (id) => {
         axios.delete(`/patient/medical_record/${id}`)
@@ -76,8 +81,12 @@ export default function Profile(props) {
                                 borderRadius: '10px'
                             }}
                             onPress={() => {
-                                console.log("DELETE medical record: ", props.id)
-                                deleteProfile(props.id)
+                                setTitle("Bạn chắc chắn muốn xóa?")
+                                setVisible(true)
+                                setAction(() => () => {
+                                    console.log("DELETE medical record: ", props.id)
+                                    deleteProfile(props.id)
+                                })
                             }}
                         >
                             <Text className="text-white font-bold text-center">Xóa</Text>
