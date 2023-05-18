@@ -56,3 +56,11 @@ export const validateUpdateUser = (user: UpdateUserDTO): UpdateUserDTO => {
     }
     return updateUser
 }
+
+export const validatePassword = (password: string) => {
+    password = password?.trim()
+    if (password.length < 8) {
+        throw new CustomError(StatusCodes.UNPROCESSABLE_ENTITY, "Password must be at least 8 characters")
+    }
+    return password
+}

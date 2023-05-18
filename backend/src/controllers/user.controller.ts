@@ -38,3 +38,13 @@ export const readNotification = ErrorWrapperHandler(async (req: Request, res: Re
     await userService.readNotification(id)
     return res.status(StatusCodes.OK).json(id);
 }) 
+
+// [POST] /user/change-password
+export const changePassword = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const { currentPass, newPass } = req.body
+    const userId = req.auth?.id
+    await userService.changePassword(userId, currentPass, newPass)
+    return res.status(StatusCodes.OK).json({
+        message: "Change password successfully"
+    });
+}) 

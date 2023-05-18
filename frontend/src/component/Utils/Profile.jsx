@@ -68,12 +68,12 @@ export default function Profile(props) {
                                 borderRadius: '10px',
                                 
                             }}
-                                onPress={() => {
-                                    console.log("Update", props.id)
-                                    setTitle("Chưa cập nhật chức năng này")
-                                    setIsAlert(true)
-                                    setVisible(true)
-                                }}
+                            onPress={() => {
+                                console.log("Update", props.id)
+                                setTitle("Chưa cập nhật chức năng này")
+                                setIsAlert(true)
+                                setVisible(true)
+                            }}
                         >
                             <Text
                                 className="text-white font-bold text-center"

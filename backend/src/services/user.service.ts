@@ -8,6 +8,8 @@ import { user_db } from '../persistence';
 import { NotificationDTO } from '../dtos/notification.dto';
 import { validateNotification } from '../validator/notification';
 import { Sequelize } from 'sequelize-typescript';
+import { comparePassword } from '../utils/bcrypt';
+import { validatePassword } from '../validator/user';
 
 export const createUser = async (createUserDTO: CreateUserDTO): Promise<User> => {
     const existingUser = await User.findOne({
@@ -107,5 +109,21 @@ export const readNotification = async (id: string) => {
         where: {
             notificationId: id
         }
+    })
+}
+
+export const changePassword = async (userId: string, currentPass: string, newPass: string) => {
+    const user = await findUserById(userId)
+    const isCorrectPassword = comparePassword(currentPass, user.dataValues.password)
+    if (!isCorrectPassword) {
+        throw new CustomError(401, "Password is incorrect")
+    }
+    newPass = validatePassword(newPass)
+    if (currentPass === newPass) {
+        throw new CustomError(401, "Mật khẩu mới và cũ trùng nhau")
+    }
+    const hashedNewPass = encodedPassword(newPass)
+    await User.update({ password: hashedNewPass }, {
+        where: { userId }
     })
 }

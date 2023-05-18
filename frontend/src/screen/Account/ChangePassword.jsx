@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import React from "react";
+import useAxios from "../../hooks/useAxios";
+import useConfirmModal from "../../hooks/useConfirmModal";
 
 export default function ChangePassword() {
     const [oldPass, setOldPass] = React.useState(null);
@@ -9,6 +11,9 @@ export default function ChangePassword() {
     const [color, setColor] = React.useState("#9ca3af");
     const [messageOldPass, setMessageOldPass] = React.useState(null);
     const [messageReNewPass, setMessageReNewPass] = React.useState(null);
+
+    const axios = useAxios()
+    const { setIsAlert, setTitle, setVisible} = useConfirmModal()
     
     const changeReNewPass = (val) => {
         setReNewPass(val);
@@ -20,14 +25,23 @@ export default function ChangePassword() {
     }
 
     const submit = () => {
-        // check old pass
-        
         // check new pass vs re new pass
         if (newPass != reNewPass) {
             setMessageReNewPass("Mật khẩu mới không khớp nhau!")
         }
 
-        // ghép api
+        axios.put("/user/change-password", {
+            currentPass: oldPass,
+            newPass: newPass
+        }).then(res => {
+            if (res.status === 200) {
+                setTitle("Cập nhật mật khẩu thành công")
+                setIsAlert(true)
+                setVisible(true)
+            }
+        }).catch(err => {
+            setMessageReNewPass(err.response.data.message)
+        })
     }
 
     return (

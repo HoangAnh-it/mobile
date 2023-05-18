@@ -13,4 +13,7 @@ router.route("/notification")
 
 router.route("/notification/read/:id")
     .put(userController.readNotification)
+
+router.route("/change-password")
+    .put(userController.changePassword)
 export default router;

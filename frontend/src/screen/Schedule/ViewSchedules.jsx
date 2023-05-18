@@ -4,8 +4,20 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import useAxios from "../../hooks/useAxios";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import useConfirmModal from "../../hooks/useConfirmModal";
 
 const ScheduleItem = ({ data }) => {
+    const {setTitle, setAction, setVisible} = useConfirmModal()
+
+    const cancelAppointment = () => {
+        setTitle(`Hủy cuộc hẹn ${data.department?.name || ""}?`)
+        setAction(() => () => {
+            console.log("delete appointment ", data.id)
+
+        })
+        setVisible(true)
+    }
+
     return (
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm"
             style={
@@ -50,18 +62,21 @@ const ScheduleItem = ({ data }) => {
                     <Text className="right-0 top-1 absolute w-2/3 text-right">{data.hospital}</Text>
                 </View>
                 <View className="flex-row py-1 mt-4">
-                    {/* <TouchableOpacity
-                        onPress={() => console.log("OK")}
-                    >
-                        <Text
-                            className="font-bold left-0 top-1 absolute text-right p-1"
-                            style={{
-                                backgroundColor: '#23f8df',
-                            }}
+                    {
+                        data.status === "PENDING" &&
+                        <TouchableOpacity
+                            onPress={cancelAppointment}
                         >
-                            Đánh dấu đã xong
-                        </Text>
-                    </TouchableOpacity> */}
+                            <Text
+                                className="font-bold p-1.5"
+                                style={{
+                                    backgroundColor: '#ff0000',
+                                }}
+                            >
+                                Hủy lịch hẹn?
+                            </Text>
+                        </TouchableOpacity>
+                    }
                     <Text className="font-bold right-0 top-1 absolute w-2/3 text-right text-decoration-line: underline">
                         {data.status === "PENDING" && "Đang chờ"}
                         {data.status === "DONE" && "Đã xong"}
@@ -108,6 +123,7 @@ export default function ViewSchedules({ navigation, route }) {
                         return <ScheduleItem
                             key={`schedule-${schedule.appointmentId}-${index}`}
                             data={{
+                                id: schedule.appointmentId,
                                 fullname: schedule.medicalRecord.name,
                                 sex: schedule.medicalRecord.gender,
                                 dateOfBirth: getDate(new Date(schedule.medicalRecord.birthDay)),

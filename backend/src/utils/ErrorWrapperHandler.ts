@@ -7,10 +7,13 @@ export default function ErrorWrapperHandler(controller : Function) {
         try {
             await controller(req, res, next)
         } catch (error) {
-            console.error(error)
+            console.log(error)
             if (error instanceof CustomError) {
+                console.log("return ", error.statusCode, "and:", {
+                    message: (error as CustomError).getMessage()
+                })
                 return res.status(error.statusCode).json({
-                    message: error.message
+                    message: (error as CustomError).getMessage()
                 })
             }
 
