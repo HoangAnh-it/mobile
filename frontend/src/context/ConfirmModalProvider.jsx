@@ -9,23 +9,31 @@ export function ConfirmModalProvider({ children }) {
     const [title, setTitle] = React.useState("")
     const [visible, setVisible] = React.useState(false)
     const [action, setAction] = React.useState(() => () => { });
+    const [isAlert, setIsAlert] = React.useState(false)
 
     const reset = () => {
         setTitle("")
         setVisible(false)
         setAction(() => () => { })
+        setIsAlert(false)
     }
 
     return (
-        <ConfirmContext.Provider value={{ setTitle, visible, setVisible, setAction, doAction: action }}>
+        <ConfirmContext.Provider value={{
+            setTitle,
+            visible, setVisible,
+            setAction, doAction: action,
+            setIsAlert
+        }}>
             <ConfirmModal
                 title={title}
                 action={() => {
                     action()
                     reset()
                 }}
-                off={() => setVisible(false)}
+                off={reset}
                 modalVisible={visible}
+                isAlert={isAlert}
             >
                 {children}
             </ConfirmModal>

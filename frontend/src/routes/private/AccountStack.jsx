@@ -5,7 +5,6 @@ import ChangePassword from "../../screen/Account/ChangePassword";
 import CreateMedicalRecord from "../../screen/Appointments/CreateMedicalRecord";
 import ViewSchedules from "../../screen/Schedule/ViewSchedules";
 import ListProfile from "../../screen/Appointments/ListProfile";
-import ConfirmModel from "../../component/ConfirmModal";
 
 const Stack = createStackNavigator();
 export default function AccountStack() {
@@ -32,11 +31,6 @@ export default function AccountStack() {
                 name="Đổi mật khẩu"
                 component={ChangePassword}
             />
-            <Stack.Screen
-                name="ConfirmModel"
-                component={ConfirmModel}
-            />
-            
         </Stack.Navigator>
     )
 }

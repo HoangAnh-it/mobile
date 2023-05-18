@@ -14,7 +14,7 @@ export default function Profile(props) {
     const axios = useAxios()
     const socket = useSocket()
     const navigation = useNavigation()
-    const {setTitle, setVisible, setAction} = useConfirmModal()
+    const {setTitle, setVisible, setAction, setIsAlert} = useConfirmModal()
 
     const deleteProfile = (id) => {
         axios.delete(`/patient/medical_record/${id}`)
@@ -65,11 +65,19 @@ export default function Profile(props) {
                             className="p-2 py-1"
                             style={{
                                 backgroundColor: "#24DCE2",
-                                borderRadius: '10px'
+                                borderRadius: '10px',
+                                
                             }}
-                            onPress={() => { console.log("Update", props.id) }}
+                                onPress={() => {
+                                    console.log("Update", props.id)
+                                    setTitle("Chưa cập nhật chức năng này")
+                                    setIsAlert(true)
+                                    setVisible(true)
+                                }}
                         >
-                            <Text className="text-white font-bold text-center">Cập nhật</Text>
+                            <Text
+                                className="text-white font-bold text-center"
+                            >Cập nhật</Text>
                         </TouchableOpacity>
                         <Text className="text-white">---</Text>
                         <TouchableOpacity
