@@ -65,7 +65,11 @@ export const profile = async (id: string) => {
                         include: [
                             {
                                 model: Hospital,
-                                attributes: ["hospitalId", "name"]
+                                attributes: ["hospitalId"],
+                                include: [{
+                                    model: User,
+                                    attributes: ["userId","name", "address", "avatar"]
+                                }]
                             }
                         ]
                     }
@@ -73,7 +77,19 @@ export const profile = async (id: string) => {
             },
             {
                 model: Patient,
-                attributes: ["patientId"]
+                attributes: ["patientId"],
+                include: [{
+                    model: User,
+                    attributes: ["name", "address", "avatar", "userId"]
+                }]
+            },
+            {
+                model: Hospital,
+                attributes: ["hospitalId", "description"],
+                include: [{
+                    model: User,
+                    attributes: ["name", "address", "avatar", "userId"]
+                }]
             }
         ]
     })

@@ -8,7 +8,7 @@ const Details = (props) => {
     const navigation = useNavigation()
 
     const goToScheduling = () => {
-        navigation.navigate("Hồ sơ", { hospital: props.hospital });
+        navigation.navigate("Hồ sơ", { hospital: props.id });
     };
 
     return (
@@ -49,7 +49,6 @@ export default function HospitalDetails({navigation, route}) {
     const axios = useAxios()
 
     React.useEffect(() => {
-        console.log("ID:", id)
         if (!id) {
             return
         }
@@ -57,11 +56,11 @@ export default function HospitalDetails({navigation, route}) {
             .then(res => res.data.data)
             .then(h => {
                 setHospital({
-                    id: h.hospitalId,
+                    id: h.userId,
                     name: h.name,
                     address: h.address,
                     imageURL: h.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg",
-                    description: h.description
+                    description: h.hospitals.description
                 })
             })
             .catch(err => {
@@ -72,12 +71,17 @@ export default function HospitalDetails({navigation, route}) {
     return (
         <KeyboardAwareScrollView>
             <ScrollView pagingEnabled={true}>
-
-                <Details key={`hospital-${hospital.id}`} id={hospital.id} name={hospital.name} address={hospital.address} hospital={hospital.name} imageURL={hospital.imageURL} description={hospital.description} />
-                
+                <Details
+                    key={`hospital-${hospital.id}`}
+                    id={hospital.id}
+                    name={hospital.name}
+                    address={hospital.address}
+                    hospital={hospital.name}
+                    imageURL={hospital.imageURL}
+                    description={hospital.description}
+                />
             </ScrollView>
-        </KeyboardAwareScrollView>  
-
+        </KeyboardAwareScrollView>
     )
 }
 

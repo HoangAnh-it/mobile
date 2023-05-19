@@ -1,53 +1,39 @@
 import { StatusCodes } from 'http-status-codes';
 import CustomError from "../error/CustomError";
-import { Department, Hospital } from "../models";
-import { CreateHospitalDTO, UpdateHospitalDTO } from '../dtos/hospital.dto';
-
-export const findByID = async (id: string): Promise<Hospital> => {
-    const hospital = await Hospital.findByPk(id)
-    if (!hospital) {
-        throw new CustomError(StatusCodes.NOT_FOUND, `Hospital not found`)
-    }
-    return Promise.resolve(hospital)
-}
-
-export const create = async (createHospitalDTO: CreateHospitalDTO): Promise<Hospital> => {
-    const hospital = await Hospital.create({...createHospitalDTO})
-    return Promise.resolve(hospital)
-}
-
-export const updateByID = async (id: string, updateHospitalDTO: UpdateHospitalDTO): Promise<string> => {
-    await findByID(id)   
-    await Hospital.update(updateHospitalDTO, {
-        where: {hospitalId: id}
-    })
-    return Promise.resolve(id)
-}
-
-export const deleteByID = async (id: string): Promise<string> => {
-    await findByID(id)
-    await Hospital.destroy({
-        where: {hospitalId: id}
-    })
-    return Promise.resolve(id)
-}
+import { Department, Hospital, User } from "../models";
 
 export const info = async(id: string) => {
-    const h = await Hospital.findByPk(id, {
-        attributes: {
-            exclude: ["createdAt", 'updatedAt']
+    return User.findOne({
+        where: {
+            userId: id,
+            role: 'HOSPITAL'
+        },
+        attributes: ["userId", "name", "address", "avatar"],
+        include: {
+            model: Hospital,
+            attributes: ["hospitalId", "description"]
         }
     })
-    return h
 }
 
-export const getDepartment = async (hospitalId: string) => {
+export const getDepartment = async (id: string) => {
+    console.log(id)
     return await Department.findAll({
-        where: {
-            hospitalId: hospitalId
-        },
         attributes: {
             exclude: ['createdAt', 'updatedAt']
+        },
+        include: {
+            model: Hospital,
+            attributes: ["hospitalId", "userId"],
+            include: [{
+                model: User,
+                attributes: ["userId"],
+                where: {
+                    userId: id
+                },
+                required: true,
+            }],
+            required: true,
         }
     })
 }

@@ -8,7 +8,6 @@ export const initialLoginState = {
 }
   
 export default function reducer(state, action) {
-    console.log("dispatch login",action)
     const { type, payload } = action
     
     switch (type) {

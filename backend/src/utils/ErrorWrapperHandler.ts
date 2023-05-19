@@ -9,9 +9,6 @@ export default function ErrorWrapperHandler(controller : Function) {
         } catch (error) {
             console.log(error)
             if (error instanceof CustomError) {
-                console.log("return ", error.statusCode, "and:", {
-                    message: (error as CustomError).getMessage()
-                })
                 return res.status(error.statusCode).json({
                     message: (error as CustomError).getMessage()
                 })

@@ -64,11 +64,12 @@ export default function PackageDetails({navigation, route}) {
         axios.get(`/test_package/${id}`)
             .then(res => res.data.data)
             .then(p => {
+                console.log("CALL P:::", p)
                 setPackage({
                     id: p.testPackageId,
                     title: p.name,
-                    hospital: p.hospital.name,
-                    address: p.hospital.address,
+                    hospital: p.hospital.user.name,
+                    address: p.hospital.user.address,
                     imageURL: require("./../../assets/demo-img/hospital.jpg"),//p.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg",
                     price: p.price,
                     description: p.description
@@ -77,7 +78,6 @@ export default function PackageDetails({navigation, route}) {
             .catch(err => {
                 console.log(JSON.stringify(err))
             })
-        //setPackage(testPackage)
     }, []);
 
     return (

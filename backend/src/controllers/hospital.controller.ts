@@ -15,6 +15,7 @@ export const hospitalInfo = ErrorWrapperHandler(async (req: Request, res: Respon
 // [GET] /hospital/:id/department
 export const getDepartments = ErrorWrapperHandler(async (req: Request, res: Response, next: NextFunction) => {
     const d = await hospitalService.getDepartment(req.params.id)
+    console.log(d.length)
     return res.status(StatusCodes.OK).json({
         data: d
     })

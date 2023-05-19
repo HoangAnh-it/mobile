@@ -8,7 +8,6 @@ import useAxios from '../hooks/useAxios';
 import useAuth from '../hooks/useAuth';
 
 export default function Routes({ navigation }) {
-    console.log('init routes')
     const [loading, setLoading] = React.useState(true)
     const axios = useAxios()
     const { auth, authDispatch } = useAuth()._j
@@ -27,7 +26,6 @@ export default function Routes({ navigation }) {
                 axios.get(`/auth/token/${token}`)
                     .then(res => {
                         if (res.status === 200) {
-                            console.log(res.data)
                             authDispatch({
                                 type: "LOGIN",
                                 payload: {
@@ -40,7 +38,7 @@ export default function Routes({ navigation }) {
                         }
                     })
                     .catch(err => {
-                        console.log("No token found :::", JSON.stringify(err))
+                        console.log(JSON.stringify(err))
                         setLoading(false)
                     })
             } else {
@@ -49,7 +47,6 @@ export default function Routes({ navigation }) {
         })()
     }, [])
 
-    console.log("isLoggedIn-loading", auth.isLoggedIn, "-", loading)
     if (loading) {
         return (
             <View className="flex-1 items-center justify-center" >

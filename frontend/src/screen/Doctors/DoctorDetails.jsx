@@ -6,7 +6,6 @@ import useAxios from '../../hooks/useAxios'
 import { useNavigation } from '@react-navigation/native';
 
 const Details = (props) => {
-    console.log(props)
     const navigation = useNavigation()
 
     const goToChat = (doctor) => {
@@ -58,7 +57,7 @@ const Details = (props) => {
                     </Text>
                     <View className="h-px mb-2 bg-gray-300 block" />
                     <TouchableOpacity className="w-fit" onPress={() => navigation.navigate("Thông tin bệnh viện", {
-                        id: props.hospital.hospitalId
+                        id: props.hospital?.id
                     })}>
                         <Text className="text-slate-900 text-base font-normal text-justify">
                             Nơi làm việc: {props.hospital?.name}
@@ -76,23 +75,26 @@ const Details = (props) => {
 }
 
 export default function DoctorDetails({ navigation, route }) {
-    console.log("PARAMS:", route.params)
     const id = route.params.id
     const [doctor, setDoctor] = React.useState({})
     const axios = useAxios()
 
     React.useEffect(() => {
+        if(!id) return
         axios.get(`/user/profile/${id}`)
             .then(res => res.data.data)
-            .then(doctor => {
-                console.log(doctor)
+            .then(user => {
                 setDoctor({
-                    id: doctor.userId,
-                    name: doctor.name,
-                    title: doctor.doctor.rank,
-                    department: doctor.doctor.department.name,
-                    hospital: doctor.doctor.department.hospital,
-                    imageURL: doctor.avatar || "https://static.vecteezy.com/system/resources/previews/001/223/214/original/female-doctor-wearing-a-medical-mask-vector.jpg",
+                    id: user.userId,
+                    name: user.name,
+                    title: user.doctor.rank,
+                    address: user.address,
+                    department: user.doctor.department.name,
+                    hospital: {
+                        name: user.doctor.department.hospital.user.name,
+                        id: user.doctor.department.hospital.user.userId
+                    },
+                    imageURL: user.avatar || "https://static.vecteezy.com/system/resources/previews/001/223/214/original/female-doctor-wearing-a-medical-mask-vector.jpg",
                     star: 3,
                 })
             })
@@ -104,7 +106,16 @@ export default function DoctorDetails({ navigation, route }) {
     return (
         <KeyboardAwareScrollView>
             <ScrollView pagingEnabled={true}>
-                <Details key={`doctor-${doctor.id}-detail`} id={doctor.id} name={doctor.name} title={doctor.title} address={doctor.address} department={doctor.department} stars={doctor.star} hospital={doctor.hospital} imageURL={doctor.imageURL} />
+                <Details
+                    key={`doctor-${doctor.id}-detail`}
+                    id={doctor?.id}
+                    name={doctor?.name}
+                    title={doctor?.title}
+                    address={doctor?.address}
+                    department={doctor?.department}
+                    stars={doctor?.star}
+                    hospital={doctor?.hospital}
+                    imageURL={doctor?.imageURL} />
             </ScrollView>
         </KeyboardAwareScrollView>  
 

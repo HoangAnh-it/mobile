@@ -5,14 +5,28 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import useAxios from "../../hooks/useAxios";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import useConfirmModal from "../../hooks/useConfirmModal";
+import useSocket from "../../hooks/useSocket";
 
 const ScheduleItem = ({ data }) => {
-    const {setTitle, setAction, setVisible} = useConfirmModal()
+    const { setTitle, setAction, setVisible, setIsAlert } = useConfirmModal()
+    const axios = useAxios()
+    const socket = useSocket()
+
 
     const cancelAppointment = () => {
         setTitle(`Hủy cuộc hẹn ${data.department?.name || ""}?`)
         setAction(() => () => {
-            console.log("delete appointment ", data.id)
+            axios.delete(`/patient/appointment/${data.id}`)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.status === 200) {
+                        socket.emit("delete appointment", res.data.id)
+                    }
+                }).catch(err => {
+                    console.log(JSON.stringify(err))
+                    setTitle("Không thể hủy. Vui lòng thử lại")
+                    setIsAlert(true)
+                })
 
         })
         setVisible(true)
@@ -61,6 +75,10 @@ const ScheduleItem = ({ data }) => {
                     <Text>Bệnh viện</Text>
                     <Text className="right-0 top-1 absolute w-2/3 text-right">{data.hospital}</Text>
                 </View>
+                <View className="flex-row py-1">
+                    <Text>Địa chỉ</Text>
+                    <Text className="right-0 top-1 absolute w-2/3 text-right">{data.address}</Text>
+                </View>
                 <View className="flex-row py-1 mt-4">
                     {
                         data.status === "PENDING" &&
@@ -90,6 +108,7 @@ const ScheduleItem = ({ data }) => {
 export default function ViewSchedules({ navigation, route }) {
     const [schedules, setSchedules] = React.useState([])
     const axios = useAxios()
+    const socket = useSocket()
 
     const getDate = React.useMemo(() => (d) => {
         return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
@@ -111,6 +130,18 @@ export default function ViewSchedules({ navigation, route }) {
             })
     }, [])
 
+    React.useEffect(() => {
+        const deleteAppointmentListener = (id) => {
+            console.log("delete appointment ", id)
+            setSchedules(prev => prev.filter(i => i.appointmentId !== id))
+        }
+
+        socket.on("delete appointment", deleteAppointmentListener)
+        return () => {
+            socket.off("delete appointment", deleteAppointmentListener)
+        }
+    }, [socket])
+
     return (
         <KeyboardAwareScrollView>
             <ScrollView pagingEnabled={true}>
@@ -130,7 +161,7 @@ export default function ViewSchedules({ navigation, route }) {
                                 relationship: schedule.medicalRecord.relationship,
                                 numberphone: schedule.medicalRecord.phone,
                                 address: schedule.medicalRecord.address,
-                                hospital: schedule.department?.hospital.name || schedule.testPackage?.hospital.name,
+                                hospital: schedule.department?.hospital.user.name || schedule.testPackage?.hospital.user.name,
                                 department: schedule.department,
                                 date: getDate(new Date(schedule.dateTime)),
                                 hour: getTime(new Date(schedule.dateTime)),

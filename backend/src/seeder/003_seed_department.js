@@ -255,27 +255,6 @@ module.exports = {
 
       },
       {
-        departmentId: "d65bf7af-a0f1-471b-963d-948c98ecfcf0",
-        name: "Khoa nội tổng quát",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/internal.png?alt=media&token=8b5a5a15-1d71-49df-817c-b8e0ae15363d',
-
-      },
-      {
-        departmentId: "3b2aab39-55e6-4e81-94d9-82734b5b7aae",
-        name: "Khoa thẩm mỹ",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/beauty.png?alt=media&token=1baf5541-2e64-4f9c-bed5-064a62a4289e',
-
-      },
-      {
-        departmentId: "0dcbd66f-b057-47d3-b773-d13e1484b36e",
-        name: "Khoa vật lý trị liệu",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/physical.png?alt=media&token=55a6ba2d-88a6-4f1d-99a3-76e35d76f408',
-
-      },
-      {
         departmentId: "3214481e-bd09-449f-b9f7-cda26cfe105c",
         name: "Khoa sản",
         hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
@@ -329,36 +308,7 @@ module.exports = {
 
       },
       {
-        departmentId: "b190973c-cd78-4fda-9bef-9ee7a451a17c",
-        name: "Khoa ngoại tổng quát",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/external.png?alt=media&token=0d0e98ee-7dfb-4234-b15e-ce8b39958965',
-
-      },
-      {
-        departmentId: "c9fa6eb4-3ad3-4804-9da2-491472d508f6",
-        name: "Khoa thần kinh",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/mental.png?alt=media&token=a9ca9f11-de18-4374-8c62-aa4469314ff6',
-
-      },
-      {
-        departmentId: "44d260a4-594e-4d84-afdb-cc0836476125",
-        name: "Khoa mắt",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/eye.png?alt=media&token=bb32716e-5bd8-4200-aca3-f7062019d681',
-
-      },
-      {
         departmentId: "c35d89e4-b5c4-4ed0-9601-f5cd441948da",
-        name: "Khoa nội tổng quát",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/internal.png?alt=media&token=8b5a5a15-1d71-49df-817c-b8e0ae15363d',
-
-      },
-
-      {
-        departmentId: "483ebd2b-21e3-4622-8951-f2e21318ee86",
         name: "Khoa nội tổng quát",
         hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
         avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/internal.png?alt=media&token=8b5a5a15-1d71-49df-817c-b8e0ae15363d',
@@ -376,13 +326,6 @@ module.exports = {
         name: "Khoa vật lý trị liệu",
         hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
         avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/physical.png?alt=media&token=55a6ba2d-88a6-4f1d-99a3-76e35d76f408',
-
-      },
-      {
-        departmentId: "c51a880a-275f-4ae6-99c8-303651f8a3e7",
-        name: "Khoa sản",
-        hospitalId: "4fab9aca-acd3-4956-8e83-cabf6213559f",
-        avatar: 'https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/obstetrics.png?alt=media&token=62131666-81df-4244-bde2-cc52517ce23f',
 
       },
 

@@ -54,10 +54,8 @@ export default function ListProfile({ navigation, route }) {
         }
     }, [socket])
 
-    const { hospital } = route.params;
-
     const chooseNext = () => {
-        navigation.navigate("Chọn chuyên khoa", { profile: selected, hospital: hospital })
+        navigation.navigate("Chọn chuyên khoa", { profile: selected, hospital: route.params.hospital })
     }
 
     return (

@@ -34,15 +34,7 @@ export const searchPreview = async(keyword :string) => {
         // limit: LIMIT_PREVIEW_RECORDS
     })
 
-    const hospitalPromise = Hospital.findAll({
-        where: {
-            name: {
-                [Op.like]: `%${keyword}%`
-            }
-        },
-        attributes: ["hospitalId", "name", "avatar", "address"],
-        // limit: LIMIT_PREVIEW_RECORDS
-    })
+    const hospitalPromise = searchHospitals(keyword)
 
     const testPackages = TestPackage.findAll({
         where: {
@@ -53,7 +45,11 @@ export const searchPreview = async(keyword :string) => {
         attributes: ["testPackageId", "name", "price"],
         include: {
             model: Hospital,
-            attributes: ["name"]
+            attributes: ["hospitalId"],
+            include: [{
+                model: User,
+                attributes: ["userId", "name", "avatar"]
+            }]
         }
         // limit: LIMIT_PREVIEW_RECORDS
     })
@@ -94,12 +90,17 @@ export const searchDoctors = async(keyword: string, d: string) => {
 }
 
 export const searchHospitals = async (keyword: string) => {
-    return Hospital.findAll({
+    return User.findAll({
         where: {
             name: {
                 [Op.like]: `%${keyword.trim()}%`
-            }
+            },
+            role: 'HOSPITAL'
         },
-        attributes: ["hospitalId", "name", "avatar", "description", "address"],
+        attributes: ["userId", "name", "address", "avatar"],
+        include: {
+            model: Hospital,
+            attributes: ["hospitalId", "description"]
+        }
     })
 }

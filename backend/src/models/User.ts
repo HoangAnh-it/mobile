@@ -1,6 +1,6 @@
 import { Model,  PrimaryKey, Column, Table, CreatedAt, UpdatedAt, DataType, BelongsTo, HasMany, BeforeCreate, HasOne } from 'sequelize-typescript';
 
-import { Chat, Post, Appointment, Doctor, Patient} from '.'
+import { Chat, Post, Appointment, Doctor, Patient, Hospital} from '.'
 import { generateUUID } from '../utils/uuid';
 import {encodedPassword} from '../utils/bcrypt'
 
@@ -47,6 +47,9 @@ export class User extends Model{
 
   @HasMany(() => Post)
   private posts!: Post[]
+
+  @HasOne(() => Hospital)
+  private hospitals!: Post[]
 
   @HasOne(() => Doctor)
   private doctor!: Doctor

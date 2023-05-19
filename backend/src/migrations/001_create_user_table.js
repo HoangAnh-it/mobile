@@ -42,7 +42,7 @@ module.exports =  {
             },
 
             role: {
-                type: DataTypes.ENUM("PATIENT", "DOCTOR", "ADMIN"),
+                type: DataTypes.ENUM("PATIENT", "DOCTOR", "HOSPITAL"),
                 allowNull: false,
                 defaultValue: "PATIENT"
             },

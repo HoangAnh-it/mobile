@@ -69,6 +69,72 @@ module.exports = {
                 "role": "PATIENT",
                 "address": "Nam Dinh"
             },
+            {
+                "userId": "7b42a0e5-4d75-42c1-9c39-1852a9a7b2ae",
+                "email": "yHanoi@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Bệnh viện Đại học Y Hà Nội",
+                "birthDay": "1970-01-01",
+                "avatar": "https://lh3.googleusercontent.com/p/AF1QipPzQ_lnLLYhqu8IshVWHmDtdDUJx2H1IsoFGph-=s680-w680-h510",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Hà Nội, Việt Nam"
+            },
+            {
+                "userId": "3c07be87-1c23-4d91-9fcd-6186c61f258a",
+                "email": "hongduc3@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Bệnh viện Hồng Đức 3",
+                "birthDay": "1990-05-01",
+                "avatar": "https://lh3.googleusercontent.com/p/AF1QipOUi4mC_pyPfQzmpoe8r3HeNs-vkRqcv_8wd68n=s680-w680-h510",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Thành phố Hồ Chí Minh"
+            },
+            {
+                "userId": "72f24184-2d30-4f2b-b996-81e0e17d964f",
+                "email": "quoc_tiep@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Phòng khám Bệnh Viện Quốc Tế Hà Nội",
+                "birthDay": "1985-09-15",
+                "avatar": "https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/phong-kham-da-khoa-quoc-te-ha-noi-152-xa-dan-co-tot-khong-1200x840-jpg_c63a689f_157c_447c_8742_089c901960ea.png",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Hà Nội, Việt Nam"
+            },
+            {
+                "userId": "0e712f2e-6180-40e4-81ce-5e0d33c6e25b",
+                "email": "phusanhanoi@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Bệnh viện phụ sản Hà Nội",
+                "birthDay": "1978-03-10",
+                "avatar": "https://cdn.concung.com/storage/data/2021/SWEET%20BABY%20-%20GCO/b%E1%BB%87nh%20vi%E1%BB%87n%20ph%E1%BB%A5%20s%E1%BA%A3n%20H%C3%A0%20N%E1%BB%99i/benh-vien-phu-san-ha-noi%20(2).jpg",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Hà Nội, Việt Nam"
+            },
+            {
+                "userId": "1d9a48e9-759b-4fb4-9b9c-1a75e0d5f2b3",
+                "email": "quany354@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Bệnh viện Quân Y 354",
+                "birthDay": "1995-12-20",
+                "avatar": "https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien-quan-y-354-ivie_de44a624_c661_4876_aeff_301de8e5f6e4.jpg",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Hà Nội, Việt Nam"
+            },
+            {
+                "userId": "ea17d0b7-d333-4d72-9aef-d6df94a19fa2",
+                "email": "binhdan_danang@gmail.com",
+                "password": "$2b$10$7zg5qOrdOuFGDUSgrUP0I.3zMOfFwWv7hSLAgdOW9guxd4gSR082y",
+                "name": "Bệnh viện Bình Dân Đà Nẵng",
+                "birthDay": "1982-07-05",
+                "avatar": "https://lh3.googleusercontent.com/p/AF1QipPVYgcvcls82uOPEnxcCaBqYDWX-ME3rmbFwygR=s680-w680-h510",
+                "phone": "0987654321",
+                "role": "HOSPITAL",
+                "address": "Đà Nẵng, Việt Nam"
+              }
         ]);
     },
     down: (queryInterface, Sequelize) => {

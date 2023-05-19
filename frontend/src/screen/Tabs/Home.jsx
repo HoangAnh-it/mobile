@@ -44,7 +44,7 @@ export default function Home({ navigation }) {
             .then(res => res.data.data.hospitals)
           .then(hs => {
                 setHospitalList(hs.map(i => ({
-                    id: i.hospitalId,
+                    id: i.userId,
                     name: i.name,
                     address: i.address,
                     imageURL: i.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg"
@@ -66,7 +66,7 @@ export default function Home({ navigation }) {
                     <Text className="font-semibold h-9" numberOfLines={2}>{props.name}</Text>
                     <Text className="text-gray-500 text-xs h-16" numberOfLines={3}>{props.address}</Text>
                     <TouchableOpacity className="rounded-full" style={{ backgroundColor: "#24DCE2" }}
-                        onPress={() => { navigation.navigate("Hồ sơ", { hospital: props }) }}
+                        onPress={() => { navigation.navigate("Hồ sơ", { hospital: props.id }) }}
                     >
                         <Text className="font-semibold text-base text-center text-white p-1">Đặt khám</Text>
                     </TouchableOpacity>

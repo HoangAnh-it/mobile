@@ -3,8 +3,9 @@ import * as  testPackageController  from '../controllers/testPackage.controller'
 const router = express.Router()
 
 router.route("/")
-    .get(testPackageController.all)
-    
+    .get(testPackageController.getAll)
+
 router.route("/:id")
     .get(testPackageController.detail)
+
 export default router;

@@ -21,8 +21,8 @@ export function ConfirmModalProvider({ children }) {
     return (
         <ConfirmContext.Provider value={{
             setTitle,
-            visible, setVisible,
-            setAction, doAction: action,
+            setVisible,
+            setAction,
             setIsAlert
         }}>
             <ConfirmModal

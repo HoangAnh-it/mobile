@@ -119,7 +119,11 @@ export const getAllAppointments = async(userId : string) => {
                 include: [
                     {
                         model: Hospital,
-                        attributes: ["name"]
+                        attributes: ["hospitalId", "userId"],
+                        include: [{
+                            model: User,
+                            attributes: ["name", "address"]
+                        }]
                     }
                 ]
             },
@@ -129,10 +133,29 @@ export const getAllAppointments = async(userId : string) => {
                 include: [
                     {
                         model: Hospital,
-                        attributes: ["name"]
+                        attributes: ["hospitalId", "userId"],
+                        include: [{
+                            model: User,
+                            attributes: ["name", "address"]
+                        }]
                     }
                 ]
             }
         ]
     })
+}
+
+export const deleteAnAppointment = async(id: string) => {
+    const app = await Appointment.findByPk(id)
+    if (!app) {
+        throw new CustomError(StatusCodes.NOT_FOUND, `Appointment with ID: ${id} not found`)
+    }
+
+    await Appointment.destroy({
+        where: {
+            appointmentId: id
+        }
+    })
+
+    return id
 }

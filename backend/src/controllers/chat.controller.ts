@@ -19,6 +19,10 @@ export const socketSetup = (io: any, app: Application) => {
         socket.on('delete medical record', (id: string) => {
             socket.emit('delete medical record', id)
         })
+
+        socket.on('delete appointment', (id: string) => {
+            socket.emit('delete appointment', id)
+        })
         
         socket.on("disconnect", () => {
             console.log("Disconnect from", socket.id)

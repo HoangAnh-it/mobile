@@ -2,11 +2,14 @@ import { View, Text, TouchableOpacity, Modal, Pressable } from "react-native";
 import Profile from "../../component/Utils/Profile";
 import React from "react";
 import useAxios from "../../hooks/useAxios";
+import useConfirmModal from "../../hooks/useConfirmModal";
 
 export default function ConfirmTest({ navigation, route }) {
     const { profile, testPackage, date, hour } = route.params;
     const  [appointmentStatus, setAppointmentStatus ] = React.useState(false);
     const [modalVisible, setModalVisible] = React.useState(false);
+    const {setTitle, setIsAlert, setVisible} = useConfirmModal()
+
     const axios = useAxios();
     const handleAppointment = () => {
         axios.post(`/patient/appointment`, {
@@ -17,13 +20,15 @@ export default function ConfirmTest({ navigation, route }) {
         }
         )
             .then(res => {
-                if (res.status < 400) {
+                if (res.status === 200) {
                     setAppointmentStatus(true);
-                    
                 }
             })
             .catch(err => {
-                console.log(JSON.stringify(err))
+                console.log(JSON.stringify(err.response.message))
+                setTitle(err.response.message)
+                setIsAlert(true)
+                setVisible(true)
             })
     }
 

@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import CustomError from '../error/CustomError';
-import { Hospital, TestPackage } from '../models';
+import { Hospital, TestPackage, User } from '../models';
 import { CreateTestPackageDTO, UpdateTestPackageDTO } from '../dtos/testPackage.dto';
 
 export const findByID = async(id: string): Promise<TestPackage> => {
@@ -32,20 +32,6 @@ export const deleteByID = async (id: string): Promise<string> => {
     return Promise.resolve(id)
 }
 
-export const all = async() => {
-    return await TestPackage.findAll({
-        attributes: {
-            exclude: ['createdAt', 'updatedAt']
-        },
-        include: {
-            model: Hospital,
-            attributes: {
-                exclude: ['createdAt', 'updatedAt']
-            }
-        }
-    })
-}
-
 export const detail = async(id: string) => {
     return await TestPackage.findByPk(id, {
         attributes: {
@@ -53,9 +39,27 @@ export const detail = async(id: string) => {
         },
         include: {
             model: Hospital,
-            attributes: {
-                exclude: ["createdAt", "updatedAt"]
-            }, 
+            attributes: ["hospitalId"],
+            include: [
+                {
+                    model: User,
+                    attributes: ["userId", "avatar", "name", "address"]
+                }
+            ]
+        }
+    })
+}
+
+export const allTestPackages = async () => {
+    return await TestPackage.findAll({
+        attributes: ["testPackageId","name", "price"],
+        include: {
+            model: Hospital,
+            attributes: ["hospitalId", "userId"],
+            include: [{
+                model: User,
+                attributes: ["name", "address", "avatar"]
+            }]
         }
     })
 }

@@ -59,7 +59,7 @@ export default function Search({navigation, route}) {
                 })) || [])
 
                 setHospitalList(data.hospitals.map(h => ({
-                    id: h.hospitalId,
+                    id: h.userId,
                     name: h.name,
                     address: h.address,
                     imageURL: h.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg",
