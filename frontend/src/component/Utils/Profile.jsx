@@ -64,15 +64,13 @@ export default function Profile(props) {
                         <TouchableOpacity
                             className="p-2 py-1"
                             style={{
-                                backgroundColor: "#24DCE2",
+                                backgroundColor: "#1AD1FF",
                                 borderRadius: '10px',
                                 
                             }}
                             onPress={() => {
                                 console.log("Update", props.id)
-                                setTitle("Chưa cập nhật chức năng này")
-                                setIsAlert(true)
-                                setVisible(true)
+                                navigation.navigate("Cập nhật hồ sơ", { prevProfile: props});
                             }}
                         >
                             <Text
@@ -81,10 +79,10 @@ export default function Profile(props) {
                         </TouchableOpacity>
                         <Text className="text-white">---</Text>
                         <TouchableOpacity
-                            className="p-2 py-1 -ml-3"
+                            className="p-2 py-1 -ml-3.5"
                             style={{
-                                color: "#24DCE2",
-                                borderColor: "#24DCE2",
+                                color: "#1AD1FF",
+                                borderColor: "#1AD1FF",
                                 backgroundColor: "#ccc",
                                 borderRadius: '10px'
                             }}
