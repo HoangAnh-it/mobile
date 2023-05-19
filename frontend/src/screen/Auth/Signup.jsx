@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     borderRadius: 250/2,
     left: 8,
     top: -114,
-    backgroundColor: 'rgba(36, 220, 226, 0.3)'
+    backgroundColor: 'rgba(77, 219, 255, 0.3)'
   },
   circle2: {
     position: "absolute",
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     borderRadius: 250/2,
     left: -117,
     top: -42,
-    backgroundColor: 'rgba(36, 220, 226, 0.3)'
+    backgroundColor: 'rgba(128, 229, 255, 0.3)'
   },
   container: {
     top: 100 
