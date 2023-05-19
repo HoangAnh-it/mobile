@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesome, Feather, MaterialCommunityIcons, AntDesign, Octicons } from '@expo/vector-icons'
+import { FontAwesome5 } from "@expo/vector-icons"
 
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
@@ -21,6 +22,7 @@ export default function Signup({ navigation }) {
     check_addressChange: false,
     check_pwChange: false,
     check_rePwChange: false,
+    role: '',
   })
   
   const {auth, authDispatch} = useAuth()._j
@@ -136,117 +138,160 @@ export default function Signup({ navigation }) {
           });
         }
       }
+  
+  const changeRole = (role) => {
+    setData(prev => ({
+      ...prev,
+      role
+    }))
+  }
 
     const handleSignup = () => {
       // signup(username, password);
     }
 
-    return (
-        <KeyboardAwareScrollView>
-        <ScrollView pagingEnabled={true}>
+  return (
+    <KeyboardAwareScrollView>
+      <ScrollView pagingEnabled={true}>
         <View style={styles.circle1} />
         <View style={styles.circle2} />
         
-            <View style={styles.container} className="relative flex-2 items-center justify-center h-screen">
-            <Text className="font-bold text-2xl text-center">Tạo tài khoản</Text>
-            <View className="items-center">
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_userChange ? 
-                    <FontAwesome name='user-o' size={20} color="black" />
-                    : <FontAwesome name='user-o' size={20} color="gray" />
-                    }
+        <View style={styles.container} className="relative flex-2 items-center justify-center h-screen">
+          <Text className="font-bold text-2xl text-center">Tạo tài khoản</Text>
+          <View className="items-center">
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_userChange ?
+                <FontAwesome name='user-o' size={20} color="black" />
+                : <FontAwesome name='user-o' size={20} color="gray" />
+              }
                     
-                    <TextInput 
-                        className="pl-2" placeholder='Họ và tên' autoComplete='name'
-                        onChangeText={(val) => userChange(val)}
-                        />
-                </View>  
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_birthDayChange ? 
-                    <MaterialCommunityIcons name='calendar-week' size={20} color="black" />
-                    : <MaterialCommunityIcons name='calendar-week' size={20} color="gray" />
-                    }
-                    
-                    <TextInput 
-                        className="pl-2" placeholder='Ngày sinh (YYYY-MM-DD)' autoComplete='birthdate-full' keyboardType='numbers-and-punctuation'
-                        onChangeText={(val) => dobChange(val)}
-                        />
-                </View> 
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_phoneChange ? 
-                    <AntDesign name='phone' size={20} color="black" />
-                    : <AntDesign name='phone' size={20} color="gray" />
-                    }
-                    
-                    <TextInput 
-                        className="pl-2" placeholder='Số điện thoại' autoComplete='tel' keyboardType='numeric'
-                        onChangeText={(val) => phoneChange(val)}
-                        />
-                </View>  
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_emailChange ? 
-                    <Feather name='mail' size={20} color="black" />
-                    :<Feather name='mail' size={20} color="gray" />  
-                    }
-                    
-                    <TextInput 
-                        className="pl-2" placeholder='Email' autoComplete='email'
-                        onChangeText={(val) => emailChange(val)}
-                        />
-                </View>  
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_addressChange ? 
-                    <Octicons name='home' size={20} color="black" />
-                    : <Octicons name='home' size={20} color="gray" />
-                    }
-                    
-                    <TextInput 
-                        className="pl-2" placeholder='Địa chỉ'
-                        onChangeText={(val) => addressChange(val)}
-                        />
-                </View>   
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_pwChange ?
-                    <Feather name='lock' size={20} color="black" />
-                    : <Feather name='lock' size={20} color="gray" />
-                    }
-                    
-                    <TextInput
-                        secureTextEntry={true}
-                        className="pl-2" placeholder='Mật khẩu'
-                        onChangeText={(val) => pwChange(val)}
-                        />
-                </View> 
-                <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
-                    {data.check_rePwChange ?
-                    <Feather name='check-square' size={20} color="black" />
-                    : <Feather name='check-square' size={20} color="gray" />
-                    }
-                    <TextInput
-                        secureTextEntry={true}
-                        className="pl-2" placeholder='Nhập lại mật khẩu'
-                        onChangeText={(val) => rePwChange(val)}
-                        />
-                </View>
-                <TouchableOpacity 
-                  onPress={() => {handleSignup()}}
-                  className="rounded-md items-center w-80 mt-10" style={styles.bgColor}
-                >
-                    <Text className="font-bold text-center mx-5 w-80 py-3 text-white">Đăng ký</Text>
-                </TouchableOpacity>
-                <View className="flex-row justify-center my-10">
-                <Text>Đã có tài khoản? </Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("LoginScreen")}
-                >
-                    <Text style={styles.textColor} className="font-bold">Đăng nhập</Text>
-                </TouchableOpacity>
-                </View>
-            </View>        
+              <TextInput
+                className="pl-2" placeholder='Họ và tên' autoComplete='name'
+                onChangeText={(val) => userChange(val)}
+              />
             </View>
-        </ScrollView>
-        </KeyboardAwareScrollView>  
-    );
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_birthDayChange ?
+                <MaterialCommunityIcons name='calendar-week' size={20} color="black" />
+                : <MaterialCommunityIcons name='calendar-week' size={20} color="gray" />
+              }
+                    
+              <TextInput
+                className="pl-2" placeholder='Ngày sinh (YYYY-MM-DD)' autoComplete='birthdate-full' keyboardType='numbers-and-punctuation'
+                onChangeText={(val) => dobChange(val)}
+              />
+            </View>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_phoneChange ?
+                <AntDesign name='phone' size={20} color="black" />
+                : <AntDesign name='phone' size={20} color="gray" />
+              }
+                    
+              <TextInput
+                className="pl-2" placeholder='Số điện thoại' autoComplete='tel' keyboardType='numeric'
+                onChangeText={(val) => phoneChange(val)}
+              />
+            </View>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_emailChange ?
+                <Feather name='mail' size={20} color="black" />
+                : <Feather name='mail' size={20} color="gray" />
+              }
+                    
+              <TextInput
+                className="pl-2" placeholder='Email' autoComplete='email'
+                onChangeText={(val) => emailChange(val)}
+              />
+            </View>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_addressChange ?
+                <Octicons name='home' size={20} color="black" />
+                : <Octicons name='home' size={20} color="gray" />
+              }
+                    
+              <TextInput
+                className="pl-2" placeholder='Địa chỉ'
+                onChangeText={(val) => addressChange(val)}
+              />
+            </View>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_pwChange ?
+                <Feather name='lock' size={20} color="black" />
+                : <Feather name='lock' size={20} color="gray" />
+              }
+                    
+              <TextInput
+                secureTextEntry={true}
+                className="pl-2" placeholder='Mật khẩu'
+                onChangeText={(val) => pwChange(val)}
+              />
+            </View>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 mt-3 py-2 w-80 flex-row items-center'>
+              {data.check_rePwChange ?
+                <Feather name='check-square' size={20} color="black" />
+                : <Feather name='check-square' size={20} color="gray" />
+              }
+              <TextInput
+                secureTextEntry={true}
+                className="pl-2" placeholder='Nhập lại mật khẩu'
+                onChangeText={(val) => rePwChange(val)}
+              />
+            </View>
+            <View className="">
+              <Text className=" text-center m-2 font-bold">Đăng ký với vai trò?</Text>
+              <View className="flex-row space-x-3">
+                {
+                  data.role === "HOSPITAL" ?
+                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" />
+                    :
+                    <TouchableOpacity
+                      onPress={() => changeRole("HOSPITAL")}
+                    >
+                      <FontAwesome5 name="circle" size={24} color="gray" />
+                    </TouchableOpacity>
+                }
+                <Text>Bệnh viện</Text>
+                {
+                  data.role === "DOCTOR" ?
+                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" /> :
+                    <TouchableOpacity
+                      onPress={() => changeRole("DOCTOR")}
+                    >
+                      <FontAwesome5 name="circle" size={24} color="gray" />
+                    </TouchableOpacity>
+                }
+                <Text>Bác sĩ</Text>
+                {
+                  data.role === "PATIENT" ?
+                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" /> :
+                    <TouchableOpacity
+                      onPress={() => changeRole("PATIENT")}
+                    >
+                      <FontAwesome5 name="circle" size={24} color="gray" />
+                    </TouchableOpacity>
+                }
+                <Text>Cá nhân</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => { handleSignup() }}
+              className="rounded-md items-center w-80 mt-10" style={styles.bgColor}
+            >
+              <Text className="font-bold text-center mx-5 w-80 py-3 text-white">Đăng ký</Text>
+            </TouchableOpacity>
+            <View className="flex-row justify-center my-10">
+              <Text>Đã có tài khoản? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("LoginScreen")}
+              >
+                <Text style={styles.textColor} className="font-bold">Đăng nhập</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </KeyboardAwareScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
