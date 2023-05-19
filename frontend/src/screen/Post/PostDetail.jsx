@@ -91,7 +91,7 @@ export default function PostDetail({ navigation, route }) {
                     className="m-3 absolute left-0"
                     onPress={() => navigation.goBack(null)}
                 >
-                    <Ionicons name="arrow-back" size={24} color="black" />
+                    <Ionicons name="arrow-back" size={24} color="#1AD1FF" />
                 </TouchableOpacity>
                 <View className="my-3 flex-row items-center">
                     <Text className="font-semibold text-lg ml-3">{post.auth.name}</Text>
@@ -134,7 +134,7 @@ export default function PostDetail({ navigation, route }) {
                                 className="w-1/12 ml-3"
                                 onPress={() => sendCommnet()}
                             >
-                                <Ionicons name="send" color={"#24CDE2"} size={24} />
+                                <Ionicons name="send" color={"#1AD1FF"} size={24} />
                             </TouchableOpacity> :
                             <View className="w-1/12 ml-3">
                                 <Ionicons name="send" color={"gray"} size={24} />
