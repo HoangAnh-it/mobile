@@ -28,12 +28,12 @@ export default function Home({ navigation }) {
         style={styles.item}
         onPress={props.onPress}
       >
-        <View className="ml-2 bg-cyan-100 h-3/4 aspect-square rounded-full items-center justify-center">
+        <View className="ml-2 bg-[#ccf5ff] h-3/4 aspect-square rounded-full items-center justify-center">
           <Image source={props.image} className="object-scale-down h-10 w-10" />
         </View>
         <Text className="ml-3 font-semibold text-lg">{props.title}</Text>
         <View className="right-3 absolute">
-          <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+          <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
         </View>
       </TouchableOpacity>
     );
@@ -65,7 +65,7 @@ export default function Home({ navigation }) {
                 <View className="px-2 py-1 space-y-1">
                     <Text className="font-semibold h-9" numberOfLines={2}>{props.name}</Text>
                     <Text className="text-gray-500 text-xs h-16" numberOfLines={3}>{props.address}</Text>
-                    <TouchableOpacity className="rounded-full" style={{ backgroundColor: "#24DCE2" }}
+                    <TouchableOpacity className="rounded-full" style={{ backgroundColor: "#1AD1FF" }}
                         onPress={() => { navigation.navigate("Hồ sơ", { hospital: props.id }) }}
                     >
                         <Text className="font-semibold text-base text-center text-white p-1">Đặt khám</Text>
@@ -171,7 +171,7 @@ const items = [
             showsVerticalScrollIndicator={true}
         >
             <LinearGradient
-                colors={['#ffffff', 'rgba(36, 220, 226, 0.5)']}
+                colors={['#ffffff', '#66e0ff']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 className="w-100 min-h-screen"

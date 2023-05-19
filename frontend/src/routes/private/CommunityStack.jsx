@@ -37,7 +37,7 @@ export default function CommunityStack() {
                 name="Thông báo"
                 component={Notification}
                 options={{
-                    headerTintColor: "#24dce2",
+                    headerTintColor: "#1AD1FF",
                     headerTitleStyle: { color: "#000000" },
                 }}
                 navigationOptions={({ navigation, route }) => ({
@@ -45,7 +45,7 @@ export default function CommunityStack() {
                         <Ionicons
                             labelVisible={false}
                             title="Trở về"
-                            style={{ color: "#24dce2" }}
+                            style={{ color: "#1AD1FF" }}
                         />
                     ),
                 })}

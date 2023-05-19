@@ -97,7 +97,7 @@ export default function Search({navigation, route}) {
                     </View>
                     <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
                     <View className="w-1/5 absolute ml-60 mt-4">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -118,7 +118,7 @@ export default function Search({navigation, route}) {
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{props.name}</Text>
                     <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.address}</Text>
                     <View className="w-1/5 absolute ml-60 mt-5">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -140,7 +140,7 @@ export default function Search({navigation, route}) {
                     <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.price}</Text>
                     <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.hospital.name}</Text>
                     <View className="w-1/5 absolute ml-60 mt-1">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -221,16 +221,16 @@ const styles = StyleSheet.create({
         color: "#ffb300",
     },
     textColor: {
-        color: "#24DCE2",
+        color: "#1AD1FF",
         fontWeight: "bold"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2"
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF"
     },
     focus: {
-        borderColor: "#24DCE2",
-        color: "#24DCE2",
+        borderColor: "#1AD1FF",
+        color: "#1AD1FF",
     },
     none: {
         fontWeight: "normal"

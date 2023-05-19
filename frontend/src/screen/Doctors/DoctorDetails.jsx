@@ -95,7 +95,7 @@ export default function DoctorDetails({ navigation, route }) {
                         id: user.doctor.department.hospital.user.userId
                     },
                     imageURL: user.avatar || "https://static.vecteezy.com/system/resources/previews/001/223/214/original/female-doctor-wearing-a-medical-mask-vector.jpg",
-                    star: 3,
+                    star: 4,
                 })
             })
             .catch(err => {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         color: "#ffb300",
     },
     bgColor: {
-      backgroundColor: "#24DCE2",
-      borderColor: "#24DCE2"
+      backgroundColor: "#1AD1FF",
+      borderColor: "#1AD1FF"
     },
   });

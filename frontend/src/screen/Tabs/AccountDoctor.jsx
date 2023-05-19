@@ -120,7 +120,7 @@ const Item = (props) => {
 
 const styles = StyleSheet.create({
     bg: {
-        backgroundColor: "#24DCE2",
+        backgroundColor: "#1AD1FF",
     },
     borderAvatar: {
 

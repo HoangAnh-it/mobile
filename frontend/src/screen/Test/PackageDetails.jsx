@@ -92,7 +92,7 @@ export default function PackageDetails({navigation, route}) {
 
 const styles = StyleSheet.create({ 
     bgColor: {
-      backgroundColor: "#24DCE2",
-      borderColor: "#24DCE2"
+      backgroundColor: "#1AD1FF",
+      borderColor: "#1AD1FF"
     },
   });

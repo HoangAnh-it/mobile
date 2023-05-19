@@ -272,9 +272,9 @@ const styles = StyleSheet.create({
     top: 100 
   }, 
   textColor: {
-    color: "#24DCE2"
+    color: "#1AD1FF"
   },
   bgColor: {
-    backgroundColor: "#24DCE2"
+    backgroundColor: "#1AD1FF"
   }
 });

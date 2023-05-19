@@ -32,7 +32,7 @@ export default function PrivateStackScreen() {
                                 }
                                 return <Ionicons name={iconName} size={size} color={color} />;
                             },
-                            tabBarActiveTintColor: '#24dce2',
+                            tabBarActiveTintColor: '#1AD1FF',
                             tabBarInactiveTintColor: 'gray',
                             headerShown: false,
                         });
@@ -49,7 +49,7 @@ export default function PrivateStackScreen() {
                                 }
                                 return <Ionicons name={iconName} size={size} color={color} />;
                             },
-                            tabBarActiveTintColor: '#24dce2',
+                            tabBarActiveTintColor: '#1AD1FF',
                             tabBarInactiveTintColor: 'gray',
                             headerShown: false,
                         });

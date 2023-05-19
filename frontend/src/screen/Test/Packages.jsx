@@ -18,7 +18,7 @@ PackageBrief = ({ _package }) => {
     };
 
     return (
-        <View className="mt-2 ml-1 mr-1 bg-white rounded-xl w-fit max-w-s shadow-sm">
+        <View className="mt-2 mx-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
             <View className="w-fit m-2 -mb-4 h-56">
                 <Image
                     source={_package.image}
@@ -30,10 +30,10 @@ PackageBrief = ({ _package }) => {
                 <Text className="text-slate-900 text-lg font-bold">
                     {_package.title}
                 </Text>
-                <Text className="text-slate-900 text-base -mt-1 font-normal">
+                <Text className="text-slate-900 mt-1 font-normal">
                     Giá đặt khám: {_package.price}đ
                 </Text>
-                <Text className="text-slate-900 text-base -mt-1 font-normal">
+                <Text className="text-slate-900 font-normal">
                     Bệnh viện: {_package.hospital}
                 </Text>
                 <View className="flex-row">
@@ -98,15 +98,15 @@ export default function Packages({ navigation }) {
 
 const styles = StyleSheet.create({
     textColor: {
-        color: "#24DCE2"
+        color: "#1AD1FF"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2",
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF",
         width: "48%"
     },
     borderColor: {
-        borderColor: "#24DCE2",
+        borderColor: "#1AD1FF",
         width: "48%"
     },
 });
