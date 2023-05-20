@@ -1,17 +1,34 @@
-import React from 'react'
 import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import Post from "../../component/Post/Post"
 import { StatusBar } from "expo-status-bar";
 import useAxios from '../../hooks/useAxios'
 import useSocket from '../../hooks/useSocket';
+import React, { useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/previews/001/223/214/original/female-doctor-wearing-a-medical-mask-vector.jpg";
 
 export default function Community({ navigation }) {
+    const [user, setUser] = React.useState({})
     const [posts, setPosts] = React.useState([])
     const axios = useAxios()
     const socket = useSocket()
+    const {auth, authDispatch} = useAuth()._j
+
+    useEffect(() => {
+        if (!auth?.user.id) {
+            return
+        }
+        axios.get(`/user/profile/${auth?.user.id}`)
+            .then(res => res.data.data)
+            .then(info => {
+                setUser(info)
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
+            })
+    }, [auth]);
 
     React.useEffect(() => {
         axios.get("/post")
@@ -72,7 +89,7 @@ export default function Community({ navigation }) {
                     onPress={() => navigation.navigate("New Post")}
                 >
                     <Image
-                        src="https://cdn-icons-png.flaticon.com/512/4659/4659027.png"
+                        src={user.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYOgVxLPZQlTUfG5XDL-uaQqJ03S3XEMx4xg&usqp=CAU"}
                         className="w-10 h-10 rounded-full ml-3"
                     />
                     <Text className="text-base ml-3 text-gray-500">Chia sẻ thông tin của bạn</Text>

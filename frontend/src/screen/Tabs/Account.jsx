@@ -42,9 +42,9 @@ export default function Account({ navigation }) {
             <View className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
                 <Text className="pt-24 text-center mb-2 text-slate-900 text-2xl font-bold">{user.name}</Text>
                 <View className="m-auto flex-row space-x-5">
-                    <TouchableOpacity style={styles.bg} className="p-3 rounded-lg flex-row items-center justify-center w-40">
+                    <TouchableOpacity style={styles.bg} className="p-3 rounded-lg flex-row items-center justify-center w-3/4">
                         <Feather name="edit" size={24} color={"white"} />
-                        <Text className="w-20 ml-3 font-bold text-white">Chỉnh sửa thông tin</Text>
+                        <Text className="ml-3 font-bold text-white">Chỉnh sửa thông tin</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity style={styles.bg} className="p-3 rounded-lg flex-row items-center justify-center w-40">
                         <Feather name="eye" size={24} color={"white"} />
@@ -54,7 +54,7 @@ export default function Account({ navigation }) {
             </View>
             <View className="top-28 p-1.5 w-56 h-56 rounded-full absolute items-center justify-center bg-white">
                 <Image
-                    src={user.avatar}
+                    src={user.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYOgVxLPZQlTUfG5XDL-uaQqJ03S3XEMx4xg&usqp=CAU"}
                     className="w-full h-full object-cover rounded-full"
                 />
             </View>
