@@ -30,10 +30,10 @@ const DoctorBrief = (props) => {
                         <MaterialIcons name={props.stars >= 4 ? "star" : "star-border"} size={25} style={props.stars >= 4 ? styles.starSelected : styles.starUnselected} />
                         <MaterialIcons name={props.stars == 5 ? "star" : "star-border"} size={25} style={props.stars == 5 ? styles.starSelected : styles.starUnselected} />
                     </View>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
-                    <View className="w-1/5 absolute ml-60 mt-4">
-                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
-                    </View>
+                    <Text className="w-2/3 text-gray-600 text-left break-normal font-normal justify-center">{props.department}</Text>
+                </View>
+                <View className="right-3 absolute">
+                    <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                 </View>
             </TouchableOpacity>
             <View style={{ width: '1.2%' }}></View>
@@ -144,7 +144,7 @@ export default function DoctorList({navigation}) {
                 
                 <View className="mt-2 mx-2 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
                     <Text style={styles.textColor} className="ml-2.5 mb-1 text-slate-900 text-lg font-bold">
-                        Danh sách bác sĩ
+                        Danh sách bác sĩ - {departmentChosen}
                     </Text>
                     {
                         filterByDepartment(doctors).length > 0 ?

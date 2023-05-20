@@ -37,7 +37,7 @@ export default function AccountDoctor({ navigation }) {
         <View className="flex-1 items-center bg-white">
             <View className="w-full h-60">
                 <Image
-                    src={"https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-abstract-medical-wallpaper-template-design-banner-background-image_519861.jpg"}
+                    src={"https://projectmgtcoach.com/wp-content/uploads/2015/03/light-blue-backgrounds-for-websites.jpg"}
                     className="object-cover w-full h-full overflow-hidden"
                 />
             </View>

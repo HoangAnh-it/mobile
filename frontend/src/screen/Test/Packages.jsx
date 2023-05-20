@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import useAxios from "../../hooks/useAxios";
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 
 PackageBrief = ({ _package }) => {
     const { description, ...other } = _package
@@ -18,7 +19,7 @@ PackageBrief = ({ _package }) => {
     };
 
     return (
-        <View className="mt-2 mx-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
+        <Animatable.View animation='fadeInRight' className="mt-2 mx-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
             <View className="w-fit m-2 -mb-4 h-56">
                 <Image
                     source={_package.image}
@@ -50,7 +51,7 @@ PackageBrief = ({ _package }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </Animatable.View>
     )
 }
 
