@@ -12,7 +12,6 @@ export default function ConfirmModal({
 
     return (
         <>
-
             <Modal
                 animationType="fade"
                 transparent={true}

@@ -8,7 +8,7 @@ export default ConfirmContext
 export function ConfirmModalProvider({ children }) {
     const [title, setTitle] = React.useState("")
     const [visible, setVisible] = React.useState(false)
-    const [action, setAction] = React.useState(() => () => { });
+    const [action, _setAction] = React.useState(() => () => { });
     const [isAlert, setIsAlert] = React.useState(false)
 
     const reset = () => {
@@ -16,6 +16,10 @@ export function ConfirmModalProvider({ children }) {
         setVisible(false)
         setAction(() => () => { })
         setIsAlert(false)
+    }
+
+    const setAction = (func) => {
+        _setAction(() => func)
     }
 
     return (

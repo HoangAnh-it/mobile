@@ -12,4 +12,4 @@ export { Patient } from './Patient'
 export { Post } from './Post'
 export { TestPackage } from './TestPackage'
 export {MedicalRecord} from './MedicalRecord'
-
+export { DoAppointment } from './DoAppointment'

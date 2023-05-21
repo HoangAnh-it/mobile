@@ -65,11 +65,12 @@ export default function Packages({ navigation }) {
                 setPackages(data.map(pk => ({
                     id: pk.testPackageId,
                     title: pk.name,
-                    address: pk.hospital.user.address,
+                    address: pk.department.hospital.user.address,
                     image: require("./../../assets/demo-img/hospital.jpg"),
                     price: pk.price,
                     description: pk.description,
-                    hospital: pk.hospital?.user?.name
+                    hospital: pk.department.hospital?.user?.name,
+                    department: pk.department.name
                 })))
             })
     }, [])

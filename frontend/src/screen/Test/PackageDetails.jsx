@@ -68,8 +68,8 @@ export default function PackageDetails({navigation, route}) {
                 setPackage({
                     id: p.testPackageId,
                     title: p.name,
-                    hospital: p.hospital.user.name,
-                    address: p.hospital.user.address,
+                    hospital: p.department.hospital.user.name,
+                    address: p.department.hospital.user.address,
                     imageURL: require("./../../assets/demo-img/hospital.jpg"),//p.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg",
                     price: p.price,
                     description: p.description

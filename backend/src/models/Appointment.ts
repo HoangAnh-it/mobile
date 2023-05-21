@@ -1,5 +1,5 @@
-import { Model,  PrimaryKey, Column, Table, ForeignKey, CreatedAt, UpdatedAt, DataType, BelongsTo, BeforeCreate } from 'sequelize-typescript';
-import {User, TestPackage, MedicalRecord, Department} from '.'
+import { Model,  PrimaryKey, Column, Table, ForeignKey, CreatedAt, UpdatedAt, DataType, BelongsTo, BeforeCreate, HasOne } from 'sequelize-typescript';
+import {User, TestPackage, MedicalRecord, Department, DoAppointment} from '.'
 import { generateUUID } from '../utils/uuid';
 
 @Table({ tableName: 'Appointments' })
@@ -8,7 +8,7 @@ export class Appointment extends Model{
   @Column({ type: DataType.STRING })
   public appointmentId!: string;
 
-  @Column({type: DataType.ENUM("PENDING", "DONE")})
+  @Column({type: DataType.ENUM("PENDING", "DONE", "ACCEPTED", "CANCELED", "REJECTED")})
   public status!: string;
 
   @Column({ type: DataType.DATE })
@@ -42,6 +42,9 @@ export class Appointment extends Model{
   
   @BelongsTo(() => MedicalRecord)
   private medicalRecord!: MedicalRecord
+
+  @HasOne(() => DoAppointment)
+  private doAppointment!: DoAppointment
 
   public getTestPackage(): TestPackage {
     return this.testPackage

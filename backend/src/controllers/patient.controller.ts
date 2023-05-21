@@ -80,10 +80,9 @@ export const getAllAppointments = ErrorWrapperHandler(async (req: Request, res: 
 })
 
 // [DELETE] /patient/appointment/:id
-export const deleteAnAppointment = ErrorWrapperHandler(async (req: Request, res: Response) => {
-    const { id } = req.params
-    const deletedAppId = await patientService.deleteAnAppointment(id)
-    return res.status(StatusCodes.OK).json({
-        id: deletedAppId
-    })
+export const handlerAnAppointment = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const { id} = req.params
+    const status = req.query.status as string
+    const data = await patientService.handleAnAppointment(id, status)
+    return res.status(StatusCodes.OK).json(data)
 })

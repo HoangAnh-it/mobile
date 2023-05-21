@@ -56,13 +56,11 @@ const Details = (props) => {
                         Chức danh: {props.title}
                     </Text>
                     <View className="h-px mb-2 bg-gray-300 block" />
-                    <TouchableOpacity className="w-fit" onPress={() => navigation.navigate("Thông tin bệnh viện", {
-                        id: props.hospital?.id
-                    })}>
+                    <View className="w-fit">
                         <Text className="text-slate-900 text-base font-normal text-justify">
                             Nơi làm việc: {props.hospital?.name}
                         </Text>
-                    </TouchableOpacity>
+                    </View>
                     <View className="h-px mb-2 bg-gray-300" />
                     <Text className="text-slate-900 text-base font-normal text-justify">
                         Chuyên môn: {props.department}

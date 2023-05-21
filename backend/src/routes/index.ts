@@ -15,7 +15,7 @@ import {roleCheck} from '../middleware/role'
 export default function initRoutes(app: Application) {
     app.use("/api/auth", authRouter)
     app.use("/api/post", authMiddleware, roleCheck("DOCTOR", "PATIENT", "HOSPITAL"), postRouter)
-    app.use("/api/user", authMiddleware, roleCheck("DOCTOR", "PATIENT"), userRouter)
+    app.use("/api/user", authMiddleware, roleCheck("DOCTOR", "PATIENT", "HOSPITAL"), userRouter)
     app.use("/api/hospital", authMiddleware, roleCheck("DOCTOR", "PATIENT", "HOSPITAL" ), hospitalRouter)
     app.use("/api/patient", authMiddleware, roleCheck("PATIENT"), patientRouter)
     app.use("/api/test_package", authMiddleware, roleCheck("PATIENT", "DOCTOR", "HOSPITAL"), testPackageRouter)

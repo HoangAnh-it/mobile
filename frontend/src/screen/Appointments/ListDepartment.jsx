@@ -5,7 +5,6 @@ import * as Animatable from 'react-native-animatable';
 
 const DepartmentOption = ({department, choose}) => {
     return (
-        <>
             <TouchableOpacity
                 onPress={() => choose(department)}
                 className="m-2 p-2 h-20 w-2/5 flex-row items-center text-center rounded-lg float-left bg-white shadow-sm"
@@ -25,7 +24,6 @@ const DepartmentOption = ({department, choose}) => {
                     {department.name}
                 </Text>
             </TouchableOpacity>
-        </>
     )
 }
 

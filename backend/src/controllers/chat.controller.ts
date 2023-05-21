@@ -11,8 +11,10 @@ export const socketSetup = (io: any, app: Application) => {
         app.set("socket.io", {io, socket})
         console.log("An user connected:", socket.id)
         socket.emit("handshake", socket.id)
-        socket.on("handshake", ({userId, socketId}: {[key: string]: string}) => {
+        socket.on("handshake", ({ userId, socketId }: { [key: string]: string }) => {
+            if (uid[userId]) return;
             uid[userId] = socketId
+            socket.join(socketId)
             console.log("JOIN: ", userId, socketId)
         })
 
@@ -20,10 +22,18 @@ export const socketSetup = (io: any, app: Application) => {
             socket.emit('delete medical record', id)
         })
 
-        socket.on('delete appointment', (id: string) => {
-            socket.emit('delete appointment', id)
+        socket.on('status appointment', (data: {[key:string]: any}) => {
+            socket.emit('status appointment', data)
         })
         
+        socket.on('reject appointment', (id: string) => {
+            socket.emit('reject appointment', id)
+        })
+
+        socket.on('create department', (data: { [key: string]: any }) => {
+            socket.emit('create department', data)
+        })
+
         socket.on("disconnect", () => {
             console.log("Disconnect from", socket.id)
             const k = Object.keys(uid).find(k => uid[k] === socket.id)

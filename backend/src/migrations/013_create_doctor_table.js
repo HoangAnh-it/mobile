@@ -38,17 +38,6 @@ module.exports =  {
                 onDelete: "CASCADE",
             },
 
-            hospitalId: {
-                type: DataTypes.UUID,
-                allowNull: false,
-                references: {
-                    model: HOSPITAL,
-                    key: "hospitalId"
-                },
-                onUpdate: "CASCADE",
-                onDelete: "CASCADE",
-            },
-
             userId: {
                 type: DataTypes.UUID,
                 allowNull: false,

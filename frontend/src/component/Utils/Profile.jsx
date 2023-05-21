@@ -91,7 +91,7 @@ export default function Profile(props) {
                             onPress={() => {
                                 setTitle("Bạn chắc chắn muốn xóa?")
                                 setVisible(true)
-                                setAction(() => () => {
+                                setAction(() => {
                                     console.log("DELETE medical record: ", props.id)
                                     deleteProfile(props.id)
                                 })

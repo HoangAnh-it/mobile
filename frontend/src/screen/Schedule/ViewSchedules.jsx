@@ -6,8 +6,9 @@ import useAxios from "../../hooks/useAxios";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import useConfirmModal from "../../hooks/useConfirmModal";
 import useSocket from "../../hooks/useSocket";
+import { dictionary } from "../../helpers/helpers";
 
-const ScheduleItem = ({ data }) => {
+export const ScheduleItem = ({ data }) => {
     const { setTitle, setAction, setVisible, setIsAlert } = useConfirmModal()
     const axios = useAxios()
     const socket = useSocket()
@@ -15,12 +16,14 @@ const ScheduleItem = ({ data }) => {
 
     const cancelAppointment = () => {
         setTitle(`Hủy cuộc hẹn ${data.department?.name || ""}?`)
-        setAction(() => () => {
-            axios.delete(`/patient/appointment/${data.id}`)
+        setAction(() => {
+            axios.put(`/patient/appointment/${data.id}?status=CANCELED`)
                 .then(res => {
-                    console.log(res.data)
                     if (res.status === 200) {
-                        socket.emit("delete appointment", res.data.id)
+                        socket.emit("status appointment", {
+                            id: res.data.id,
+                            status: res.data.status
+                        })
                     }
                 }).catch(err => {
                     console.log(JSON.stringify(err))
@@ -34,9 +37,7 @@ const ScheduleItem = ({ data }) => {
 
     return (
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm"
-            style={
-                data.status === 'PENDING' ? styles.pending : styles.done
-            }
+            style={styles.status[data.status]}
         >
             <View className="my-3">
                 <View className="flex-row py-1 border-b border-gray-200">
@@ -61,7 +62,7 @@ const ScheduleItem = ({ data }) => {
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Chuyên khoa</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.department?.name || 'Chưa có thông tin'}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.department}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Ngày khám</Text>
@@ -79,9 +80,16 @@ const ScheduleItem = ({ data }) => {
                     <Text>Địa chỉ</Text>
                     <Text className="right-0 top-1 absolute w-2/3 text-right">{data.address}</Text>
                 </View>
+                {
+                    data.doctor &&
+                    <View className="flex-row py-1">
+                        <Text>Bác sĩ</Text>
+                        <Text className="right-0 top-1 absolute w-2/3 text-right">{data.doctor}</Text>
+                    </View>
+                }
                 <View className="flex-row py-1 mt-4">
                     {
-                        data.status === "PENDING" &&
+                        ["PENDING", "ACCEPTED"].includes(data.status) &&
                         <TouchableOpacity
                             onPress={cancelAppointment}
                         >
@@ -95,9 +103,19 @@ const ScheduleItem = ({ data }) => {
                             </Text>
                         </TouchableOpacity>
                     }
+                    {
+                        [].includes(data.status) &&
+                        <Text
+                                className="font-bold p-1.5"
+                                style={{
+                                    backgroundColor: '#ff0000',
+                                }}
+                            >
+                                Đã hủy?
+                            </Text>
+                    }
                     <Text className="font-bold right-0 top-1 absolute w-2/3 text-right text-decoration-line: underline">
-                        {data.status === "PENDING" && "Đang chờ"}
-                        {data.status === "DONE" && "Đã xong"}
+                        {dictionary[data.status]}
                     </Text>
                 </View>
             </View>
@@ -123,7 +141,21 @@ export default function ViewSchedules({ navigation, route }) {
         axios.get('/patient/appointment')
             .then(res => res.data.data)
             .then(d => {
-                setSchedules(d)
+                setSchedules(d.map(schedule => ({
+                    id: schedule.appointmentId,
+                    fullname: schedule.medicalRecord.name,
+                    sex: schedule.medicalRecord.gender,
+                    dateOfBirth: getDate(new Date(schedule.medicalRecord.birthDay)),
+                    relationship: schedule.medicalRecord.relationship,
+                    numberphone: schedule.medicalRecord.phone,
+                    address: schedule.medicalRecord.address,
+                    hospital: schedule.department?.hospital.user.name || schedule.testPackage?.department.hospital.user.name,
+                    department: schedule.department?.name,
+                    date: getDate(new Date(schedule.dateTime)),
+                    hour: getTime(new Date(schedule.dateTime)),
+                    status: schedule.status,
+                    doctor: schedule.doAppointment?.user.name
+                })))
             })
             .catch(err => {
                 console.log(JSON.stringify(err))
@@ -131,14 +163,25 @@ export default function ViewSchedules({ navigation, route }) {
     }, [])
 
     React.useEffect(() => {
-        const deleteAppointmentListener = (id) => {
-            console.log("delete appointment ", id)
-            setSchedules(prev => prev.filter(i => i.appointmentId !== id))
+        const statusAppointmentListener = (data) => {
+            console.log(data)
+            setSchedules(prev => {
+                const index = prev.findIndex(e => e.id === data.id)
+                console.log(index)
+                console.log(prev.map(prev => prev.id))
+                if (index >= 0) {
+                    prev[index].status = data.status
+                    if (data.status === 'ACCEPTED') {
+                        prev[index].doctor = data.doctor
+                    }
+                }
+                return [...prev]
+            })
         }
 
-        socket.on("delete appointment", deleteAppointmentListener)
+        socket.on("status appointment", statusAppointmentListener)
         return () => {
-            socket.off("delete appointment", deleteAppointmentListener)
+            socket.off("status appointment", statusAppointmentListener)
         }
     }, [socket])
 
@@ -152,21 +195,8 @@ export default function ViewSchedules({ navigation, route }) {
                 {
                     schedules.map((schedule, index) => {
                         return <ScheduleItem
-                            key={`schedule-${schedule.appointmentId}-${index}`}
-                            data={{
-                                id: schedule.appointmentId,
-                                fullname: schedule.medicalRecord.name,
-                                sex: schedule.medicalRecord.gender,
-                                dateOfBirth: getDate(new Date(schedule.medicalRecord.birthDay)),
-                                relationship: schedule.medicalRecord.relationship,
-                                numberphone: schedule.medicalRecord.phone,
-                                address: schedule.medicalRecord.address,
-                                hospital: schedule.department?.hospital.user.name || schedule.testPackage?.hospital.user.name,
-                                department: schedule.department,
-                                date: getDate(new Date(schedule.dateTime)),
-                                hour: getTime(new Date(schedule.dateTime)),
-                                status: schedule.status
-                            }}
+                            key={`schedule-${schedule.id}-${index}`}
+                            data={schedule}
                         />
                     })
                 }
@@ -176,15 +206,31 @@ export default function ViewSchedules({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-    pending: {
-        borderColor: "yellow",
-        borderWidth: "2px",
-        shadowColor: "2px"
-    },
+    status: {
+        PENDING: {
+            borderColor: 'yellow',
+            borderWidth: 2,
+        },
+            
+        ACCEPTED: {
+            borderColor: '#3333ff',
+            borderWidth: 2,
+        },
+
+        DONE: {
+            borderColor: '#33ff33',
+            borderWidth: 2,
+        },
     
-    done: {
-        borderColor: "green",
-        borderWidth: "2px",
-        shadowColor: "2px"
+        CANCELED: {
+            borderColor: '#ff9933',
+            borderWidth: 2,
+        },
+
+        REJECTED: {
+            borderColor: '#ff3333',
+            borderWidth: 2,
+        },
+
     }
-});
+})

@@ -70,7 +70,8 @@ export default function Search({navigation, route}) {
                     title: p.name,
                     image: require("./../../assets/demo-img/hospital.jpg"),
                     price: p.price,
-                    hospital: p.hospital
+                    hospital: p.department.hospital.user.name,
+                    department: p.department.name
                 })) || [])
 
             }).catch(err => {
@@ -138,7 +139,8 @@ export default function Search({navigation, route}) {
                 <View className="left-3 w-full">
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{props.name}</Text>
                     <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.price}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.hospital.name}</Text>
+                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.hospital}</Text>
+                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
                     <View className="w-1/5 absolute ml-60 mt-1">
                         <Ionicons name="caret-forward" size={24} color="#24DCE2" />
                     </View>
@@ -202,7 +204,7 @@ export default function Search({navigation, route}) {
                     </Text>
                         {
                             packageList.map((item, index) => {
-                                return <PackageBrief key={`package-${index}-${item.id}`} id={item.id} name={item.title} price={item.price} image={item.image} hospital={item.hospital} />
+                                return <PackageBrief key={`package-${index}-${item.id}`} id={item.id} name={item.title} price={item.price} image={item.image} hospital={item.hospital} department={item.department} />
                             })
                         }                    
                 </View>
