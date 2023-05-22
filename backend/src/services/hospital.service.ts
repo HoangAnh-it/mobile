@@ -192,6 +192,10 @@ export const rejectAppointment = async(hospitalId: string, appointmentId: string
         status: 'REJECTED'
     })
 
+    await DoAppointment.destroy({
+        where :{appointmentId}
+    })
+
     return existingAppointment.appointmentId
 }
 

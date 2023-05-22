@@ -211,12 +211,12 @@ export default function Notification({navigation}) {
 
 const styles = StyleSheet.create({ 
     textColor: {
-        color: "#24DCE2",
+        color: "#1AD1FF",
         fontWeight: "bold"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2"
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF"
     },
 
     unRead: {

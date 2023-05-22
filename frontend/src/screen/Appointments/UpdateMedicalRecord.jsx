@@ -5,14 +5,17 @@ import React from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useAxios from "../../hooks/useAxios";
 
-export default function CreateMedicalRecord({navigation}) {
+export default function UpdateMedicalRecord({navigation, route}) {
+    const { prevProfile } = route.params;
+    console.log(prevProfile); 
+
     const [data, setData] = React.useState({
-        name: null,
-        gender: "Nam",
-        birthDay: null,
-        relationship: null,
-        phone: null,
-        address: null
+        name: prevProfile.fullname,
+        gender: prevProfile.sex,
+        birthDay: prevProfile.dateOfBirth,
+        relationship: prevProfile.relationship,
+        phone: prevProfile.numberphone,
+        address: prevProfile.address
     })
 
     const [checkData, setCheckData] = React.useState({
@@ -63,14 +66,14 @@ export default function CreateMedicalRecord({navigation}) {
         }
         checkbirthDay(data.birthDay)
 
-        axios.post("/patient/medical_record", data)
-            .then(res => res.data.data)
-            .then((res) => {
-                console.log(res)
-                navigation.goBack(null)
-            }).catch(err => {
-                console.log(JSON.stringify(err))
-            })
+        // axios.post("/patient/medical_record", data)
+        //     .then(res => res.data.data)
+        //     .then((res) => {
+        //         console.log(res)
+        //         navigation.goBack(null)
+        //     }).catch(err => {
+        //         console.log(JSON.stringify(err))
+        //     })
     }
 
     return (
@@ -81,6 +84,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-1 my-1 px-3"
                         placeholder="Nhập họ tên"
+                        value={prevProfile.fullname}
                         onChangeText={(val) => setData({ ...data, name: val })}
                     />
                     {!checkData.name && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -114,6 +118,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-1 my-1 px-3"
                         placeholder="yyyy-MM-dd"
+                        value={prevProfile.dateOfBirth}
                         onChangeText={(val) => setData({ ...data, birthDay: val })}
                     />
                     {!checkData.birthDay && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -123,6 +128,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-1 my-1 px-3"
                         placeholder="Bố, Mẹ,..."
+                        value={prevProfile.relationship}
                         onChangeText={(val) => setData({ ...data, relationship: val })}
                     />
                     {!checkData.relationship && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -132,6 +138,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-1 my-1 px-3"
                         placeholder="0982xxxxxxx"
+                        value={prevProfile.numberphone}
                         onChangeText={(val) => setData({ ...data, phone: val })}
                     />
                     {!checkData.phone && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -141,6 +148,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-1 my-1 px-3"
                         placeholder="Số 19 ngõ 8 đường X, ...."
+                        value={prevProfile.address}
                         onChangeText={(val) => setData({ ...data, address: val })}
                     />
                     {!checkData.address && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -151,7 +159,7 @@ export default function CreateMedicalRecord({navigation}) {
                         style={{ backgroundColor: "#1AD1FF" }}
                         onPress={() => submit(data)}
                     >
-                        <Text className="text-white font-bold">Tạo hồ sơ</Text>
+                        <Text className="text-white font-bold">Cập nhật</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

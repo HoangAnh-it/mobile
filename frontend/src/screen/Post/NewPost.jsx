@@ -43,7 +43,7 @@ export default function NewPost({ navigation }) {
                     content ?
                         <TouchableOpacity
                             className="m-3 absolute right-0 rounded-md py-1 px-2"
-                            style={{ backgroundColor: "#24CDE2" }}
+                            style={{ backgroundColor: "#1AD1FF" }}
                             onPress={() => post()}
                         >
                             <Text className="text-base text-white">Đăng</Text>
@@ -58,7 +58,7 @@ export default function NewPost({ navigation }) {
                 <View className="flex-row m-3">
                     <Image
                         src={"https://cdn-icons-png.flaticon.com/512/4659/4659027.png"}
-                        className="w-10 h-10 rounded-full"
+                        className="w-10 h-10 rounded-full bg-[#ccf5ff]"
                     />
                     <View className="justify-center">
                         <Text className="font-semibold text-lg ml-3">Chia sẻ thông tin của bạn</Text>

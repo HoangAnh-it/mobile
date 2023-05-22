@@ -65,7 +65,7 @@ export default function ConfirmTest({ navigation, route }) {
 
     return (
         <View>
-            <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#24DCE2" }}>Thông tin bệnh nhân</Text>
+            <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#1AD1FF" }}>Thông tin bệnh nhân</Text>
             <Profile
                 fullname={profile.fullname}
                 sex={profile.sex}
@@ -74,14 +74,14 @@ export default function ConfirmTest({ navigation, route }) {
                 numberphone={profile.numberphone}
                 address={profile.address}
             />
-            <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#24DCE2" }}>Thông tin lịch xét nghiệm</Text>
+            <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#1AD1FF" }}>Thông tin lịch xét nghiệm</Text>
             <Info
                 testPackage={testPackage}
                 date={date}
                 hour={hour}
             />
             <TouchableOpacity
-                className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#24DCE2" }}
+                className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#1AD1FF" }}
                 onPress={() => {
                     handleAppointment();
                     setModalVisible(true);
@@ -105,7 +105,7 @@ export default function ConfirmTest({ navigation, route }) {
                         {appointmentStatus?<Text className="font-bold text-lg">Đặt lịch xét nghiệm thành công!</Text>:<Text className="font-bold text-lg">Đặt lịch xét nghiệm thất bại!</Text>}
                         <Pressable
                             className="mt-4 p-2 rounded"
-                            style={{ backgroundColor: "#24DCE2" }}
+                            style={{ backgroundColor: "#1AD1FF" }}
                             onPress={() => { setModalVisible(!modalVisible); navigation.navigate("Home") }}>
                             <Text className="text-white font-bold">Đóng</Text>
                         </Pressable>
