@@ -246,8 +246,8 @@ const FilterForm = ({ value, setValue, isShow, setIsShown }) => {
       <View className="w-screen h-screen items-center justify-center">
         <View className="w-screen h-screen bg-black opacity-25 absolute">
         </View>
-        <View className="bg-white items-center w-2/3 p-4 shadow-sm">
-          <Text className="font-bold text-lg">Loại:</Text>
+        <View className="bg-white items-center w-2/3 p-4 shadow-sm rounded-lg">
+          <Text className="font-bold text-xl">Loại xét nghiệm:</Text>
           <Picker
             className=""
             selectedValue={data.type}
@@ -261,7 +261,7 @@ const FilterForm = ({ value, setValue, isShow, setIsShown }) => {
             <Picker.Item label="Xét nghiệm tại nhà" value="AT_HOME" />
           </Picker>
 
-          <Text className="font-bold text-lg">Trạng thái:</Text>
+          <Text className="font-bold text-xl">Trạng thái:</Text>
           <Picker
             className=""
             selectedValue={data.status}
@@ -270,31 +270,31 @@ const FilterForm = ({ value, setValue, isShow, setIsShown }) => {
               width: "100%",
             }}
           >
-            <Picker.Item className="text-sm" label="Tất cả" value="ALL" />
-            <Picker.Item className="text-sm" label="Đang chờ" value="PENDING" />
-            <Picker.Item className="text-sm" label="Đã nhận" value="ACCEPTED" />
-            <Picker.Item className="text-sm" label="Đã xong" value="DONE" />
-            <Picker.Item className="text-sm" label="Đã hủy" value="CANCELED" />
-            <Picker.Item className="text-sm" label="Từ chối" value="REJECTED" />
+            <Picker.Item label="Tất cả" value="ALL" />
+            <Picker.Item label="Đang chờ" value="PENDING" />
+            <Picker.Item label="Đã nhận" value="ACCEPTED" />
+            <Picker.Item label="Đã xong" value="DONE" />
+            <Picker.Item label="Đã hủy" value="CANCELED" />
+            <Picker.Item label="Từ chối" value="REJECTED" />
           </Picker>
 
-          <View className="flex flex-row justify-center items-center">
-            <TouchableOpacity
+          <View className="flex flex-row justify-center items-center rounded-sm">
+            <TouchableOpacity className="p-2.5 mx-2 bg-[#1AD1FF] border-[#1AD1FF] border rounded-md"
               onPress={() => {
                 setValue(data)
                 setIsShown(false)
               }}
             >
-              <Text className="p-2 bg-teal-200 mx-2">Áp dụng</Text>
+              <Text className="text-white text-base">Áp dụng</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            <TouchableOpacity className="p-2.5 mx-2 border-[#1AD1FF] border bg-white rounded-md"
               onPress={() => {
                 setIsShown(false)
                 setData(value)
               }}
             >
-              <Text className="p-2 bg-neutral-400 mx-2">Bỏ qua</Text>
+              <Text className="text-[#1AD1FF] text-base">Bỏ qua</Text>
             </TouchableOpacity>
           </View>
         </View>

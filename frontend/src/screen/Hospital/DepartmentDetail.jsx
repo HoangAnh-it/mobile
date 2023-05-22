@@ -89,7 +89,7 @@ const DoctorItem = (props) => {
                 <Text className="w-2/3 text-left break-normal font-semibold justify-center mx-2">{props.name}</Text>
 
                 <View className="">
-                    <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                    <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                 </View>
             </View>
         </TouchableOpacity>
