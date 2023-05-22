@@ -101,7 +101,7 @@ export const getAllAppointments = async(userId : string) => {
     if (!user) {
         throw new CustomError(StatusCodes.NOT_FOUND, `User with ID: ${userId} not found.`)
     }
-    return await Appointment.findAll({
+    return Appointment.findAll({
         include: [
             {
                 model: MedicalRecord,
@@ -111,9 +111,10 @@ export const getAllAppointments = async(userId : string) => {
                 include: [{
                     model: Patient,
                     where: { userId },
-                    attributes: ["userId"]
-                }
-                ]
+                    attributes: ["userId"],
+                    required: true,
+                }],
+                required: true
             },
             {
                 model: Department,
@@ -124,7 +125,10 @@ export const getAllAppointments = async(userId : string) => {
                         attributes: ["hospitalId", "userId"],
                         include: [{
                             model: User,
-                            attributes: ["name", "address"]
+                            attributes: ["name", "address"],
+                            where: {
+                                role: 'HOSPITAL'
+                            }
                         }]
                     }
                 ]
@@ -140,7 +144,10 @@ export const getAllAppointments = async(userId : string) => {
                             attributes: ["hospitalId", "userId"],
                             include: [{
                                 model: User,
-                                attributes: ["name", "address"]
+                                attributes: ["name", "address"],
+                                where: {
+                                    role: 'HOSPITAL'
+                                }
                             }]
                         }
                     ]
@@ -151,10 +158,13 @@ export const getAllAppointments = async(userId : string) => {
                 model: DoAppointment,
                 include: [{
                     model: User,
-                    attributes: ["name"]
+                    attributes: ["name"],
+                    where: {
+                        role: 'DOCTOR'
+                    }
                 }]
             }
-        ]
+        ],
     })
 }
 

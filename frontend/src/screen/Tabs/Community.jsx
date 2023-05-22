@@ -18,6 +18,7 @@ export default function Community({ navigation }) {
             .then(res => res.data.data)
             .then(res => {
                 setPosts(res.posts)
+                console.log(posts)
             })
             .catch(err => {
                 console.log(JSON.stringify(err))
@@ -73,11 +74,11 @@ export default function Community({ navigation }) {
                 >
                     <Image
                         src="https://cdn-icons-png.flaticon.com/512/4659/4659027.png"
-                        className="w-10 h-10 rounded-full ml-3"
+                        className="w-10 h-10 rounded-full ml-3 bg-[#ccf5ff]"
                     />
                     <Text className="text-base ml-3 text-gray-500">Chia sẻ thông tin của bạn</Text>
-                    <View className="right-3 absolute">
-                        <Ionicons name="images" size={28} color={"green"} />
+                    <View className="right-3 absolute ">
+                        <Ionicons name="images" size={28} color={"#00ccff"} />
                     </View>
                 </TouchableOpacity>
 
@@ -95,11 +96,15 @@ export default function Community({ navigation }) {
                                 >
                                     <Post
                                         key={post.post_id}
-                                        user_id={post.auth.name}
+                                        auth={{
+                                            name: post.auth.name,
+                                            id: post.authId
+                                        }}
                                         createdAt={post.createdAt}
                                         avatar={post.auth.avatar || DEFAULT_AVATAR}
                                         content={post.content}
                                         numberOfComments={post.numberOfComments}
+                                        authId={post.authId}
                                     />
                                 </TouchableOpacity>
                             )

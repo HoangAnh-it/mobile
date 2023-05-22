@@ -64,8 +64,8 @@ export default function ListProfile({ navigation, route }) {
                 onPress={() => { navigation.navigate("Tạo hồ sơ") }}
                 className="flex-row m-4 mb-2 p-5 rounded-md bg-white shadow-sm"
             >
-                <Text className="text-base font-bold w-11/12" style={{ color: "#24DCE2" }}>Thêm hồ sơ</Text>
-                <Ionicons name="add-circle" size={24} color="#24DCE2" />
+                <Text className="text-base font-bold w-11/12" style={{ color: "#1AD1FF" }}>Thêm hồ sơ</Text>
+                <Ionicons name="add-circle" size={24} color="#1AD1FF" />
             </TouchableOpacity>
             <ScrollView className="mb-20">
                 {
@@ -104,7 +104,7 @@ export default function ListProfile({ navigation, route }) {
                 {
                     !onlyShow && selected &&
                     <TouchableOpacity
-                        className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#24DCE2" }}
+                        className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#1AD1FF" }}
                         onPress={chooseNext}
                     >
                         <Text className="text-white font-bold text-center">Tiếp theo</Text>

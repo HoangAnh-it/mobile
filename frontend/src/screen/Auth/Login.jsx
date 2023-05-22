@@ -149,29 +149,29 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   circle1: {
     position: "absolute",
-    width: 250,
-    height: 250,
-    borderRadius: 250/2,
+    width: 280,
+    height: 280,
+    borderRadius: 280/2,
     left: 8,
-    top: -114,
-    backgroundColor: 'rgba(36, 220, 226, 0.3)'
+    top: -104,
+    backgroundColor: 'rgba(77, 219, 255, 0.3)'
   },
   circle2: {
     position: "absolute",
-    width: 250,
-    height: 250,
-    borderRadius: 250/2,
+    width: 300,
+    height: 300,
+    borderRadius: 300/2,
     left: -117,
     top: -42,
-    backgroundColor: 'rgba(36, 220, 226, 0.3)'
+    backgroundColor: 'rgba(128, 229, 255, 0.3)'
   },
   container: {
     top: 100 
   }, 
   textColor: {
-    color: "#24DCE2"
+    color: "#1AD1FF"
   },
   bgColor: {
-    backgroundColor: "#24DCE2"
+    backgroundColor: "#1AD1FF"
   }
 });

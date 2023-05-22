@@ -30,13 +30,13 @@ export default function ConfirmModal({
                                 <>
                                     <Pressable
                                         className="mt-4 p-2 rounded"
-                                        style={{ backgroundColor: "#24DCE2" }}
+                                        style={{ backgroundColor: "#1AD1FF" }}
                                         onPress={action}>
                                         <Text className="text-white font-bold">Xác nhận</Text>
                                     </Pressable>
                                     <Pressable
                                         className="mt-4 p-2 rounded"
-                                        style={{ backgroundColor: "#24DCE2" }}
+                                        style={{ backgroundColor: "#1AD1FF" }}
                                         onPress={off}>
                                         <Text className="text-white font-bold">Hủy</Text>
                                     </Pressable>
@@ -44,7 +44,7 @@ export default function ConfirmModal({
                                 :
                                 <Pressable
                                     className="mt-4 p-2 rounded"
-                                    style={{ backgroundColor: "#24DCE2" }}
+                                    style={{ backgroundColor: "#1AD1FF" }}
                                     onPress={off}>
                                     <Text className="text-white font-bold">Đã hiểu</Text>
                                 </Pressable>

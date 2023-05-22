@@ -76,7 +76,7 @@ export default function ChangePassword() {
             <View className="items-center">
                 <TouchableOpacity 
                     className="my-5 py-2 items-center w-3/5 rounded-lg"
-                    style={{ backgroundColor: "#24DCE2" }}
+                    style={{ backgroundColor: "#1ad1ff" }}
                     onPress={() => submit()}
                 >
                     <Text className="text-white font-bold">Xác nhận</Text>

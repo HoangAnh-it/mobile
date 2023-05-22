@@ -25,7 +25,7 @@ export default function AccountDoctorStack() {
                 name="Thông tin bệnh viện"
                 component={HospitalDetails}
                 options={{
-                    headerTintColor: "#24dce2",
+                    headerTintColor: "#1AD1FF",
                     headerTitleStyle: { color: "#000000" },
                     headerBackTitle: "Trở về"
                 }}
@@ -34,7 +34,7 @@ export default function AccountDoctorStack() {
                         <Ionicons
                             labelVisible={false}
                             title="Trở về"
-                            style={{ color: "#24dce2" }}
+                            style={{ color: "#1AD1FF" }}
                         />
                     ),
                 })}
@@ -48,7 +48,7 @@ export default function AccountDoctorStack() {
                 name="Thông tin bác sĩ"
                 component={DoctorDetails}
                 options={{
-                    headerTintColor: "#24dce2",
+                    headerTintColor: "#1AD1FF",
                     headerTitleStyle: { color: "#000000" },
                     headerBackTitle: "Trở về"
                 }}
@@ -57,7 +57,7 @@ export default function AccountDoctorStack() {
                         <Ionicons
                             labelVisible={false}
                             title="Trở về"
-                            style={{ color: "#24dce2" }}
+                            style={{ color: "#1AD1FF" }}
                         />
                     ),
                 })}

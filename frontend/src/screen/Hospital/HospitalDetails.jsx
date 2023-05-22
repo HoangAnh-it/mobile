@@ -3,6 +3,8 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from "rea
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
 import useAxios from '../../hooks/useAxios';
+import { AntDesign } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 const Details = (props) => {
     const navigation = useNavigation()
@@ -20,26 +22,27 @@ const Details = (props) => {
                     alt={props.name}
                 />
             </View>
-            <View className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
+            <Animatable.View animation="fadeInUpBig" className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
                 <Text className=" mb-2 text-slate-900 text-2xl font-bold">{props.name}</Text>
                 <Text className="text-slate-900 text-base font-normal">
                 Địa chỉ: {props.address}
                 </Text>
                 <View className="h-px my-2 bg-gray-300" />
                 
-                <TouchableOpacity style={styles.bgColor} className="w-full mt-2 p-2 text-center rounded-lg border"
+                <TouchableOpacity style={styles.bgColor} className="flex-row justify-center w-full mt-2 p-2 text-center rounded-lg border"
                     onPress={goToScheduling}
                     >
-                    <Text className="text-white text-base text-center font-bold">Đặt khám</Text>
+                    <AntDesign name="calendar" size={24} color="white" />
+                    <Text className="text-white text-base text-center font-bold ml-2">Đặt khám</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
 
-            <View className="mt-1.5 p-4 bg-white w-full max-w-s shadow-sm">
+            <Animatable.View animation="fadeInDown" className="mt-1.5 p-4 bg-white w-full max-w-s shadow-sm">
                 <Text className="mb-1.5 text-slate-900 text-xl font-bold">Mô tả chi tiết</Text>
                 <Text className="text-slate-900 text-base font-normal text-justify">
                 {props.description}
                 </Text>
-            </View>
+            </Animatable.View>
         </View>
 )}
 
@@ -87,7 +90,7 @@ export default function HospitalDetails({navigation, route}) {
 
 const styles = StyleSheet.create({ 
     bgColor: {
-      backgroundColor: "#24DCE2",
-      borderColor: "#24DCE2"
+      backgroundColor: "#1AD1FF",
+      borderColor: "#1AD1FF"
     },
   });
