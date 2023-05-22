@@ -171,9 +171,9 @@ export default function MedicalRecordManagement({ navigation }) {
       {/** Filter */}
       <View className="flex flex-row">
 
-        <View className="fixed flex flex-row justify-items-end">
+        <View className="px-1 fixed flex flex-row justify-items-end">
           <TouchableOpacity
-            className="flex flex-row justify-items-center items-center py-2 mx-1 border-transparent bg-gray-300 rounded-lg"
+            className="px-1 flex flex-row justify-items-center items-center py-2 mx-1 border-transparent bg-gray-300 rounded-lg"
             style={{
               borderWidth: 1,
               borderBottomColor: '#ccc',
@@ -182,17 +182,17 @@ export default function MedicalRecordManagement({ navigation }) {
           >
             <Ionicons name="settings-outline" size={20} color={"gray"} />
             <Text
-              className="font-bold mx-1 text-sm "
+              className="font-bold mx-1 text-sm"
             >Tùy chọn:</Text>
           </TouchableOpacity>
         </View>
 
         <View className="flex flex-row items-center justify-items-center text-sm">
-          <Text className="">{dictionary[filter.type]}</Text>
-          <Text> --- </Text>
-          <Text className="">{dictionary[filter.status]}</Text>
-          <Text> --- </Text>
-          <Text className="">{filterSearch(temporaryFilter(appointments, filter)).length} hồ sơ</Text>
+          <Text className="ml-2.5">{dictionary[filter.type]}</Text>
+          <Text className="ml-2.5"> --- </Text>
+          <Text className="ml-2.5">{dictionary[filter.status]}</Text>
+          <Text className="ml-2.5"> --- </Text>
+          <Text className="ml-2.5">{filterSearch(temporaryFilter(appointments, filter)).length} hồ sơ</Text>
         </View>
 
       </View>
@@ -200,7 +200,7 @@ export default function MedicalRecordManagement({ navigation }) {
       {/** body */}
       <ScrollView className="m-h-screen">
         <LinearGradient
-          colors={['#ffffff', 'rgba(36, 220, 226, 0.5)']}
+          colors={['#ffffff', '#66e0ff']}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           className="min-h-screen"

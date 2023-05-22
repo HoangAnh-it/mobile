@@ -48,7 +48,7 @@ export default function ChangePassword() {
         <View className="h-screen bg-white p-3 space-y-2">
             <Text className="text-base">Mật khẩu cũ</Text>
             <TextInput
-                className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                 placeholder="Nhập mật khẩu cũ của bạn"
                 secureTextEntry={true}
                 onChangeText={(val) => setOldPass(val)}
@@ -58,7 +58,7 @@ export default function ChangePassword() {
 
             <Text className="text-base">Mật khẩu mới</Text>
             <TextInput
-                className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                 placeholder="Nhập mật khẩu mới của bạn"
                 secureTextEntry={true}
                 onChangeText={(val) => setNewPass(val)}
@@ -66,7 +66,7 @@ export default function ChangePassword() {
 
             <Text className="text-base">Nhập lại mật khẩu mới</Text>
             <TextInput
-                className="rounded-lg border p-1 my-1 px-3"
+                className="rounded-lg border p-3 my-1 px-3"
                 placeholder="Nhập lại mật khẩu của bạn"
                 style={{borderColor: color}}
                 secureTextEntry={true}
@@ -79,7 +79,7 @@ export default function ChangePassword() {
                     style={{ backgroundColor: "#1ad1ff" }}
                     onPress={() => submit()}
                 >
-                    <Text className="text-white font-bold">Xác nhận</Text>
+                    <Text className="text-white font-bold text-base py-1">Xác nhận</Text>
                 </TouchableOpacity>
             </View>
         </View>

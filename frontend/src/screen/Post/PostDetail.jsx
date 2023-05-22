@@ -121,10 +121,10 @@ export default function PostDetail({ navigation, route }) {
                     }
                 </View>
             </ScrollView>
-            <KeyboardAvoidingView className="w-screen absolute bottom-0">
+            <KeyboardAvoidingView className="w-screen absolute bottom-0" behavior="padding">
                 <View className="flex-row bg-white items-center justify-center px-5">
                     <TextInput
-                        className="bg-gray-100 w-11/12 my-2 rounded-full p-2 px-5"
+                        className="bg-gray-100 w-11/12 my-2 rounded-full py-3 px-5"
                         placeholder="Viết bình luận ..."
                         id="comment"
                         value={comment}

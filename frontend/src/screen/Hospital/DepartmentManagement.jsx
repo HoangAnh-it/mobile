@@ -56,7 +56,7 @@ export default function DepartmentManagement({ navigation }) {
                     <TouchableOpacity
                         onPress={() => navigation.goBack(null)}
                     >
-                        <Ionicons name="arrow-back" size={24} color="black" />
+                        <Ionicons name="arrow-back" size={24} color="#1AD1FF" />
                     </TouchableOpacity>
                     <Text className="ml-1 font-bold text-2xl">Quản lý khoa</Text>
                 </View>
@@ -64,9 +64,9 @@ export default function DepartmentManagement({ navigation }) {
                     <TouchableOpacity onPress={() => {
                         navigation.navigate("create-department")
                     }}>
-                        <View className="flex-row p-1 rounded-lg justify-items-center items-center bg-teal-300">
-                            <Text className="mr-1">Thêm khoa</Text>
-                            <Ionicons name="add-circle-outline" size={24} />
+                        <View className="flex-row px-2 py-1 rounded-lg justify-items-center items-center bg-[#1AD1FF]">
+                            <Text className="mr-1 text-white text-base">Thêm khoa</Text>
+                            <Ionicons name="add-circle-outline" size={24} color="white"/>
                         </View>
                     </TouchableOpacity>
                 </View>

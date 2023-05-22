@@ -27,7 +27,7 @@ export default function ConfirmModal({
                         <Text className="font-bold text-lg">{title}</Text>
                         {
                             !isAlert ?
-                                <>
+                                <View className="flex-row">
                                     <Pressable
                                         className="mt-4 p-2 rounded"
                                         style={{ backgroundColor: "#1AD1FF" }}
@@ -35,12 +35,12 @@ export default function ConfirmModal({
                                         <Text className="text-white font-bold">Xác nhận</Text>
                                     </Pressable>
                                     <Pressable
-                                        className="mt-4 p-2 rounded"
-                                        style={{ backgroundColor: "#1AD1FF" }}
+                                        className="mt-4 ml-2 p-2 rounded"
+                                        style={{ backgroundColor: "#ccc" }}
                                         onPress={off}>
-                                        <Text className="text-white font-bold">Hủy</Text>
+                                        <Text className="text-gray-700 font-bold">Hủy</Text>
                                     </Pressable>
-                                </>
+                                </View>
                                 :
                                 <Pressable
                                     className="mt-4 p-2 rounded"
