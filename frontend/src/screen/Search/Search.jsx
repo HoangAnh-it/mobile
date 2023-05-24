@@ -139,11 +139,9 @@ export default function Search({navigation, route}) {
                 </View>
                 <View className="left-3 w-full">
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{props.name}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.price}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.hospital}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
+                    <Text className="w-2/3 text-left break-normal font-normal justify-center text-gray-600">{props.hospital}</Text>
                     <View className="w-1/5 absolute ml-60 mt-1">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>

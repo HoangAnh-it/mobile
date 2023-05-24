@@ -238,11 +238,11 @@ export default function Signup({ navigation }) {
               />
             </View>
             <View className="">
-              <Text className=" text-center m-2 font-bold">Đăng ký với vai trò?</Text>
+              <Text className=" text-center m-2 mt-5 font-bold">Đăng ký với vai trò?</Text>
               <View className="flex-row space-x-3">
                 {
                   data.role === "HOSPITAL" ?
-                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" />
+                    <FontAwesome5 name="dot-circle" size={24} color="#1AD1FF" />
                     :
                     <TouchableOpacity
                       onPress={() => changeRole("HOSPITAL")}
@@ -253,7 +253,7 @@ export default function Signup({ navigation }) {
                 <Text>Bệnh viện</Text>
                 {
                   data.role === "DOCTOR" ?
-                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" /> :
+                    <FontAwesome5 name="dot-circle" size={24} color="#1AD1FF" /> :
                     <TouchableOpacity
                       onPress={() => changeRole("DOCTOR")}
                     >
@@ -263,7 +263,7 @@ export default function Signup({ navigation }) {
                 <Text>Bác sĩ</Text>
                 {
                   data.role === "PATIENT" ?
-                    <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" /> :
+                    <FontAwesome5 name="dot-circle" size={24} color="#1AD1FF" /> :
                     <TouchableOpacity
                       onPress={() => changeRole("PATIENT")}
                     >
@@ -275,11 +275,11 @@ export default function Signup({ navigation }) {
             </View>
             <TouchableOpacity
               onPress={() => { handleSignup() }}
-              className="rounded-md items-center w-80 mt-10" style={styles.bgColor}
+              className="rounded-md items-center w-80 mt-5" style={styles.bgColor}
             >
               <Text className="font-bold text-center mx-5 w-80 py-3 text-white">Đăng ký</Text>
             </TouchableOpacity>
-            <View className="flex-row justify-center my-10">
+            <View className="flex-row justify-center my-3">
               <Text>Đã có tài khoản? </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate("LoginScreen")}

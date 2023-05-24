@@ -54,7 +54,7 @@ export default function AccountDoctor({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View className="top-28 p-1.5 w-56 h-56 rounded-full absolute items-center justify-center bg-white">
+            <View className="top-28 p-1.5 w-56 h-56 rounded-full absolute items-center justify-center bg-white border-2 border-gray-50">
                 <Image
                     src={user.avatar}
                     className="w-full h-full object-cover rounded-full"

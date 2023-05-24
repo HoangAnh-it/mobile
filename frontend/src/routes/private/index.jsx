@@ -37,7 +37,7 @@ export default function PrivateStackScreen() {
                             }
                             return <Ionicons name={iconName} size={size} color={color} />;
                         },
-                        tabBarActiveTintColor: '#24dce2',
+                        tabBarActiveTintColor: '#1AD1FF',
                         tabBarInactiveTintColor: 'gray',
                         headerShown: false,
                     });
@@ -46,6 +46,9 @@ export default function PrivateStackScreen() {
             {console.log("Register routes with:::", auth?.user)}
             {
                 ["PATIENT"].includes(auth?.user.role) && <Tab.Screen name="Trang chủ" component={HomeStack} />
+            }
+            {
+                ["HOSPITAL"].includes(auth?.user.role) && <Tab.Screen name="Hồ sơ" component={MedicalRecordStack} />
             }
             {
                 ["PATIENT", "DOCTOR", "HOSPITAL"].includes(auth?.user.role) && <Tab.Screen name="Cộng đồng" component={CommunityStack} />
@@ -61,9 +64,6 @@ export default function PrivateStackScreen() {
             }
             {
                 ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountDoctorStack} />
-            }
-            {
-                ["HOSPITAL"].includes(auth?.user.role) && <Tab.Screen name="Hồ sơ" component={MedicalRecordStack} />
             }
             {
                 ["HOSPITAL"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountHospitalStack} />

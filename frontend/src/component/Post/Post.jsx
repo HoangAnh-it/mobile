@@ -38,7 +38,7 @@ export default function (props) {
                     <Text className="text-gray-400 ml-3 text-sm">{dateToString(new Date(props.createdAt))}</Text>
                 </View>
                 {props.auth.id === auth?.user.id &&
-                    <TouchableOpacity onPress={() => { setOpenPostOptions(!openPostOptions); }} className="p-3 right-0 absolute">
+                    <TouchableOpacity onPress={() => {setOpenPostOptions(!openPostOptions);}} className="p-3 right-0 absolute">
                         <Entypo className="absolute float-right" name="dots-three-vertical" size={20} color="gray" />
                     </TouchableOpacity>
                 }

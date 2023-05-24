@@ -32,7 +32,7 @@ export default function Profile(props) {
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm">
             <View className="flex-row">
                 {
-                    props.selected ? <AntDesign name="checkcircle" size={20} color="green" />
+                    props.selected ? <AntDesign name="checkcircle" size={20} color="#1AD1FF" />
                         : <Feather name="circle" size={20} color="black" />
                 }
                 <Text className="ml-4 font-bold text-base">{props.fullname}</Text>

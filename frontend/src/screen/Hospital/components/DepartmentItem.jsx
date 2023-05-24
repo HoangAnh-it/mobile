@@ -23,7 +23,7 @@ export default function DepartmentItem({ data }) {
                 <View className="left-3 w-full flex-row justify-items-center items-center">
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{data.name}</Text>
                     <View className="w-1/5 absolute ml-60 mt-4">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>
