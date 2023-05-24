@@ -48,6 +48,9 @@ export default function PrivateStackScreen() {
                 ["PATIENT"].includes(auth?.user.role) && <Tab.Screen name="Trang chủ" component={HomeStack} />
             }
             {
+                ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Lịch" component={AppointmentStack} />
+            }
+            {
                 ["HOSPITAL"].includes(auth?.user.role) && <Tab.Screen name="Hồ sơ" component={MedicalRecordStack} />
             }
             {
@@ -58,9 +61,6 @@ export default function PrivateStackScreen() {
             }
             {
                 ["PATIENT"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountStack} />
-            }
-            {
-                ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Lịch" component={AppointmentStack} />
             }
             {
                 ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountDoctorStack} />

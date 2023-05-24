@@ -120,7 +120,7 @@ export default function MedicalRecordItem({ data, className, style }) {
                     }
                     <View className="p-2 rounded-md right-0 absolute items-center"
                         style={styles.status[data.status]}>
-                        <Text className="font-bold w-fit text-right text-decoration-line: underline">
+                        <Text className="font-bold text-gray-700 w-fit text-right text-decoration-line: underline">
                             {dictionary[data.status]}
                         </Text>
                     </View>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         },
             
         ACCEPTED: {
-            backgroundColor: '#66ccff',
+            backgroundColor: '#99ddff',
             // borderWidth: 2,
         },
 

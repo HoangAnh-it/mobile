@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         },
             
         ACCEPTED: {
-            backgroundColor: '#66ccff',
+            backgroundColor: '#99ddff',
             // borderWidth: 2,
         },
 
