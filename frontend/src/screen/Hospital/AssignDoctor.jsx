@@ -112,10 +112,10 @@ export default function AssignDoctor({ navigation, route }) {
                 <View className="flex-row justify-between items-center">
                     <Text className="font-bold text-lg m-2">Hồ sơ</Text>
                     <TouchableOpacity
-                        className="rounded border-1 border-black"
+                        className="p-2 mx-3 bg-[#1AD1FF] rounded border-1 border-black"
                         onPress={done}
                     >
-                        <Text className="bg-teal-300 p-2 mx-3 rounded-lg">Xong</Text>
+                        <Text className="text-white font-bold">Xong</Text>
                     </TouchableOpacity>
                 </View>
                 <View className="w-screen p-2">
@@ -192,7 +192,7 @@ export default function AssignDoctor({ navigation, route }) {
                         />
                     </View>
 
-                    <ScrollView className="m-h-screen">
+                    <ScrollView className="min-h-screen">
                         <View>
                             {
                                 loading && <ActivityIndicator></ActivityIndicator>
@@ -251,14 +251,14 @@ const DoctorItem = (props) => {
                     <Text className="w-2/3 text-left break-normal font-light justify-center">{props.department}</Text>
                 </View>
                 <View className="flex-row items-center justify-items-center ml-auto">
-                    <TouchableOpacity className="bg-slate-400 p-1 py-3 rounded-lg mr-2"
+                    <TouchableOpacity className="bg-[#ccc] p-3 rounded-lg mr-2"
                         onPress={() => props.choose()}
                     >
                         {
                             props.selectedDoctor ?
-                                <Text>Đã chọn</Text>
+                                <Text className="font-bold text-gray-700">Đã chọn</Text>
                                 :
-                                <Text>Chọn</Text>
+                                <Text className="font-bold text-gray-700">Chọn</Text>
                         }
                     </TouchableOpacity>
                 </View>
@@ -269,6 +269,6 @@ const DoctorItem = (props) => {
 
 const styles = StyleSheet.create({
     selectedDoctor: {
-        backgroundColor: '#3eeddc'
+        backgroundColor: '#1AD1FF'
     }
 })

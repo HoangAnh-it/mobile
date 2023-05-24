@@ -37,10 +37,6 @@ export default function MedicalRecordItem({ data, className, style }) {
     return (
         <View
             className={"mx-4 my-2 p-5 rounded-md bg-white shadow-sm" + className || ""}
-            style={{
-                ...style,
-                ...styles.status[data.status],
-            }}
         >
             <View className="w-full">
                 <View className="flex-row py-1 border-b border-gray-200">
@@ -93,21 +89,21 @@ export default function MedicalRecordItem({ data, className, style }) {
                     <Text className="right-0 bottom-1 absolute">{data.doctor}</Text>
                 </View>
                 }
-                <View className="flex-row py-1 mt-4 flex flex-row justify-items-start items-center">
+                <View className="py-1 mt-4 flex flex-row justify-items-start items-center">
                     {
                         ["PENDING"].includes(data.status) &&
-                            <TouchableOpacity
+                            <TouchableOpacity className="mx-1 p-2 bg-[#1AD1FF] rounded"
                                 onPress={assignDoctor}
                             >
-                                <Text className="mx-1 p-2 bg-teal-300 rounded-lg">Đặt lịch</Text>
+                                <Text className="text-white font-bold">Đặt lịch</Text>
                             </TouchableOpacity>
                     }
                     {
                         ["PENDING"].includes(data.status) &&
-                            <TouchableOpacity
+                            <TouchableOpacity className="mx-1 p-2 bg-stone-300 rounded"
                                 onPress={reject}
                             >
-                                <Text className="mx-1 p-2 bg-stone-300 rounded-lg">
+                                <Text className="font-bold">
                                     Không nhận
                                 </Text>
                             </TouchableOpacity>
@@ -122,9 +118,12 @@ export default function MedicalRecordItem({ data, className, style }) {
                                 </Text>
                             </TouchableOpacity>
                     }
-                    <Text className="mx-1 p-2 text-left ml-auto underline">
-                        {dictionary[data.status]}
-                    </Text>
+                    <View className="p-2 rounded-md right-0 absolute items-center"
+                        style={styles.status[data.status]}>
+                        <Text className="font-bold w-fit text-right text-decoration-line: underline">
+                            {dictionary[data.status]}
+                        </Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -133,30 +132,29 @@ export default function MedicalRecordItem({ data, className, style }) {
 
 const styles = StyleSheet.create({
     status: {
-        
         PENDING: {
-            borderColor: 'yellow',
-            borderWidth: 2,
+            backgroundColor: '#FFF192',
+            // borderWidth: 2,
         },
             
         ACCEPTED: {
-            borderColor: '#3333ff',
-            borderWidth: 2,
+            backgroundColor: '#66ccff',
+            // borderWidth: 2,
         },
 
         DONE: {
-            borderColor: '#33ff33',
-            borderWidth: 2,
+            backgroundColor: '#99ff99',
+            // borderWidth: 2,
         },
     
         CANCELED: {
-            borderColor: '#ff9933',
-            borderWidth: 2,
+            backgroundColor: '#ffcc66',
+            // borderWidth: 2,
         },
 
         REJECTED: {
-            borderColor: '#ff3333',
-            borderWidth: 2,
+            backgroundColor: '#ff8080',
+            // borderWidth: 2,
         },
 
     }

@@ -37,7 +37,7 @@ export const ScheduleItem = ({ data }) => {
 
     return (
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm"
-            style={styles.status[data.status]}
+            // style={styles.status[data.status]}
         >
             <View className="my-3">
                 <View className="flex-row py-1 border-b border-gray-200">
@@ -90,14 +90,11 @@ export const ScheduleItem = ({ data }) => {
                 <View className="flex-row py-1 mt-4">
                     {
                         ["PENDING", "ACCEPTED"].includes(data.status) &&
-                        <TouchableOpacity
+                        <TouchableOpacity className="p-2 bg-[#ff8080] rounded"
                             onPress={cancelAppointment}
                         >
                             <Text
-                                className="font-bold p-1.5"
-                                style={{
-                                    backgroundColor: '#ff0000',
-                                }}
+                                className="font-bold text-white"
                             >
                                 Hủy lịch hẹn?
                             </Text>
@@ -105,18 +102,16 @@ export const ScheduleItem = ({ data }) => {
                     }
                     {
                         [].includes(data.status) &&
-                        <Text
-                                className="font-bold p-1.5"
-                                style={{
-                                    backgroundColor: '#ff0000',
-                                }}
-                            >
-                                Đã hủy?
-                            </Text>
+                        <Text className="font-bold p-2 bg-[#ff8080]">
+                            Đã hủy?
+                        </Text>
                     }
-                    <Text className="font-bold right-0 top-1 absolute w-2/3 text-right text-decoration-line: underline">
-                        {dictionary[data.status]}
-                    </Text>
+                    <View className="p-2 rounded-md right-0 absolute items-center"
+                        style={styles.status[data.status]}>
+                        <Text className="font-bold w-fit text-right text-decoration-line: underline">
+                            {dictionary[data.status]}
+                        </Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -208,28 +203,28 @@ export default function ViewSchedules({ navigation, route }) {
 const styles = StyleSheet.create({
     status: {
         PENDING: {
-            borderColor: 'yellow',
-            borderWidth: 2,
+            backgroundColor: 'yellow',
+            // borderWidth: 2,
         },
             
         ACCEPTED: {
-            borderColor: '#3333ff',
-            borderWidth: 2,
+            backgroundColor: '#66ccff',
+            // borderWidth: 2,
         },
 
         DONE: {
-            borderColor: '#33ff33',
-            borderWidth: 2,
+            backgroundColor: '#99ff99',
+            // borderWidth: 2,
         },
     
         CANCELED: {
-            borderColor: '#ff9933',
-            borderWidth: 2,
+            backgroundColor: '#ffcc66',
+            // borderWidth: 2,
         },
 
         REJECTED: {
-            borderColor: '#ff3333',
-            borderWidth: 2,
+            backgroundColor: '#ff8080',
+            // borderWidth: 2,
         },
 
     }
