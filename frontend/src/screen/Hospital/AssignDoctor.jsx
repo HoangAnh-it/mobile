@@ -269,6 +269,6 @@ const DoctorItem = (props) => {
 
 const styles = StyleSheet.create({
     selectedDoctor: {
-        backgroundColor: '#3eeddc'
+        backgroundColor: '#1AD1FF'
     }
 })

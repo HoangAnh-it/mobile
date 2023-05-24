@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Account from "../../screen/Tabs/Account";
-import ChangePassword from "../../screen/Account/ChangePassword";
-import CreateMedicalRecord from "../../screen/Appointments/CreateMedicalRecord";
-import ViewSchedules from "../../screen/Schedule/ViewSchedules";
-import ListProfile from "../../screen/Appointments/ListProfile";
-import UpdateMedicalRecord from "../../screen/Appointments/UpdateMedicalRecord";
+import Account from "../../../screen/Tabs/Account";
+import ChangePassword from "../../../screen/Account/ChangePassword";
+import CreateMedicalRecord from "../../../screen/Appointments/CreateMedicalRecord";
+import ViewSchedules from "../../../screen/Schedule/ViewSchedules";
+import ListProfile from "../../../screen/Appointments/ListProfile";
+import UpdateMedicalRecord from "../../../screen/Appointments/UpdateMedicalRecord";
 
 const Stack = createStackNavigator();
 export default function AccountStack() {

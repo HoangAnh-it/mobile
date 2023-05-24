@@ -63,7 +63,7 @@ export default function NewDepartment({ navigation }) {
             <View className="flex-row items-center">
                 <Text className="text-base mr-3">Hình đại diện</Text>
                 <View >
-                    <TouchableOpacity className="m-auto mt-2 p-2 bg-teal-300 rounded-lg flex-row justify-between"
+                    <TouchableOpacity className="m-auto mt-2 p-2 bg-[#1AD1FF] rounded-lg flex-row justify-between"
                         onPress={updateLoadAvatar}
                     >
                         <Text className="text-lg mr-2">Tải ảnh lên</Text>
@@ -75,7 +75,7 @@ export default function NewDepartment({ navigation }) {
             <TouchableOpacity
                 onPress={create}
             >
-                <View className="m-auto mt-2 p-2 bg-teal-300 rounded-lg w-11/12 justify-items-center">
+                <View className="m-auto mt-2 p-2 bg-[#1AD1FF] rounded-lg w-11/12 justify-items-center">
                     <Text className="text-lg text-center"
                     >Tạo</Text>
                 </View>

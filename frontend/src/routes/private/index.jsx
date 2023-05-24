@@ -3,14 +3,15 @@ import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeStack from './HomeStack'
-import AccountDoctorStack from './AccountDoctorStack'
-import AccountStack from './AccountStack'
+import AccountDoctorStack from './doctor/AccountDoctorStack'
+import AccountStack from './patient/AccountStack'
 import ChatStack from './ChatStack'
 import CommunityStack from './CommunityStack'
 
 import useAuth from '../../hooks/useAuth';
 import AccountHospitalStack from './hospital/AccountHospitalStack';
 import MedicalRecordStack from './hospital/MedicalRecordStack';
+import AppointmentStack from './doctor/AppointmentStack';
 
 export default function PrivateStackScreen() {
     const Tab = createBottomTabNavigator();
@@ -28,7 +29,7 @@ export default function PrivateStackScreen() {
                                 iconName = focused ? 'md-people' : 'people-outline';
                             } else if (route.name == 'Chat') {
                                 iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
-                            } else if (route.name == 'Hồ sơ') {
+                            } else if (route.name == 'Hồ sơ' || route.name == 'Lịch') {
                                 iconName = focused? 'clipboard' : 'clipboard-outline'
                             }
                             else {
@@ -57,6 +58,9 @@ export default function PrivateStackScreen() {
             }
             {
                 ["PATIENT"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountStack} />
+            }
+            {
+                ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Lịch" component={AppointmentStack} />
             }
             {
                 ["DOCTOR"].includes(auth?.user.role) && <Tab.Screen name="Tài khoản" component={AccountDoctorStack} />
