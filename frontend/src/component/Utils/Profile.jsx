@@ -60,9 +60,9 @@ export default function Profile(props) {
                 </View>
                 {
                     onlyShow &&
-                    <View className="flex-row py-1">
+                    <View className="flex-row py-1 mt-3">
                         <TouchableOpacity
-                            className="p-2 py-1"
+                            className="px-2 py-1"
                             style={{
                                 backgroundColor: "#1AD1FF",
                                 borderRadius: '10px',
@@ -74,12 +74,12 @@ export default function Profile(props) {
                             }}
                         >
                             <Text
-                                className="text-white font-bold text-center"
+                                className="p-1.5 text-white font-bold text-center"
                             >Cập nhật</Text>
                         </TouchableOpacity>
                         <Text className="text-white">---</Text>
                         <TouchableOpacity
-                            className="p-2 py-1 -ml-3.5"
+                            className="py-1 px-2 -ml-2"
                             style={{
                                 color: "#1AD1FF",
                                 borderColor: "#1AD1FF",
@@ -95,7 +95,7 @@ export default function Profile(props) {
                                 })
                             }}
                         >
-                            <Text className="text-white font-bold text-center">Xóa</Text>
+                            <Text className="p-1.5 text-white font-bold text-center">Xóa</Text>
                         </TouchableOpacity>
                     </View>
                 }

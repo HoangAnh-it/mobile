@@ -79,7 +79,7 @@ export default function CreateMedicalRecord({navigation}) {
                 <View className="mt-2 mx-2">
                     <Text>Họ và tên</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-2 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Nhập họ tên"
                         onChangeText={(val) => setData({ ...data, name: val })}
                     />
@@ -112,7 +112,7 @@ export default function CreateMedicalRecord({navigation}) {
                 <View className="mt-2 mx-2">
                     <Text>Ngày sinh</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-2 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="yyyy-MM-dd"
                         onChangeText={(val) => setData({ ...data, birthDay: val })}
                     />
@@ -121,7 +121,7 @@ export default function CreateMedicalRecord({navigation}) {
                 <View className="mt-2 mx-2">
                     <Text>Mối quan hệ</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-2 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Bố, Mẹ,..."
                         onChangeText={(val) => setData({ ...data, relationship: val })}
                     />
@@ -130,7 +130,7 @@ export default function CreateMedicalRecord({navigation}) {
                 <View className="mt-2 mx-2">
                     <Text>Số điện thoại</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-2 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="0982xxxxxxx"
                         onChangeText={(val) => setData({ ...data, phone: val })}
                     />
@@ -139,7 +139,7 @@ export default function CreateMedicalRecord({navigation}) {
                 <View className="mt-2 mx-2">
                     <Text>Địa chỉ</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-2 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Số 19 ngõ 8 đường X, ...."
                         onChangeText={(val) => setData({ ...data, address: val })}
                     />
@@ -147,11 +147,11 @@ export default function CreateMedicalRecord({navigation}) {
                 </View>
                 <View className="items-center">
                     <TouchableOpacity
-                        className="my-5 py-2 items-center w-3/5 rounded-lg"
+                        className="my-5 py-3 items-center w-3/5 rounded-lg"
                         style={{ backgroundColor: "#1AD1FF" }}
                         onPress={() => submit(data)}
                     >
-                        <Text className="text-white font-bold">Tạo hồ sơ</Text>
+                        <Text className="text-white font-bold text-base">Tạo hồ sơ</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

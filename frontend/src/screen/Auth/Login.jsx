@@ -97,7 +97,7 @@ export default function Login({ navigation }) {
           <Text className="font-bold text-2xl text-center mb-10">Chào mừng bạn{"\n"} đến với MyHealth</Text>
           {/* <Image source={require('./../../assets/img-login.jpg')} className='object-cover h-48 w-screen' /> */}
           <View className="space-y-3 m-5 items-center">
-            <View className='bg-gray-200 rounded-full mx-5 px-3 py-2 w-80 flex-row items-center'>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 py-2.5 w-80 flex-row items-center'>
                 {data.check_userChange ?
                   <FontAwesome name='user-o' size={20} color="black" />
                   : <FontAwesome name='user-o' size={20} color="gray" />
@@ -108,7 +108,7 @@ export default function Login({ navigation }) {
                   onChangeText={(val) => userChange(val)}
                   />
             </View>     
-            <View className='bg-gray-200 rounded-full mx-5 px-3 py-2 w-80 flex-row items-center'>
+            <View className='bg-gray-200 rounded-full mx-5 px-3 py-2.5 w-80 flex-row items-center'>
                 {data.check_pwChange ? 
                   <Feather name='lock' size={20} color="black" />
                   : <Feather name='lock' size={20} color="gray" />

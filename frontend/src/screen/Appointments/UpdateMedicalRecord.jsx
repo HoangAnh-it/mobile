@@ -82,7 +82,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 <View className="mt-2 mx-2">
                     <Text>Họ và tên</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Nhập họ tên"
                         value={prevProfile.fullname}
                         onChangeText={(val) => setData({ ...data, name: val })}
@@ -116,7 +116,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 <View className="mt-2 mx-2">
                     <Text>Ngày sinh</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="yyyy-MM-dd"
                         value={prevProfile.dateOfBirth}
                         onChangeText={(val) => setData({ ...data, birthDay: val })}
@@ -126,7 +126,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 <View className="mt-2 mx-2">
                     <Text>Mối quan hệ</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Bố, Mẹ,..."
                         value={prevProfile.relationship}
                         onChangeText={(val) => setData({ ...data, relationship: val })}
@@ -136,7 +136,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 <View className="mt-2 mx-2">
                     <Text>Số điện thoại</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="0982xxxxxxx"
                         value={prevProfile.numberphone}
                         onChangeText={(val) => setData({ ...data, phone: val })}
@@ -146,7 +146,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 <View className="mt-2 mx-2">
                     <Text>Địa chỉ</Text>
                     <TextInput
-                        className="rounded-lg border border-gray-400 p-1 my-1 px-3"
+                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Số 19 ngõ 8 đường X, ...."
                         value={prevProfile.address}
                         onChangeText={(val) => setData({ ...data, address: val })}
@@ -155,11 +155,11 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 </View>
                 <View className="items-center">
                     <TouchableOpacity
-                        className="my-5 py-2 items-center w-3/5 rounded-lg"
+                        className="my-5 py-3 items-center w-3/5 rounded-lg"
                         style={{ backgroundColor: "#1AD1FF" }}
                         onPress={() => submit(data)}
                     >
-                        <Text className="text-white font-bold">Cập nhật</Text>
+                        <Text className="text-white font-bold text-base">Cập nhật</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
