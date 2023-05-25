@@ -23,7 +23,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: '8e8e67e0-b971-4efc-b563-587d6e5675d3'
+                departmentId: '0fa142b3-d580-475f-95b4-9375fddb4a8b'
             },
             {
                 testPackageId: 'aa2ea854-ad74-4af7-bf81-e5caa8c8fc89',
@@ -45,7 +45,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: 'cca2c6dc-f9dc-4560-ab75-154fcfeb529c'
+                departmentId: '3ce80c11-9b18-4a4f-9784-1aca9c96200b'
             },
             {
                 testPackageId: '00a91f89-d878-4330-a84c-201290d095e0',
@@ -67,7 +67,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: 'cca2c6dc-f9dc-4560-ab75-154fcfeb529c'
+                departmentId: '8ed53b76-22d1-4526-b38e-d72690bc8dac'
             },
             {
                 testPackageId: '8a8dac8d-450a-4f82-a2df-3a3993cb6d1a',
@@ -89,7 +89,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: 'f7fdfaf0-7f60-44b6-8d37-69c47c2c21cd'
+                departmentId: '0690d992-e0e1-4315-9262-b76e4a1829fa'
             },
             {
                 testPackageId: '542ed848-1098-4c59-8b84-6db2e783f7f0',
@@ -111,7 +111,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: '4ef9c725-d451-473a-b9bd-b0b6e05db155'
+                departmentId: '11ceaf3c-4cb2-46d2-824a-3ead3d45f1b9'
             },
             {
                 testPackageId: '5957f864-00d3-41bd-bd04-fa68da7c795f',
@@ -133,7 +133,7 @@ module.exports = {
                 Bước 4: Kết quả khi có sẽ thông báo trả tại APP
                 
                 Bước 5: Khách hàng có thể đặt câu hỏi, chat, video call trực tiếp với bác sĩ trên APP  DR.OH  để được hỗ trợ những thắc mắc.`,
-                hospitalId: '4fab9aca-acd3-4956-8e83-cabf6213559f'
+                departmentId: '4b6c5533-5b86-4576-84ac-07b223e13097'
             }
         ]);
     },

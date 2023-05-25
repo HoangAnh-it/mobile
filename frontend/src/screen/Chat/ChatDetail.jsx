@@ -90,7 +90,7 @@ export default function ChatDetail({ navigation, route }) {
         return (
             <Send {...props} className="items-center mr-3">
                 <View className="items-center m-2" >
-                    <Ionicons name="send" size={24} color={"#24DCE2"} />
+                    <Ionicons name="send" size={24} color={"#1AD1FF"} />
                 </View>
             </Send>
         )

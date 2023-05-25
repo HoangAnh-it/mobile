@@ -30,10 +30,10 @@ const DoctorBrief = (props) => {
                         <MaterialIcons name={props.stars >= 4 ? "star" : "star-border"} size={25} style={props.stars >= 4 ? styles.starSelected : styles.starUnselected} />
                         <MaterialIcons name={props.stars == 5 ? "star" : "star-border"} size={25} style={props.stars == 5 ? styles.starSelected : styles.starUnselected} />
                     </View>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
-                    <View className="w-1/5 absolute ml-60 mt-4">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
-                    </View>
+                    <Text className="w-2/3 text-gray-600 text-left break-normal font-normal justify-center">{props.department}</Text>
+                </View>
+                <View className="right-3 absolute">
+                    <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                 </View>
             </TouchableOpacity>
             <View style={{ width: '1.2%' }}></View>
@@ -112,7 +112,7 @@ export default function DoctorList({navigation}) {
         <KeyboardAwareScrollView>
             <ScrollView pagingEnabled={true}>
 
-                <View className="mt-2 ml-1 mr-1 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
+                <View className="mt-2 mx-2 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
                     <Text style={styles.textColor} className="ml-2.5 text-slate-900 text-lg font-bold">
                         Chọn chuyên khoa
                     </Text>
@@ -142,9 +142,9 @@ export default function DoctorList({navigation}) {
                     </ScrollView>
                 </View>
                 
-                <View className="mt-2 ml-1 mr-1 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
+                <View className="mt-2 mx-2 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
                     <Text style={styles.textColor} className="ml-2.5 mb-1 text-slate-900 text-lg font-bold">
-                        Danh sách bác sĩ
+                        Danh sách bác sĩ - {departmentChosen}
                     </Text>
                     {
                         filterByDepartment(doctors).length > 0 ?
@@ -168,16 +168,16 @@ const styles = StyleSheet.create({
         color: "#ffb300",
     },
     textColor: {
-        color: "#24DCE2",
+        color: "#1AD1FF",
         fontWeight: "bold"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2"
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF"
     },
     focus: {
-        borderColor: "#24DCE2",
-        color: "#24DCE2",
+        borderColor: "#1AD1FF",
+        color: "#1AD1FF",
     },
     none: {
         fontWeight: "normal"

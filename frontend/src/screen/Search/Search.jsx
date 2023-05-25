@@ -70,7 +70,8 @@ export default function Search({navigation, route}) {
                     title: p.name,
                     image: require("./../../assets/demo-img/hospital.jpg"),
                     price: p.price,
-                    hospital: p.hospital
+                    hospital: p.department.hospital.user.name,
+                    department: p.department.name
                 })) || [])
 
             }).catch(err => {
@@ -95,10 +96,10 @@ export default function Search({navigation, route}) {
                         <MaterialIcons name={props.stars >= 4 ? "star" : "star-border"} size={25} style={props.stars >= 4 ? styles.starSelected : styles.starUnselected} />
                         <MaterialIcons name={props.stars == 5 ? "star" : "star-border"} size={25} style={props.stars == 5 ? styles.starSelected : styles.starUnselected} />
                     </View>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
-                    <View className="w-1/5 absolute ml-60 mt-4">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
-                    </View>
+                    <Text className="w-2/3 text-gray-600 text-left break-normal font-normal justify-center">{props.department}</Text>
+                </View>
+                <View className="right-3 absolute">
+                    <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                 </View>
             </TouchableOpacity>
             <View style={{width: '1.2%'}}></View>
@@ -116,10 +117,10 @@ export default function Search({navigation, route}) {
                 </View>
                 <View className="left-3 w-full">
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{props.name}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.address}</Text>
-                    <View className="w-1/5 absolute ml-60 mt-5">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
-                    </View>
+                    <Text className="w-2/3 text-gray-600 text-left break-normal font-normal justify-center">{props.address}</Text>
+                </View>
+                <View className="right-3 absolute mt-1">
+                    <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                 </View>
             </TouchableOpacity>
             <View style={{width: '1.2%'}}></View>
@@ -128,6 +129,7 @@ export default function Search({navigation, route}) {
     }
     
     const PackageBrief = (props) => {
+        console.log(props);
         return (
             <>
             <View className="h-0.5 w-full bg-gray-200" />
@@ -137,10 +139,9 @@ export default function Search({navigation, route}) {
                 </View>
                 <View className="left-3 w-full">
                     <Text className="w-2/3 text-left break-normal font-semibold justify-center">{props.name}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.price}</Text>
-                    <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.hospital.name}</Text>
+                    <Text className="w-2/3 text-left break-normal font-normal justify-center text-gray-600">{props.hospital}</Text>
                     <View className="w-1/5 absolute ml-60 mt-1">
-                        <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                        <Ionicons name="caret-forward" size={24} color="#1AD1FF" />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -202,7 +203,7 @@ export default function Search({navigation, route}) {
                     </Text>
                         {
                             packageList.map((item, index) => {
-                                return <PackageBrief key={`package-${index}-${item.id}`} id={item.id} name={item.title} price={item.price} image={item.image} hospital={item.hospital} />
+                                return <PackageBrief key={`package-${index}-${item.id}`} id={item.id} name={item.title} price={item.price} image={item.image} hospital={item.hospital} department={item.department} />
                             })
                         }                    
                 </View>
@@ -221,16 +222,16 @@ const styles = StyleSheet.create({
         color: "#ffb300",
     },
     textColor: {
-        color: "#24DCE2",
+        color: "#1AD1FF",
         fontWeight: "bold"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2"
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF"
     },
     focus: {
-        borderColor: "#24DCE2",
-        color: "#24DCE2",
+        borderColor: "#1AD1FF",
+        color: "#1AD1FF",
     },
     none: {
         fontWeight: "normal"

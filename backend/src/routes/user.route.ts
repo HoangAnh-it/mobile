@@ -16,4 +16,5 @@ router.route("/notification/read/:id")
 
 router.route("/change-password")
     .put(userController.changePassword)
+
 export default router;

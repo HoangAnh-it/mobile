@@ -74,16 +74,16 @@ export const makeAnAppointment = ErrorWrapperHandler(async (req: Request, res: R
 export const getAllAppointments = ErrorWrapperHandler(async (req: Request, res: Response) => {
     const userId = req.auth?.id
     const appointment = await patientService.getAllAppointments(userId)
+    console.log("appointment.length", appointment.length)
     return res.status(StatusCodes.OK).json({
         data: appointment
     });
 })
 
 // [DELETE] /patient/appointment/:id
-export const deleteAnAppointment = ErrorWrapperHandler(async (req: Request, res: Response) => {
-    const { id } = req.params
-    const deletedAppId = await patientService.deleteAnAppointment(id)
-    return res.status(StatusCodes.OK).json({
-        id: deletedAppId
-    })
+export const handlerAnAppointment = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const { id} = req.params
+    const status = req.query.status as string
+    const data = await patientService.handleAnAppointment(id, status)
+    return res.status(StatusCodes.OK).json(data)
 })

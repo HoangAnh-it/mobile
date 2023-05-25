@@ -38,13 +38,13 @@ export default function HomeStack() {
       <Stack.Screen
         name="Tìm kiếm"
         component={Search}
-        options={{ headerShown: false }} // headerLeft: () => <Ionicons title="Trở về" size={30} color={'#24dce2'} name={'arrow-back-outline'} />}}
+        options={{ headerShown: false }} // headerLeft: () => <Ionicons title="Trở về" size={30} color={'#1AD1FF'} name={'arrow-back-outline'} />}}
         navigationOptions={({ navigation, route }) => ({
           headerLeft: (
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -53,7 +53,7 @@ export default function HomeStack() {
         name="Thông báo"
         component={Notification}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
         }}
         navigationOptions={({ navigation, route }) => ({
@@ -61,7 +61,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -70,7 +70,7 @@ export default function HomeStack() {
         name="Xét nghiệm tại nhà"
         component={Packages}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trang chủ"
         }}
@@ -79,7 +79,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -88,7 +88,7 @@ export default function HomeStack() {
         name="Xem lịch khám"
         component={ViewSchedules}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trang chủ"
         }}
@@ -97,7 +97,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -106,7 +106,7 @@ export default function HomeStack() {
         name="Chi tiết gói khám"
         component={PackageDetails}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -115,7 +115,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -124,7 +124,7 @@ export default function HomeStack() {
         name="Hồ sơ xét nghiệm"
         component={ListProfileTest}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -133,7 +133,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -142,7 +142,7 @@ export default function HomeStack() {
         name="Chọn lịch xét nghiệm"
         component={Scheduling}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -151,7 +151,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -160,7 +160,7 @@ export default function HomeStack() {
         name="Xác nhận gói khám"
         component={ConfirmTest}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -169,7 +169,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -178,7 +178,7 @@ export default function HomeStack() {
         name="Danh sách bác sĩ"
         component={DoctorList}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trang chủ"
         }}
@@ -187,7 +187,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -196,7 +196,7 @@ export default function HomeStack() {
         name="Thông tin bác sĩ"
         component={DoctorDetails}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -205,7 +205,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -214,7 +214,7 @@ export default function HomeStack() {
         name="Thông tin bệnh viện"
         component={HospitalDetails}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -223,7 +223,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -232,7 +232,7 @@ export default function HomeStack() {
         name="Hồ sơ"
         component={ListProfile}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -241,7 +241,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -250,7 +250,7 @@ export default function HomeStack() {
         name="Chọn chuyên khoa"
         component={ListDepartment}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -259,7 +259,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -268,7 +268,7 @@ export default function HomeStack() {
         name="Đặt lịch"
         component={Book}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
           headerBackTitle: "Trở về"
         }}
@@ -277,7 +277,7 @@ export default function HomeStack() {
             <Ionicons
               labelVisible={false}
               title="Trở về"
-              style={{ color: "#24dce2" }}
+              style={{ color: "#1AD1FF" }}
             />
           ),
         })}
@@ -286,7 +286,7 @@ export default function HomeStack() {
         name="Xác nhận"
         component={Confirm}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
         }}
         navigationOptions={({ navigation, route }) => ({
@@ -295,7 +295,7 @@ export default function HomeStack() {
               <Ionicons
                 labelVisible={false}
                 title="Trở về"
-                style={{ color: "#24dce2" }}
+                style={{ color: "#1AD1FF" }}
                 name="arrow-back-outline"
               />
             );
@@ -306,7 +306,7 @@ export default function HomeStack() {
         name="Tạo hồ sơ"
         component={CreateMedicalRecord}
         options={{
-          headerTintColor: "#24dce2",
+          headerTintColor: "#1AD1FF",
           headerTitleStyle: { color: "#000000" },
         }}
         navigationOptions={({ navigation, route }) => ({
@@ -315,7 +315,7 @@ export default function HomeStack() {
               <Ionicons
                 labelVisible={false}
                 title="Trở về"
-                style={{ color: "#24dce2" }}
+                style={{ color: "#1AD1FF" }}
                 name="arrow-back-outline"
               />
             );

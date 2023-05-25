@@ -1,5 +1,5 @@
 import { Model,  PrimaryKey, Column, Table, ForeignKey, CreatedAt, UpdatedAt, DataType, DeletedAt, BelongsTo, BeforeCreate } from 'sequelize-typescript';
-import { Hospital } from '.';
+import { Department, Hospital } from '.';
 import { generateUUID } from '../utils/uuid';
 
 @Table({ tableName: 'TestPackages' })
@@ -23,17 +23,17 @@ export class TestPackage extends Model {
   @UpdatedAt
   public readonly updatedAt!: Date;
 
-  @ForeignKey(() => Hospital)
+  @ForeignKey(() => Department)
   @Column({ type: DataType.STRING })
-  public hospitalId!: string;
+  public departmentId!: string;
 
   // associate
 
-  @BelongsTo(() => Hospital)
-  private hospital!: Hospital
+  @BelongsTo(() => Department)
+  private department!: Department
   
-  public getHospital(): Hospital {
-    return this.hospital
+  public getHospital(){
+    return this.department
   }
 
   @BeforeCreate

@@ -1,12 +1,13 @@
 
 import { StatusCodes } from 'http-status-codes';
 import CustomError from "../error/CustomError";
-import { User, Patient, MedicalRecord, Appointment, Department, Hospital, TestPackage } from "../models";
+import { User, Patient, MedicalRecord, Appointment, Department, Hospital, TestPackage, DoAppointment } from "../models";
 import { CreateMedicalRecordDTO, UpdateMedicalRecordDTO } from '../dtos/medicalRecord.dto';
 import { validateCreateMedicalRecord, validateUpdateMedicalRecord } from '../validator/patient';
 import { CreateAppointmentDTO } from '../dtos/appointment.dto';
 import { convertDateTime } from '../utils/converter';
 import { validateCreateAppointment } from '../validator/appointment';
+import { appointmentService } from '.';
 
 export const allMedicalRecords = async (userId: string) => {
     const user = await User.findByPk(userId, {
@@ -100,7 +101,7 @@ export const getAllAppointments = async(userId : string) => {
     if (!user) {
         throw new CustomError(StatusCodes.NOT_FOUND, `User with ID: ${userId} not found.`)
     }
-    return await Appointment.findAll({
+    return Appointment.findAll({
         include: [
             {
                 model: MedicalRecord,
@@ -110,8 +111,10 @@ export const getAllAppointments = async(userId : string) => {
                 include: [{
                     model: Patient,
                     where: { userId },
-                    attributes: []
-                }]
+                    attributes: ["userId"],
+                    required: true,
+                }],
+                required: true
             },
             {
                 model: Department,
@@ -122,40 +125,54 @@ export const getAllAppointments = async(userId : string) => {
                         attributes: ["hospitalId", "userId"],
                         include: [{
                             model: User,
-                            attributes: ["name", "address"]
+                            attributes: ["name", "address"],
+                            where: {
+                                role: 'HOSPITAL'
+                            }
                         }]
                     }
                 ]
             },
             {
                 model: TestPackage,
-                attributes: ["testPackageId", "hospitalId"],
-                include: [
-                    {
-                        model: Hospital,
-                        attributes: ["hospitalId", "userId"],
-                        include: [{
-                            model: User,
-                            attributes: ["name", "address"]
-                        }]
-                    }
-                ]
+                include: [{
+                    model: Department,
+                    attributes: ["departmentId", "name", "hospitalId"],
+                    include: [
+                        {
+                            model: Hospital,
+                            attributes: ["hospitalId", "userId"],
+                            include: [{
+                                model: User,
+                                attributes: ["name", "address"],
+                                where: {
+                                    role: 'HOSPITAL'
+                                }
+                            }]
+                        }
+                    ]
+                }]
             }
-        ]
+            ,
+            {
+                model: DoAppointment,
+                include: [{
+                    model: User,
+                    attributes: ["name"],
+                    where: {
+                        role: 'DOCTOR'
+                    }
+                }]
+            }
+        ],
     })
 }
 
-export const deleteAnAppointment = async(id: string) => {
+export const handleAnAppointment = async(id: string, status: string) => {
     const app = await Appointment.findByPk(id)
     if (!app) {
         throw new CustomError(StatusCodes.NOT_FOUND, `Appointment with ID: ${id} not found`)
     }
-
-    await Appointment.destroy({
-        where: {
-            appointmentId: id
-        }
-    })
-
-    return id
+    await appointmentService.changeStatus(id, status)
+    return {id, status}
 }

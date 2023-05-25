@@ -35,7 +35,6 @@ const Comment = (props) => {
 }
 
 export default function PostDetail({ navigation, route }) {
-    console.log("POST DETAIL:::", route.params.post)
     const [post, setPost] = React.useState(route.params.post || {})
     const [comments, setComments] = React.useState([])
     const [comment, setComment] = React.useState("");
@@ -91,7 +90,7 @@ export default function PostDetail({ navigation, route }) {
                     className="m-3 absolute left-0"
                     onPress={() => navigation.goBack(null)}
                 >
-                    <Ionicons name="arrow-back" size={24} color="black" />
+                    <Ionicons name="arrow-back" size={24} color="#1AD1FF" />
                 </TouchableOpacity>
                 <View className="my-3 flex-row items-center">
                     <Text className="font-semibold text-lg ml-3">{post.auth.name}</Text>
@@ -100,7 +99,10 @@ export default function PostDetail({ navigation, route }) {
             <ScrollView className="h-4/5">
                 <Post
                     key={post.postId}
-                    user_id={post.auth.name}
+                    auth={{
+                        name: post.auth.name,
+                        id: post.authId,
+                    }}
                     createdAt={post.createdAt}
                     avatar={post.auth.avatar || DEFAULT_AVATAR}
                     content={post.content}
@@ -137,7 +139,7 @@ export default function PostDetail({ navigation, route }) {
                                 className="w-1/12 ml-3"
                                 onPress={() => sendCommnet()}
                             >
-                                <Ionicons name="send" color={"#24CDE2"} size={24} />
+                                <Ionicons name="send" color={"#1AD1FF"} size={24} />
                             </TouchableOpacity> :
                             <View className="w-1/12 ml-3">
                                 <Ionicons name="send" color={"gray"} size={24} />

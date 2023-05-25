@@ -12,5 +12,6 @@ module.exports = {
     TEST_PACKAGE : "TestPackages",
     POST : "Posts",
     COMMENT : "Comments",
-    REACTION : "Reactions",
+    REACTION: "Reactions",
+    DO_APPOINTMENT: 'DoAppointments'
 }

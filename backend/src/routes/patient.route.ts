@@ -15,6 +15,6 @@ router.route("/appointment")
     .get(patientController.getAllAppointments)
 
 router.route("/appointment/:id")
-    .delete(patientController.deleteAnAppointment)
+    .put(patientController.handlerAnAppointment)
 
 export default router;

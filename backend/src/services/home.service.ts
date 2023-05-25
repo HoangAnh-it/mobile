@@ -44,11 +44,15 @@ export const searchPreview = async(keyword :string) => {
         },
         attributes: ["testPackageId", "name", "price"],
         include: {
-            model: Hospital,
-            attributes: ["hospitalId"],
+            model: Department,
+            attributes: ["departmentId", "name"],
             include: [{
-                model: User,
-                attributes: ["userId", "name", "avatar"]
+                model: Hospital,
+                attributes: ["userId"],
+                include: [{
+                    model: User,
+                    attributes: ["userId", "name", "avatar"]
+                }]
             }]
         }
         // limit: LIMIT_PREVIEW_RECORDS

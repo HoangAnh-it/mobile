@@ -5,7 +5,6 @@ import * as Animatable from 'react-native-animatable';
 
 const DepartmentOption = ({department, choose}) => {
     return (
-        <>
             <TouchableOpacity
                 onPress={() => choose(department)}
                 className="m-2 p-2 h-20 w-2/5 flex-row items-center text-center rounded-lg float-left bg-white shadow-sm"
@@ -25,7 +24,6 @@ const DepartmentOption = ({department, choose}) => {
                     {department.name}
                 </Text>
             </TouchableOpacity>
-        </>
     )
 }
 
@@ -119,7 +117,7 @@ export default function ListDepartment({ route, navigation }) {
                 {
                     Object.keys(selected).length > 0 &&
                     <TouchableOpacity
-                        className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#24DCE2" }}
+                        className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#1AD1FF" }}
                         onPress={chooseNext}
                     >
                         <Text className="text-white font-bold text-center">Tiếp theo</Text>
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     focus: {
-        backgroundColor: "#24DCE2",
+        backgroundColor: "#1AD1FF",
     },
     none: {
         fontWeight: "normal"

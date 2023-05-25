@@ -116,7 +116,7 @@ export default function Scheduling({ navigation, route }) {
             {
                 (selectedDate && selectedHour) &&
                 <TouchableOpacity
-                    className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#24DCE2" }}
+                    className="m-auto w-1/3 p-2 mt-4 mb-8 rounded" style={{ backgroundColor: "#1AD1FF" }}
                     onPress={chooseNext}
                 >
                     <Text className="text-white font-bold text-center">Tiếp theo</Text>
@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
         color: "white",
     },
     focus: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2",
-        borderTopColor: "#24DCE2",
-        borderBottomColor: "#24DCE2"
+        backgroundColor: "#1AD1FF",
+        borderColor: "#1AD1FF",
+        borderTopColor: "#1AD1FF",
+        borderBottomColor: "#1AD1FF"
     },
 
 });

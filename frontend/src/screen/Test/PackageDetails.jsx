@@ -3,6 +3,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import useAxios from '../../hooks/useAxios';
+import { AntDesign } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 const HOSPITAL_AVATAR_DEFAULT = "https://firebasestorage.googleapis.com/v0/b/myhealth-3d3d4.appspot.com/o/hospital.jpg?alt=media&token=83c7a59c-e1ba-46dc-97b0-94935479c09d"
 
@@ -22,7 +24,7 @@ const Details = (props) => {
                     alt={props.title}
                 />
             </View>
-            <View className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
+            <Animatable.View animation="fadeInUpBig" className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
                 <Text className=" mb-2 text-slate-900 text-2xl font-bold">{props.title}</Text>
                 <Text className="text-slate-900 text-base font-normal">
                 Đơn vị cung cấp: {props.hospital}
@@ -35,19 +37,20 @@ const Details = (props) => {
                     Giá đặt khám: {props.price}
                 </Text>
                 
-                <TouchableOpacity style={styles.bgColor} className="w-full mt-2 p-2 text-center rounded-lg border"
+                <TouchableOpacity style={styles.bgColor} className="flex-row justify-center w-full mt-2 p-2 text-center rounded-lg border"
                     onPress={() => goToSchedulings(props)}
                     >
-                    <Text className="text-white text-base text-center font-bold">Đặt lịch hẹn</Text>
+                    <AntDesign name="calendar" size={24} color="white" />
+                    <Text className="text-white text-base text-center font-bold ml-2">Đặt lịch hẹn</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
 
-            <View className="mt-1.5 p-4 bg-white w-full max-w-s shadow-sm">
+            <Animatable.View animation="fadeInDown" className="mt-1.5 p-4 bg-white w-full max-w-s shadow-sm">
                 <Text className="mb-1.5 text-slate-900 text-xl font-bold">Mô tả chi tiết</Text>
                 <Text className="text-slate-900 text-base font-normal text-justify">
                 {props.description}
                 </Text>
-            </View>
+            </Animatable.View>
         </View>
 )}
 
@@ -68,8 +71,8 @@ export default function PackageDetails({navigation, route}) {
                 setPackage({
                     id: p.testPackageId,
                     title: p.name,
-                    hospital: p.hospital.user.name,
-                    address: p.hospital.user.address,
+                    hospital: p.department.hospital.user.name,
+                    address: p.department.hospital.user.address,
                     imageURL: require("./../../assets/demo-img/hospital.jpg"),//p.avatar || "https://insmart.com.vn/wp-content/uploads/2021/05/BV-108-2.jpg",
                     price: p.price,
                     description: p.description
@@ -92,7 +95,7 @@ export default function PackageDetails({navigation, route}) {
 
 const styles = StyleSheet.create({ 
     bgColor: {
-      backgroundColor: "#24DCE2",
-      borderColor: "#24DCE2"
+      backgroundColor: "#1AD1FF",
+      borderColor: "#1AD1FF"
     },
   });

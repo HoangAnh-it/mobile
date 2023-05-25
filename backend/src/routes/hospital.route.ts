@@ -10,4 +10,16 @@ router.route("/:id")
 router.route("/:id/department")
     .get(hospitalController.getDepartments)
 
+router.route("/:id/appointment")
+    .get(hospitalController.getAllAppointments)
+
+router.route("/appointment/:id")
+    .put(hospitalController.handleAppointments)
+
+router.route('/assign_doctor_appointment')
+    .post(hospitalController.assignDoctorAppointment)
+
+router.route("/department")
+    .post(hospitalController.createDepartment)
+    
 export default router

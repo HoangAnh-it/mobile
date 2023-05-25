@@ -9,7 +9,6 @@ export class Department  extends Model{
   @PrimaryKey
   @Column({
       type: DataType.STRING,
-      allowNull: false
   })
   public departmentId!: string;
 

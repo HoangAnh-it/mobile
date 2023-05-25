@@ -32,7 +32,7 @@ export default function Profile(props) {
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm">
             <View className="flex-row">
                 {
-                    props.selected ? <AntDesign name="checkcircle" size={20} color="green" />
+                    props.selected ? <AntDesign name="checkcircle" size={20} color="#1AD1FF" />
                         : <Feather name="circle" size={20} color="black" />
                 }
                 <Text className="ml-4 font-bold text-base">{props.fullname}</Text>
@@ -64,15 +64,13 @@ export default function Profile(props) {
                         <TouchableOpacity
                             className="p-2 py-1"
                             style={{
-                                backgroundColor: "#24DCE2",
+                                backgroundColor: "#1AD1FF",
                                 borderRadius: '10px',
                                 
                             }}
                             onPress={() => {
                                 console.log("Update", props.id)
-                                setTitle("Chưa cập nhật chức năng này")
-                                setIsAlert(true)
-                                setVisible(true)
+                                navigation.navigate("Cập nhật hồ sơ", { prevProfile: props});
                             }}
                         >
                             <Text
@@ -81,17 +79,17 @@ export default function Profile(props) {
                         </TouchableOpacity>
                         <Text className="text-white">---</Text>
                         <TouchableOpacity
-                            className="p-2 py-1 -ml-3"
+                            className="p-2 py-1 -ml-3.5"
                             style={{
-                                color: "#24DCE2",
-                                borderColor: "#24DCE2",
+                                color: "#1AD1FF",
+                                borderColor: "#1AD1FF",
                                 backgroundColor: "#ccc",
                                 borderRadius: '10px'
                             }}
                             onPress={() => {
                                 setTitle("Bạn chắc chắn muốn xóa?")
                                 setVisible(true)
-                                setAction(() => () => {
+                                setAction(() => {
                                     console.log("DELETE medical record: ", props.id)
                                     deleteProfile(props.id)
                                 })

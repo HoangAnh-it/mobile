@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import AccountDoctor from "../../screen/Tabs/AccountDoctor";
-import ListHospital from "../../screen/Account/ListHospital";
-import HospitalDetails from "../../screen/Hospital/HospitalDetails";
-import ListDoctor from "../../screen/Account/ListDoctor";
-import DoctorDetails from "../../screen/Doctors/DoctorDetails";
-import ChangePassword from "../../screen/Account/ChangePassword";
+import ListHospital from "../../../screen/Account/ListHospital";
+import HospitalDetails from "../../../screen/Hospital/HospitalDetails";
+import ListDoctor from "../../../screen/Account/ListDoctor";
+import DoctorDetails from "../../../screen/Doctors/DoctorDetails";
+import ChangePassword from "../../../screen/Account/ChangePassword";
+import Account from "../../../screen/Tabs/Account";
 
 const Stack = createStackNavigator();
 export default function AccountDoctorStack() {
@@ -13,7 +13,7 @@ export default function AccountDoctorStack() {
         <Stack.Navigator initialRoutName="AccountDoctor">
             <Stack.Screen
                 name="AccountDoctor"
-                component={AccountDoctor}
+                component={Account}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -25,7 +25,7 @@ export default function AccountDoctorStack() {
                 name="Thông tin bệnh viện"
                 component={HospitalDetails}
                 options={{
-                    headerTintColor: "#24dce2",
+                    headerTintColor: "#1AD1FF",
                     headerTitleStyle: { color: "#000000" },
                     headerBackTitle: "Trở về"
                 }}
@@ -34,7 +34,7 @@ export default function AccountDoctorStack() {
                         <Ionicons
                             labelVisible={false}
                             title="Trở về"
-                            style={{ color: "#24dce2" }}
+                            style={{ color: "#1AD1FF" }}
                         />
                     ),
                 })}
@@ -48,7 +48,7 @@ export default function AccountDoctorStack() {
                 name="Thông tin bác sĩ"
                 component={DoctorDetails}
                 options={{
-                    headerTintColor: "#24dce2",
+                    headerTintColor: "#1AD1FF",
                     headerTitleStyle: { color: "#000000" },
                     headerBackTitle: "Trở về"
                 }}
@@ -57,7 +57,7 @@ export default function AccountDoctorStack() {
                         <Ionicons
                             labelVisible={false}
                             title="Trở về"
-                            style={{ color: "#24dce2" }}
+                            style={{ color: "#1AD1FF" }}
                         />
                     ),
                 })}

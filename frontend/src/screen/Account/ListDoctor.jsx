@@ -119,7 +119,7 @@ function DoctorBrief(props) {
                 </View>
                 <Text className="w-2/3 text-left break-normal font-normal justify-center">{props.department}</Text>
                 <View className="w-1/5 absolute ml-60 mt-4">
-                    <Ionicons name="caret-forward" size={24} color="#24DCE2" />
+                    <Ionicons name="caret-forward" size={24} color="#1ad1ff" />
                 </View>
             </View>
         </View>
@@ -136,16 +136,16 @@ const styles = StyleSheet.create({
         color: "#ffb300",
     },
     textColor: {
-        color: "#24DCE2",
+        color: "#1ad1ff",
         fontWeight: "bold"
     },
     bgColor: {
-        backgroundColor: "#24DCE2",
-        borderColor: "#24DCE2"
+        backgroundColor: "#1ad1ff",
+        borderColor: "#1ad1ff"
     },
     focus: {
-        borderColor: "#24DCE2",
-        color: "#24DCE2",
+        borderColor: "#1ad1ff",
+        color: "#1ad1ff",
     },
     none: {
         fontWeight: "normal"

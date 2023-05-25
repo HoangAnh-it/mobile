@@ -90,7 +90,7 @@ export default function CreateMedicalRecord({navigation}) {
                     <View className="flex-row space-x-3">
                         {
                             data.gender == "Nam" ?
-                                <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" />
+                                <FontAwesome5 name="dot-circle" size={24} color="#1AD1FF" />
                                 :
                                 <TouchableOpacity
                                     onPress={() => setData({ ...data, gender: "Nam" })}
@@ -101,7 +101,7 @@ export default function CreateMedicalRecord({navigation}) {
                         <Text>Nam</Text>
                         {
                             data.gender == "Nữ" ?
-                                <FontAwesome5 name="dot-circle" size={24} color="#24DCE2" /> :
+                                <FontAwesome5 name="dot-circle" size={24} color="#1AD1FF" /> :
                                 <TouchableOpacity onPress={() => setData({ ...data, gender: "Nữ" })} >
                                     <FontAwesome5 name="circle" size={24} color="gray" />
                                 </TouchableOpacity>
@@ -147,8 +147,8 @@ export default function CreateMedicalRecord({navigation}) {
                 </View>
                 <View className="items-center">
                     <TouchableOpacity
-                        className="my-5 py-3 items-center w-3/5 rounded-lg"
-                        style={{ backgroundColor: "#24DCE2" }}
+                        className="my-5 py-2 items-center w-3/5 rounded-lg"
+                        style={{ backgroundColor: "#1AD1FF" }}
                         onPress={() => submit(data)}
                     >
                         <Text className="text-white font-bold">Tạo hồ sơ</Text>

@@ -1,6 +1,6 @@
 const {DataTypes,Sequelize } = require('sequelize')
 
-const {TEST_PACKAGE, HOSPITAL} = require("./table_name")
+const {TEST_PACKAGE, DEPARTMENT} = require("./table_name")
 
 module.exports =  {
     up: async (queryInterface) => {
@@ -36,12 +36,12 @@ module.exports =  {
                 defaultValue: Sequelize.fn('now'),
             },
 
-            hospitalId: {
+            departmentId: {
                 type: DataTypes.UUID,
                 allowNull: false,
                 references: {
-                    model: HOSPITAL,
-                    key: "hospitalId"
+                    model: DEPARTMENT,
+                    key: "departmentId"
                 },
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE",
