@@ -4,8 +4,10 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import React from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useAxios from "../../hooks/useAxios";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import useConfirmModal from "../../hooks/useConfirmModal";
 
-export default function CreateMedicalRecord({navigation}) {
+export default function CreateMedicalRecord({ navigation }) {
     const [data, setData] = React.useState({
         name: null,
         gender: "Nam",
@@ -14,6 +16,8 @@ export default function CreateMedicalRecord({navigation}) {
         phone: null,
         address: null
     })
+
+    const [dayOfBirth, setDayOfBirth] = React.useState(new Date())
 
     const [checkData, setCheckData] = React.useState({
         name: true,
@@ -24,16 +28,7 @@ export default function CreateMedicalRecord({navigation}) {
     })
 
     const axios = useAxios()
-
-    const checkbirthDay = (val) => {
-        var d_reg = /^([0-9]{4})\/(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])$/;
-        if (d_reg.test(val)) {
-            console.log("Date follows mm/dd/yyyy format");
-        }
-        else {
-            console.log("Invalid date format");
-        }
-    }
+    const { setIsAlert, setTitle, setVisible} = useConfirmModal()
 
     const submit = (data) => {
         if (data.name == null) {
@@ -61,16 +56,35 @@ export default function CreateMedicalRecord({navigation}) {
         } else {
             setCheckData({ ...data, address: true })
         }
-        checkbirthDay(data.birthDay)
-
         axios.post("/patient/medical_record", data)
-            .then(res => res.data.data)
-            .then((res) => {
+            .then(res => {
+                if (res.status === 200) {
+                    setTitle("Tạo hồ sơ thành công")
+                    setIsAlert(true)
+                    setVisible(true)
+                }
+                return res.data.data
+            }).then((res) => {
                 console.log(res)
-                navigation.goBack(null)
             }).catch(err => {
+                setTitle(err.response.data.message)
+                setIsAlert(true)
+                setVisible(true)
                 console.log(JSON.stringify(err))
             })
+    }
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || dayOfBirth
+        setDayOfBirth(currentDate);
+        let date = dayOfBirth.getFullYear() + "-"
+        if (dayOfBirth.getMonth() < 9) 
+            date += "0"
+        date += (dayOfBirth.getMonth() + 1) + "-"
+        if (dayOfBirth.getDate() < 10) 
+            date += "0"
+        date += dayOfBirth.getDate();
+        setData({ ...data, birthDay: date }); 
     }
 
     return (
@@ -111,12 +125,13 @@ export default function CreateMedicalRecord({navigation}) {
                 </View>
                 <View className="mt-2 mx-2">
                     <Text>Ngày sinh</Text>
-                    <TextInput
-                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
-                        placeholder="yyyy-MM-dd"
-                        onChangeText={(val) => setData({ ...data, birthDay: val })}
+                </View>
+                <View
+                    className="flex-row mt-2">
+                    <DateTimePicker
+                        value={dayOfBirth}
+                        onChange={onChange}
                     />
-                    {!checkData.birthDay && <Text className="text-red-500">Vui lòng điền trường này</Text>}
                 </View>
                 <View className="mt-2 mx-2">
                     <Text>Mối quan hệ</Text>
