@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import CustomError from "../error/CustomError";
 import { Appointment, Department, DoAppointment, Hospital, MedicalRecord, Patient, TestPackage, User } from "../models";
 import { CreateDepartmentDTO } from '../dtos/department.dto';
-import { Op } from 'sequelize'
+import { appointmentService } from '.';
 
 export const info = async(id: string) => {
     return User.findOne({
@@ -38,105 +38,6 @@ export const getDepartment = async (id: string) => {
             required: true,
         }
     })
-}
-
-export const getAllAppointment = async (id: string, query: { [key:string]: any }) => {
-    const status = query.status || 'ALL'
-    const type = query.type || 'ALL'
-    const searchName = query.search?.trim() || ""
-
-    const filter: { [key: string]: any } = {
-        attributes: {
-            exclude: ['createdAt', 'updatedAt']
-        },
-        include: [
-            {
-                model: Department,
-                attributes: ["departmentId", "name"],
-                include: [{
-                    model: Hospital,
-                    attributes: ["userId"],
-                    include: [{
-                        model: User,
-                        attributes: ["name"],
-                        where: {
-                            userId: id,
-                        },
-                        required: true
-                    }],
-                    required: true
-                }],
-            },
-            
-            {
-                model: TestPackage,
-                attributes: ["testPackageId", "name"],
-                include: [
-                    {
-                        model: Department,
-                        attributes: ["departmentId", "name"],
-                        include: [{
-                            model: Hospital,
-                            attributes: ["userId"],
-                            include: [{
-                                model: User,
-                                attributes: [],
-                                where: {
-                                    userId: id,
-                                },
-                                required: true
-                            }],
-                            required: true
-                        }],
-                    }
-                ]
-            },
-
-            {
-                model: MedicalRecord,
-                where: {
-                    name: {
-                        [Op.like]: `%${searchName}%`
-                    }
-                },
-                include: [{
-                    model: Patient,
-                    attributes: ["userId"]
-                }]
-            },
-
-            {
-                model: DoAppointment,
-                include: [{
-                    model: User,
-                    attributes: ["userId"],
-                    where: {
-                        userId: id,
-                    },
-                }]
-            }
-        ]
-    }
-
-    if (status !== 'ALL') {
-        filter.where = {status}
-    }
-    
-    let appos =  await Appointment.findAll(filter)
-    appos = appos.filter(a => {
-        switch (type) {
-            case 'AT_HOME':
-                return a.getDepartment() === null && a.getTestPackage() !== null
-            
-            case 'FACE_TO_FACE':
-                return a.getTestPackage() === null && a.getDepartment() !== null
-            
-            default:
-                return a.getDepartment() !== null || a.getTestPackage() !== null
-        }
-    });
-    
-    return appos
 }
 
 export const rejectAppointment = async(hospitalId: string, appointmentId: string) => {
@@ -243,4 +144,9 @@ export const createDepartment = async (userHospitalId: string, department: Creat
         hospitalId: (userHospital?.dataValues as { [key: string]: any })?.hospitals?.hospitalId,
         ...department
     })
+}
+
+export const getAllAppointments = async (userId: string, query: {[key:string]: any}) => {
+    const appointments = await appointmentService.getAllAppointments(userId, query);
+    return appointments.filter(a => a.getDoAppointment() === null);
 }

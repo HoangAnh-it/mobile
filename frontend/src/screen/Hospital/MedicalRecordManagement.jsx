@@ -4,10 +4,8 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  Modal,
   ActivityIndicator
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,9 +14,10 @@ import useAxios from "../../hooks/useAxios";
 import MedicalRecordItem from "./components/MedicalRecordItem";
 import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
-import { extractDate, extractDay, extractTime } from "../../helpers/helpers";
+import {  extractDay, extractTime } from "../../helpers/helpers";
 
 import { dictionary } from "../../helpers/helpers";
+import FilterMedicalRecord from "../components/FilterMedicalRecord";
 
 const toAppointment = (data) => {
   return {
@@ -142,11 +141,12 @@ export default function MedicalRecordManagement({ navigation }) {
     <>
       <StatusBar />
       <View className="flex-row pt-10 pb-2 px-5 space-x-2 bg-white">
-        <FilterForm
+        <FilterMedicalRecord
           value={filter}
           setValue={setFilter}
           isShow={showFilterForm}
           setIsShown={setShowFilterForm}
+          role="HOSPITAL"
         />
         <View className="bg-gray-200 rounded-full px-3 py-2 w-11/12 flex-row items-center">
           {search.isSearch ? (
@@ -229,76 +229,4 @@ export default function MedicalRecordManagement({ navigation }) {
       </ScrollView>
     </>
   );
-}
-
-const FilterForm = ({ value, setValue, isShow, setIsShown }) => {
-  const [data, setData] = React.useState(value)
-
-  return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={isShow}
-      onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
-        setIsShown(false);
-      }}>
-      <View className="w-screen h-screen items-center justify-center">
-        <View className="w-screen h-screen bg-black opacity-25 absolute">
-        </View>
-        <View className="bg-white items-center w-2/3 p-4 shadow-sm rounded-lg">
-          <Text className="font-bold text-xl">Loại xét nghiệm:</Text>
-          <Picker
-            className=""
-            selectedValue={data.type}
-            onValueChange={(itemValue, itemIndex) => setData(prev => ({ ...prev, type: itemValue }))}
-            style={{
-              width: "100%",
-            }}
-          >
-            <Picker.Item label="Tất cả" value="ALL" />
-            <Picker.Item label="Trực tiếp" value="FACE_TO_FACE" />
-            <Picker.Item label="Xét nghiệm tại nhà" value="AT_HOME" />
-          </Picker>
-
-          <Text className="font-bold text-xl">Trạng thái:</Text>
-          <Picker
-            className=""
-            selectedValue={data.status}
-            onValueChange={(itemValue, itemIndex) => setData(prev => ({ ...prev, status: itemValue }))}
-            style={{
-              width: "100%",
-            }}
-          >
-            <Picker.Item label="Tất cả" value="ALL" />
-            <Picker.Item label="Đang chờ" value="PENDING" />
-            <Picker.Item label="Đã nhận" value="ACCEPTED" />
-            <Picker.Item label="Đã xong" value="DONE" />
-            <Picker.Item label="Đã hủy" value="CANCELED" />
-            <Picker.Item label="Từ chối" value="REJECTED" />
-          </Picker>
-
-          <View className="flex flex-row justify-center items-center rounded-sm">
-            <TouchableOpacity className="p-2.5 mx-2 bg-[#1AD1FF] border-[#1AD1FF] border rounded-md"
-              onPress={() => {
-                setValue(data)
-                setIsShown(false)
-              }}
-            >
-              <Text className="text-white text-base">Áp dụng</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity className="p-2.5 mx-2 border-[#1AD1FF] border bg-white rounded-md"
-              onPress={() => {
-                setIsShown(false)
-                setData(value)
-              }}
-            >
-              <Text className="text-[#1AD1FF] text-base">Bỏ qua</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  )
 }

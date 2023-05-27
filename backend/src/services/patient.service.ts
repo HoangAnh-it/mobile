@@ -1,7 +1,7 @@
 
 import { StatusCodes } from 'http-status-codes';
 import CustomError from "../error/CustomError";
-import { User, Patient, MedicalRecord, Appointment, Department, Hospital, TestPackage, DoAppointment } from "../models";
+import { User, Patient, MedicalRecord, Appointment, Department, Hospital, TestPackage, DoAppointment, MedicalResult } from "../models";
 import { CreateMedicalRecordDTO, UpdateMedicalRecordDTO } from '../dtos/medicalRecord.dto';
 import { validateCreateMedicalRecord, validateUpdateMedicalRecord } from '../validator/patient';
 import { CreateAppointmentDTO } from '../dtos/appointment.dto';
@@ -163,6 +163,12 @@ export const getAllAppointments = async(userId : string) => {
                         role: 'DOCTOR'
                     }
                 }]
+            },
+            {
+                model: MedicalResult,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                },
             }
         ],
     })

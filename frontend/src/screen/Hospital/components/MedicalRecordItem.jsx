@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import useConfirmModal from '../../../hooks/useConfirmModal'
 import useAxios from '../../../hooks/useAxios'
@@ -6,6 +6,7 @@ import useSocket from '../../../hooks/useSocket'
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { dictionary } from '../../../helpers/helpers'
+import { StatusStyles } from '../../../component/Utils/Color'
 
 export default function MedicalRecordItem({ data, className, style }) {
     const { setAction, setTitle, setVisible } = useConfirmModal()
@@ -119,7 +120,7 @@ export default function MedicalRecordItem({ data, className, style }) {
                             </TouchableOpacity>
                     }
                     <View className="p-2 rounded-md right-0 absolute items-center"
-                        style={styles.status[data.status]}>
+                        style={StatusStyles.status[data.status]}>
                         <Text className="font-bold text-gray-700 w-fit text-right text-decoration-line: underline">
                             {dictionary[data.status]}
                         </Text>
@@ -129,33 +130,3 @@ export default function MedicalRecordItem({ data, className, style }) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    status: {
-        PENDING: {
-            backgroundColor: '#FFF192',
-            // borderWidth: 2,
-        },
-            
-        ACCEPTED: {
-            backgroundColor: '#99ddff',
-            // borderWidth: 2,
-        },
-
-        DONE: {
-            backgroundColor: '#99ff99',
-            // borderWidth: 2,
-        },
-    
-        CANCELED: {
-            backgroundColor: '#ffcc66',
-            // borderWidth: 2,
-        },
-
-        REJECTED: {
-            backgroundColor: '#ff8080',
-            // borderWidth: 2,
-        },
-
-    }
-})

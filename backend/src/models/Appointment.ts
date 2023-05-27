@@ -1,5 +1,5 @@
 import { Model,  PrimaryKey, Column, Table, ForeignKey, CreatedAt, UpdatedAt, DataType, BelongsTo, BeforeCreate, HasOne } from 'sequelize-typescript';
-import {User, TestPackage, MedicalRecord, Department, DoAppointment} from '.'
+import {User, TestPackage, MedicalRecord, Department, DoAppointment, MedicalResult} from '.'
 import { generateUUID } from '../utils/uuid';
 
 @Table({ tableName: 'Appointments' })
@@ -46,6 +46,9 @@ export class Appointment extends Model{
   @HasOne(() => DoAppointment)
   private doAppointment!: DoAppointment
 
+  @HasOne(() => MedicalResult)
+  private medicalResult!: MedicalResult
+
   public getTestPackage(): TestPackage {
     return this.testPackage
   }
@@ -56,6 +59,14 @@ export class Appointment extends Model{
 
   public getMedicalRecord() {
     return this.medicalRecord
+  }
+
+  public getDoAppointment() {
+    return this.doAppointment
+  }
+
+  public getMedicalResult() {
+    return this.medicalResult
   }
 
   @BeforeCreate

@@ -13,5 +13,6 @@ module.exports = {
     POST : "Posts",
     COMMENT : "Comments",
     REACTION: "Reactions",
-    DO_APPOINTMENT: 'DoAppointments'
+    DO_APPOINTMENT: 'DoAppointments',
+    MEDICAL_RESULT: 'MedicalResults'
 }

@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Appointments from "../../../screen/Doctors/Appointment";
 import { Entypo } from '@expo/vector-icons';
-import CreateExaminationResults from "../../../screen/Doctors/CreateExaminationResults";
+import ExaminationResults from "../../../screen/components/ExaminationResults";
 
 const Stack = createStackNavigator();
 export default function AppointmentStack() {
@@ -12,12 +12,12 @@ export default function AppointmentStack() {
                 name="Lịch khám"
                 component={Appointments}
                 options={{
-                  headerTitleStyle: { color: "#000000", fontSize: "20px", fontWeight: "bold" },
+                  headerTitleStyle: { color: "#000000", fontSize: 20, fontWeight: "bold" },
                 }}
             />
             <Stack.Screen
                 name="Tạo kết quả khám"
-                component={CreateExaminationResults}
+                component={ExaminationResults}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>

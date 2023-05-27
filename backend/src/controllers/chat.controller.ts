@@ -34,6 +34,10 @@ export const socketSetup = (io: any, app: Application) => {
             socket.emit('create department', data)
         })
 
+        socket.on("medical result", (data: { [key: string]: any }) => {
+            socket.emit("medical result", data)
+        })
+
         socket.on("disconnect", () => {
             console.log("Disconnect from", socket.id)
             const k = Object.keys(uid).find(k => uid[k] === socket.id)

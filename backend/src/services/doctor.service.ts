@@ -1,25 +1,41 @@
-import { Appointment, Department, DoAppointment, MedicalRecord, TestPackage } from "../models"
+import { StatusCodes } from "http-status-codes";
+import { appointmentService, doctorService } from "."
+import { CreateMedicalResultDTO } from "../dtos/medicalResult.dto";
+import CustomError from "../error/CustomError";
+import { Appointment, Department, DoAppointment, MedicalRecord, TestPackage, User } from "../models"
+import { MedicalResult } from "../models/MedicalResults";
 
-export const allAppointments = async (userId: string) => {
-    return DoAppointment.findAll({
-        where: { userId },
-        include: [
-            {
-                model: Appointment,
-                include: [
-                    {
-                        model: MedicalRecord,
+export const allAppointments = async (userId: string, query: {[key:string]: any}) => {
+    const appointments = await appointmentService.getAllAppointments(userId, query);
+    return appointments.filter(a => a.getDoAppointment() !== null);
+}
 
-                    },
-                    {
-                        model: Department,
-                        attributes: ["name"]
-                    },
-                    {
-                        model: TestPackage,
-                        
-                    }
-                ]
-            }]
+export const createResultAppointment = async (appointmentId: string, medicalResult: CreateMedicalResultDTO) => {
+    const appointment = await Appointment.findByPk(appointmentId, {
+        include: {
+            model: MedicalResult,
+            attributes: ["medicalResultId"]
+        }
     })
+    if (!appointment) {
+        throw new CustomError(StatusCodes.NOT_FOUND, "Appointment not found");
+    }
+    
+    if (appointment.getMedicalResult() !== null) {
+        throw new CustomError(StatusCodes.NOT_FOUND, "Appointment has already a result");
+    }
+
+    const result  = await MedicalResult.create({
+        disease: medicalResult.disease,
+        medicines: JSON.stringify(medicalResult.medicines),
+        note: medicalResult.note,
+        appointmentId: appointmentId
+    })
+
+    await appointmentService.changeStatus(appointmentId, "DONE");
+    return {
+        id: appointmentId,
+        status: 'DONE',
+        result: result.dataValues
+    }
 }

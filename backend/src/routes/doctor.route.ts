@@ -5,4 +5,7 @@ const router = express.Router();
 
 router.route("/appointment")
     .get(doctorController.allAppointments)
+
+router.route("/appointment/:id/result")
+    .post(doctorController.createResultAppointment)
 export default router;

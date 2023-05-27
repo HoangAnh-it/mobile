@@ -7,12 +7,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import useConfirmModal from "../../hooks/useConfirmModal";
 import useSocket from "../../hooks/useSocket";
 import { dictionary } from "../../helpers/helpers";
+import { useNavigation } from "@react-navigation/native";
 
 export const ScheduleItem = ({ data }) => {
     const { setTitle, setAction, setVisible, setIsAlert } = useConfirmModal()
     const axios = useAxios()
     const socket = useSocket()
-
+    const navigation = useNavigation()
 
     const cancelAppointment = () => {
         setTitle(`Hủy cuộc hẹn ${data.department?.name || ""}?`)
@@ -37,7 +38,7 @@ export const ScheduleItem = ({ data }) => {
 
     return (
         <View className="mx-4 my-2 p-5 rounded-md bg-white shadow-sm"
-            // style={styles.status[data.status]}
+        // style={styles.status[data.status]}
         >
             <View className="my-3">
                 <View className="flex-row py-1 border-b border-gray-200">
@@ -64,6 +65,13 @@ export const ScheduleItem = ({ data }) => {
                     <Text>Chuyên khoa</Text>
                     <Text className="right-0 bottom-1 absolute">{data.department}</Text>
                 </View>
+                {
+                    data.testPackage &&
+                    <View className="flex-row py-1 border-b border-gray-200">
+                        <Text>Gói khám</Text>
+                        <Text className="right-0 top-1 absolute w-2/3 text-right">{data.testPackage}</Text>
+                    </View>
+                }
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Ngày khám</Text>
                     <Text className="right-0 bottom-1 absolute">{data.date}</Text>
@@ -72,17 +80,17 @@ export const ScheduleItem = ({ data }) => {
                     <Text>Giờ khám</Text>
                     <Text className="right-0 bottom-1 absolute">{data.hour}</Text>
                 </View>
-                <View className="flex-row py-1">
+                <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Bệnh viện</Text>
                     <Text className="right-0 top-1 absolute w-2/3 text-right">{data.hospital}</Text>
                 </View>
-                <View className="flex-row py-1">
+                <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Địa chỉ</Text>
                     <Text className="right-0 top-1 absolute w-2/3 text-right">{data.address}</Text>
                 </View>
                 {
                     data.doctor &&
-                    <View className="flex-row py-1">
+                    <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Bác sĩ</Text>
                         <Text className="right-0 top-1 absolute w-2/3 text-right">{data.doctor}</Text>
                     </View>
@@ -105,6 +113,14 @@ export const ScheduleItem = ({ data }) => {
                         <Text className="font-bold p-2 bg-[#ff8080]">
                             Đã hủy?
                         </Text>
+                    }
+                    {
+                        ["DONE"].includes(data.status) &&
+                        <TouchableOpacity onPress={() => navigation.navigate("result appointment", {data: {result: data.result}})}>
+                            <Text className="font-bold w-fit text-right text-decoration-line: underline">
+                                Xem kết quả
+                            </Text>
+                        </TouchableOpacity>
                     }
                     <View className="p-2 rounded-md right-0 absolute items-center"
                         style={styles.status[data.status]}>
@@ -145,11 +161,13 @@ export default function ViewSchedules({ navigation, route }) {
                     numberphone: schedule.medicalRecord.phone,
                     address: schedule.medicalRecord.address,
                     hospital: schedule.department?.hospital.user.name || schedule.testPackage?.department.hospital.user.name,
-                    department: schedule.department?.name,
+                    department: schedule.department?.name || schedule.testPackage.department.name,
                     date: getDate(new Date(schedule.dateTime)),
                     hour: getTime(new Date(schedule.dateTime)),
                     status: schedule.status,
-                    doctor: schedule.doAppointment?.user.name
+                    doctor: schedule.doAppointment?.user.name,
+                    testPackage: schedule.testPackage?.name,
+                    result: schedule.medicalResult
                 })))
             })
             .catch(err => {
@@ -159,11 +177,8 @@ export default function ViewSchedules({ navigation, route }) {
 
     React.useEffect(() => {
         const statusAppointmentListener = (data) => {
-            console.log(data)
             setSchedules(prev => {
                 const index = prev.findIndex(e => e.id === data.id)
-                console.log(index)
-                console.log(prev.map(prev => prev.id))
                 if (index >= 0) {
                     prev[index].status = data.status
                     if (data.status === 'ACCEPTED') {

@@ -24,7 +24,7 @@ export default function ConfirmModal({
                     <View className="w-screen h-screen bg-black opacity-25 absolute">
                     </View>
                     <View className="bg-white items-center justify-center w-2/3 p-4 rounded-md shadow-sm">
-                        <Text className="font-bold text-lg">{title}</Text>
+                        <Text className="font-bold text-lg text-center">{title}</Text>
                         {
                             !isAlert ?
                                 <View className="flex-row">

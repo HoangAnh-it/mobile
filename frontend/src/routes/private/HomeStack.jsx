@@ -20,6 +20,7 @@ import ConfirmTest from "../../screen/Test/Confirm";
 import ListProfileTest from "../../screen/Test/ListProfile";
 import ChatDetail from "../../screen/Chat/ChatDetail";
 import CreateMedicalRecord from "../../screen/Appointments/CreateMedicalRecord";
+import ExaminationResults from "../../screen/components/ExaminationResults";
 
 const Stack = createStackNavigator();
 export default function HomeStack() {
@@ -101,6 +102,11 @@ export default function HomeStack() {
             />
           ),
         })}
+      />
+       <Stack.Screen
+        name="result appointment"
+        component={ExaminationResults}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Chi tiết gói khám"

@@ -4,6 +4,7 @@ import ErrorWrapperHandler from "../utils/ErrorWrapperHandler"
 import { StatusCodes } from 'http-status-codes'
 import * as hospitalService from '../services/hospital.service'
 import { CreateDepartmentDTO } from '../dtos/department.dto'
+import { appointmentService } from '../services'
 
 // [GET] /hospital/:id
 export const hospitalInfo = ErrorWrapperHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +24,7 @@ export const getDepartments = ErrorWrapperHandler(async (req: Request, res: Resp
 
 // [GET] /hospital/:id/appointment
 export const getAllAppointments = ErrorWrapperHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const d = await hospitalService.getAllAppointment(req.params.id, req.query as { type: string, status: string })
+    const d = await appointmentService.getAllAppointments(req.params.id, req.query as { type: string, status: string })
     return res.status(StatusCodes.OK).json({
         data: d
     })
