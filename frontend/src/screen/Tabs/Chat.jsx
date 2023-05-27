@@ -13,6 +13,7 @@ export default function Chat({ navigation }) {
     const [chatList, setChatList] = React.useState([])
     const axios = useAxios()
     const socket = useSocket()
+    const [testReload, setTestReload] = React.useState(0)
 
     const searchChange = (val) => {
         if (val.length != 0) {
@@ -49,16 +50,26 @@ export default function Chat({ navigation }) {
             }).catch(err => {
                 console.log(JSON.stringify(err))
             })
-    }, [])
+    }, [testReload])
 
     React.useEffect(() => {
         const newMsg = (c) => {
-            console.log("new chat:::",c)
+
+        }
+
+        const reload = (isReload) => {
+            console.log("is reload", isReload)
+            if (isReload) {
+                setTestReload(prev => prev + 1)
+            }
         }
 
         socket.on('message', newMsg)
+        socket.on('reload', reload)
+
         return () => {
             socket.off('message', newMsg)
+            socket.off('reload', reload)
         }
     }, [socket])
 

@@ -38,6 +38,11 @@ export const socketSetup = (io: any, app: Application) => {
             socket.emit("medical result", data)
         })
 
+        socket.on('reload', (data: boolean) => {
+            console.log("reload")
+            socket.emit('reload', data)
+        })
+
         socket.on("disconnect", () => {
             console.log("Disconnect from", socket.id)
             const k = Object.keys(uid).find(k => uid[k] === socket.id)
@@ -73,12 +78,6 @@ export const sendMessage = ErrorWrapperHandler(async (req: Request, res: Respons
     const userId = req.auth?.id
     const partnerId = req.params.id
     const d = await chatService.sendMessage(userId, partnerId, req.body as CreateMessageDTO)
-    
-    const { socket } = req.app.get("socket.io")
-    socket.in(uid[userId]).emit('message', d)
-    if (uid[partnerId]) {
-        socket.in(uid[partnerId]).emit("message", d)
-    }
     return res.status(StatusCodes.OK).json({
         data: d
     });

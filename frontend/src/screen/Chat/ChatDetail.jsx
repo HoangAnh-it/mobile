@@ -70,15 +70,14 @@ export default function ChatDetail({ navigation, route }) {
 
     const onSend = useCallback((messages = []) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-        console.log("send:::", messages)
 
         axios.post(`/chat/${user.id}/message`, {
             content: messages[0].text
         })
-            .then(res => res.data.data)
             .then(res => {
-                if (!chat.trim()) {
-                    setChat(res.chatId)
+                if (res.status === 200) {
+                    setChat(res.data.data.chatId)
+                    socket.emit("reload", true)
                 }
             })
             .catch(err => {
