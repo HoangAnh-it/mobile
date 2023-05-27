@@ -49,7 +49,11 @@ export default function Community({ navigation }) {
 
         const newComment = (id) => {
             setPosts(prev => {
-                return prev
+                const index = prev.findIndex(item => item.postId === id)
+                if (index >= 0) {
+                    prev[index].numberOfComments++;
+                }
+                return [...prev]
             })
         }
 

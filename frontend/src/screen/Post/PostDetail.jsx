@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView, 
 import { Ionicons } from "@expo/vector-icons";
 import Post from "../../component/Post/Post";
 import useAxios from "../../hooks/useAxios";
+import useSocket from "../../hooks/useSocket";
 
 const DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/3607/3607444.png";
 
@@ -56,10 +57,6 @@ export default function PostDetail({ navigation, route }) {
                         ...prev,
                         res.data.data
                     ])
-                    setPost(prev => ({
-                        ...prev,
-                        numberOfComments: prev.numberOfComments + 1
-                    }))
                 }
             })
             .catch(err => {
