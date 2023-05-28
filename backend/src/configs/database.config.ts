@@ -11,6 +11,7 @@ const db = new Sequelize({
     password: mysql.DB_PASSWORD,
     database: mysql.DB_DATABASE,
     logging: false,
+    timezone: "+07:00"
 });
 
 export function connectToDatabase() { 
