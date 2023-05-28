@@ -17,4 +17,6 @@ router.route("/appointment")
 router.route("/appointment/:id")
     .put(patientController.handlerAnAppointment)
 
+router.route("/busy_time")
+    .get(patientController.busyTime)
 export default router;

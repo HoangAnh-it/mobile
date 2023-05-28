@@ -86,3 +86,13 @@ export const handlerAnAppointment = ErrorWrapperHandler(async (req: Request, res
     const data = await patientService.handleAnAppointment(id, status)
     return res.status(StatusCodes.OK).json(data)
 })
+
+// [GET] /patient/busy_time?day&departmentId
+export const busyTime = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const { day, departmentId } = req.query
+    const userId = req.auth?.id
+    const busyTime = await patientService.busyTime(userId, day as string, departmentId as string);
+    return res.status(StatusCodes.OK).json({
+        data: busyTime
+    })
+})

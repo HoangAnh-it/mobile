@@ -39,3 +39,19 @@ export const createResultAppointment = async (appointmentId: string, medicalResu
         result: result.dataValues
     }
 }
+
+export const getBusyTime = async (doctorId: string) => {
+    return  await Appointment.findAll({
+        include: {
+            model: DoAppointment,
+            include: [{
+                model: User,
+                attributes: ["name"],
+                where: {
+                    userId: doctorId
+                }
+            }]
+        },
+        attributes: ["dateTime"]
+    })
+}

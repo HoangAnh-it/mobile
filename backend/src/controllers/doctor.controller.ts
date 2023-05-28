@@ -21,3 +21,22 @@ export const createResultAppointment = ErrorWrapperHandler(async (req: Request, 
         data: d
     });
 })
+
+// [GET] /doctor/:id/available_time
+export const availableTime = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const appointmentId = req.params.id;
+    // const d = await doctorService.getAvailableTime()
+    return res.status(StatusCodes.OK).json({
+        // data: d
+    });
+})
+
+
+// [GET] /doctor/:id/busy_time
+export const busyTime = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const doctorId = req.params.id;
+    const d = await doctorService.getBusyTime(doctorId)
+    return res.status(StatusCodes.OK).json({
+        data: d
+    });
+})

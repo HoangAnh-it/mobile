@@ -8,6 +8,7 @@ import { CreateAppointmentDTO } from '../dtos/appointment.dto';
 import { convertDateTime } from '../utils/converter';
 import { validateCreateAppointment } from '../validator/appointment';
 import { appointmentService } from '.';
+import { Sequelize } from 'sequelize-typescript';
 
 export const allMedicalRecords = async (userId: string) => {
     const user = await User.findByPk(userId, {
@@ -181,4 +182,33 @@ export const handleAnAppointment = async(id: string, status: string) => {
     }
     await appointmentService.changeStatus(id, status)
     return {id, status}
+}
+
+export const busyTime = async (userId: string, day: string, departmentId: string) => {
+    const date = new Date(day)
+
+    const existingAppointmentsDateTime = await Appointment.findAll({
+        attributes: ["dateTime"],
+        where: Sequelize.literal(`DAY(dateTime) = ${date.getDate()} AND MONTH(dateTime) = ${date.getMonth() + 1}`),
+        include: {
+            model: MedicalRecord,
+            attributes: [],
+            include: [{
+                model: Patient,
+                attributes: [],
+                include: [{
+                    model: User,
+                    attributes: [],
+                    where: {userId: userId}
+                }]
+            }]
+        }
+    })
+
+    return existingAppointmentsDateTime.map(d => {
+        const _d = new Date(d.dataValues.dateTime)
+        const h = _d.getHours() < 10 ? `0${_d.getHours()}`: _d.getHours()
+        const m = _d.getMinutes() < 10 ? `0${_d.getMinutes()}` : _d.getMinutes()
+        return `${h}:${m}`
+    })
 }

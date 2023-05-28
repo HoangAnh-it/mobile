@@ -2,34 +2,34 @@ import { View, Text, TouchableOpacity, Modal, Pressable } from "react-native";
 import Profile from "../../component/Utils/Profile";
 import React from "react";
 import useAxios from "../../hooks/useAxios";
+import useConfirmModal from "../../hooks/useConfirmModal";
 
 export default function Confirm({ navigation, route }) {
     const { profile, hospital, department, date, hour } = route.params;
+
     const [appointmentStatus, setAppointmentStatus] = React.useState(false);
     const [message, setMessage] = React.useState("");
-    React.useEffect(() => {
-        console.log("Date: ", date, " Hour: ", hour, " Hospital: ", hospital, " Department: ", department, " Profile: ", profile);
-    }, [])
     const axios = useAxios();
+    const { setTitle, setIsAlert, setVisible } = useConfirmModal()
+
     const handleAppoinment = () => {
         axios.post(`/patient/appointment`, {
-            date: date.shortDate,
+            date: date,
             time: hour,
             medicalRecordId: profile.id,
             departmentId: department.id
         }).then(res => {
-            if (res.status < 400) {
-                    setAppointmentStatus(true);
-                    setModalVisible(true)
-            } else {
-                    setMessage(res.message)
-                    alert(res.message)
+            if (res.status === 200) {
+                setAppointmentStatus(true);
+                setModalVisible(true)
             }
         })
-        .catch(err => {
+            .catch(err => {
                 console.log(JSON.stringify(err))
-                Alert.alert(res.message)
-        })
+                setIsAlert(true)
+                setTitle("Lỗi")
+                setVisible(true)
+            })
     }
 
     const Info = (props) => {
