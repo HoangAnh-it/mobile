@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { View, Text, TouchableOpacity, Animated, StyleSheet } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import React from "react";
 import useAxios from "../../hooks/useAxios";
@@ -22,7 +22,7 @@ export default function ExaminationResults({ navigation, route }) {
     const [isFreeze, setIsFreeze] = React.useState(!!data?.result?.medicalResultId)
     const axios = useAxios()
     const socket = useSocket()
-    const {auth}  = useAuth()._j
+    const { auth } = useAuth()._j
 
     const submit = () => {
         if (!result.disease.trim()) {
@@ -35,7 +35,7 @@ export default function ExaminationResults({ navigation, route }) {
         result.medicines = result.medicines
             .filter(m => !!m.name.trim() && m.num > 0)
             .map(m => ({ name: m.name, num: m.num }));
-        
+
         axios.post(`/doctor/appointment/${data.id}/result`, result)
             .then(res => {
                 if (res.status === 200) {
@@ -47,7 +47,7 @@ export default function ExaminationResults({ navigation, route }) {
                 setIsAlert(true)
                 setTitle("Không thể tạo kết quả")
                 setVisible(true)
-        })
+            })
     }
 
     const softDeleteOneMedicine = (id) => {
@@ -63,7 +63,7 @@ export default function ExaminationResults({ navigation, route }) {
             if (index >= 0) {
                 prev.medicines[index].name = name
             }
-            return {...prev}
+            return { ...prev }
         })
     }
 
@@ -73,7 +73,7 @@ export default function ExaminationResults({ navigation, route }) {
             if (index >= 0) {
                 prev.medicines[index].num = num
             }
-            return {...prev}
+            return { ...prev }
         })
     }
 
@@ -118,30 +118,37 @@ export default function ExaminationResults({ navigation, route }) {
                     {
                         result.medicines.map((medicine, index) => {
                             return (
-                                <View
-                                    key={`result-item-medicine-${medicine.tempId}-${index}`}
-                                    className='rounded-lg px-3 py-2.5 w-fit flex-row items-center border border-gray-400'>
-                                    <Ionicons name="medkit-outline" size={20} color="gray" />
-                                    <TextInput
-                                        className="p-1.5 pl-3"
-                                        placeholder='Tên thuốc'
-                                        multiline={true}
-                                        value={medicine.name}
-                                        onChangeText={(val) => changeNameMedicine(medicine.tempId, val)}
-                                        editable={!isFreeze}
-                                    />
-                                    <TextInput
-                                        className="h-full px-2 mr-3 font-bold text-black bg-slate-300"
-                                        onChangeText={(val) => changeNumMedicine(medicine.tempId, val)}
-                                        value={medicine.num.toString()}
-                                        placeholder="0"
-                                        keyboardType="numeric"
-                                        editable={!isFreeze}
-                                    />
-                                    {
-                                        !isFreeze && result.medicines.length > 1 &&
-                                        <Ionicons name="trash-outline" size={20} color="gray" onPress={() => softDeleteOneMedicine(medicine.tempId)} />
-                                    }
+                                <View className="flex-row items-center">
+                                    <View
+                                        key={`result-item-medicine-${medicine.tempId}-${index}`}
+                                        className='rounded-lg px-3 py-2.5 flex-row items-center border border-gray-400'
+                                        style={(!isFreeze && result.medicines.length > 1) ? styles.width_90 : styles.width_fit}>
+                                        <Ionicons name="medkit-outline" size={20} color="gray" />
+                                        <TextInput
+                                            className="p-1.5 pl-3"
+                                            placeholder='Tên thuốc'
+                                            multiline={true}
+                                            value={medicine.name}
+                                            onChangeText={(val) => changeNameMedicine(medicine.tempId, val)}
+                                            editable={!isFreeze}
+                                        />
+                                        <TextInput
+                                            className="h-full px-3 my-1 mr-3 font-bold text-black bg-slate-300 absolute right-0"
+                                            onChangeText={(val) => changeNumMedicine(medicine.tempId, val)}
+                                            value={medicine.num.toString()}
+                                            placeholder="0"
+                                            keyboardType="numeric"
+                                            editable={!isFreeze}
+                                        />
+                                    </View>
+                                    <View className="ml-3">
+                                        {
+                                            !isFreeze && result.medicines.length > 1 &&
+                                            <Ionicons
+                                                name="trash-outline" size={28} color="gray"
+                                                onPress={() => softDeleteOneMedicine(medicine.tempId)} />
+                                        }
+                                    </View>
 
                                 </View>
                             )
@@ -201,3 +208,13 @@ export default function ExaminationResults({ navigation, route }) {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    width_fit: {
+        width: "100%",
+    },
+    width_90: {
+        width: "90%",
+    },
+
+});
