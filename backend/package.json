@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/index.ts --exec ts-node"
+    "dev": "nodemon src/index.ts --exec ts-node",
+    "migrate": "npx sequelize-cli db:migrate --config ./src/configs/db.json --migrations-path ./src/migrations",
+    "seed": "npx sequelize-cli db:seed:all --config ./src/configs/db.json --seeders-path ./src/seeder",
+    "undo-migrate": "npx sequelize-cli db:migrate:undo:all --config ./src/configs/db.json --migrations-path ./src/migrations",
+    "undo-seed": "npx sequelize-cli db:seed:undo:all --config ./src/configs/db.json --seeders-path ./src/seeder"
   },
   "keywords": [],
   "author": "",
