@@ -10,15 +10,16 @@ import useAuth from "../../hooks/useAuth";
 
 export default function ExaminationResults({ navigation, route }) {
     const data = route.params.data
-
+    
     const { setIsAlert, setTitle, setVisible } = useConfirmModal()
     const [result, setResult] = React.useState({
         disease: data?.result?.disease || "",
-        medicines: JSON.parse(data?.result?.medicines
+        medicines:  [... JSON.parse(data?.result?.medicines
             || '[{"name": "", "num": 0}]')
-            .map(item => ({ ...item, tempId: Date.now().toString() })),
+            .map(item => ({ ...item, tempId: Date.now().toString() }))],
         note: data?.result?.note || ""
     })
+
     const [isFreeze, setIsFreeze] = React.useState(!!data?.result?.medicalResultId)
     const axios = useAxios()
     const socket = useSocket()
