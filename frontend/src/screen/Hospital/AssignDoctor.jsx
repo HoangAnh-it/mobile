@@ -121,15 +121,15 @@ export default function AssignDoctor({ navigation, route }) {
                 <View className="w-screen p-2">
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Họ tên</Text>
-                        <Text className="right-0 bottom-1 absolute">{appointment.fullname}</Text>
+                        <Text className="right-0 bottom-1 absolute">{appointment.name}</Text>
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Giới tính</Text>
-                        <Text className="right-0 bottom-1 absolute">{appointment.sex}</Text>
+                        <Text className="right-0 bottom-1 absolute">{appointment.gender}</Text>
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Ngày sinh</Text>
-                        <Text className="right-0 bottom-1 absolute">{appointment.dateOfBirth}</Text>
+                        <Text className="right-0 bottom-1 absolute">{appointment.birthDay}</Text>
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Mối quan hệ</Text>
@@ -137,7 +137,7 @@ export default function AssignDoctor({ navigation, route }) {
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Số điện thoại</Text>
-                        <Text className="right-0 bottom-1 absolute">{appointment.numberphone}</Text>
+                        <Text className="right-0 bottom-1 absolute">{appointment.phone}</Text>
                     </View>
                     {
                         appointment.department?.id &&

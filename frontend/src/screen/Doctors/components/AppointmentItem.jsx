@@ -26,11 +26,11 @@ export default function AppointmentItem({ data }) {
                         </View>
                         <View className="flex-row py-1 border-b border-gray-200">
                             <Text>Giới tính</Text>
-                            <Text className="right-0 bottom-1 absolute">{data.sex}</Text>
+                            <Text className="right-0 bottom-1 absolute">{data.gender}</Text>
                         </View>
                         <View className="flex-row py-1 border-b border-gray-200">
                             <Text>Ngày sinh</Text>
-                            <Text className="right-0 bottom-1 absolute">{data.dateOfBirth}</Text>
+                            <Text className="right-0 bottom-1 absolute">{data.birthDay}</Text>
                         </View>
                         {data.type === "Gói xét nghiệm tại nhà" && (
                             <View className="flex-row py-1 border-b border-gray-200">

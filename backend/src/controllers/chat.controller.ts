@@ -30,6 +30,10 @@ export const socketSetup = (io: any, app: Application) => {
             socket.emit('reject appointment', id)
         })
 
+        socket.on('update medical record', (data: {[key:string]: any}) => {
+            socket.emit('update medical record', data)
+        })
+
         socket.on('create department', (data: { [key: string]: any }) => {
             socket.emit('create department', data)
         })

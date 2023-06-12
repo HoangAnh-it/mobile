@@ -49,6 +49,7 @@ export const createMedicalRecord = async(userId: string, medicalRecordDTO: Creat
 }
 
 export const updateMedicalRecord = async (id: string, medicalRecordDTO: UpdateMedicalRecordDTO) => {
+    console.log(medicalRecordDTO)
     const medicalRecord = await MedicalRecord.findByPk(id)
     if (!medicalRecord) {
         throw new CustomError(StatusCodes.NOT_FOUND, `Medical record with ID: ${id} not found.`)

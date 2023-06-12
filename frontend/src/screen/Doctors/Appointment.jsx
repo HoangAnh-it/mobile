@@ -13,8 +13,8 @@ const toAppointment = (data) => {
     return {
         id: data.appointmentId,
         name: data.medicalRecord.name,
-        sex: data.medicalRecord.gender,
-        dateOfBirth: extractDay(new Date(data.medicalRecord.birthDay)),
+        gender: data.medicalRecord.gender,
+        birthDay: extractDay(new Date(data.medicalRecord.birthDay)),
         date: extractDate(new Date(data.dateTime)),
         type: data.department !== null ? 'FACE_TO_FACE' : 'AT_HOME',
         phone: data.medicalRecord.phone,
@@ -58,7 +58,7 @@ export default function Appointments({ navigation }) {
 
     const filterSearch = (data) => {
         if (!search.inputSearch.trim()) return data
-        return data.filter(d => d.fullname.toLowerCase().includes(search.inputSearch.toLowerCase().trim())
+        return data.filter(d => d.name.toLowerCase().includes(search.inputSearch.toLowerCase().trim())
         )
     };
 

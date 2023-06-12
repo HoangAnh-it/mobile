@@ -67,11 +67,11 @@ export default function Confirm({ navigation, route }) {
         <View>
             <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#1ad1ff" }}>Thông tin bệnh nhân</Text>
             <Profile
-                fullname={profile.fullname}
-                sex={profile.sex}
-                dateOfBirth={profile.dateOfBirth}
+                name={profile.name}
+                gender={profile.gender}
+                birthDay={profile.birthDay}
                 relationship={profile.relationship}
-                numberphone={profile.numberphone}
+                phone={profile.phone}
                 address={profile.address}
             />
             <Text className="text-lg font-bold ml-4 mt-4" style={{ color: "#1ad1ff" }}>Thông tin lịch khám</Text>

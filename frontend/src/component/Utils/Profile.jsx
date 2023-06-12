@@ -35,16 +35,16 @@ export default function Profile(props) {
                     props.selected ? <AntDesign name="checkcircle" size={20} color="#1AD1FF" />
                         : <Feather name="circle" size={20} color="black" />
                 }
-                <Text className="ml-4 font-bold text-base">{props.fullname}</Text>
+                <Text className="ml-4 font-bold text-base">{props.name}</Text>
             </View>
             <View className="my-3">
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Giới tính</Text>
-                    <Text className="right-0 bottom-1 absolute">{props.sex}</Text>
+                    <Text className="right-0 bottom-1 absolute">{props.gender}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Ngày sinh</Text>
-                    <Text className="right-0 bottom-1 absolute">{props.dateOfBirth}</Text>
+                    <Text className="right-0 bottom-1 absolute">{props.birthDay}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Mối quan hệ</Text>
@@ -52,7 +52,7 @@ export default function Profile(props) {
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Số điện thoại</Text>
-                    <Text className="right-0 bottom-1 absolute">{props.numberphone}</Text>
+                    <Text className="right-0 bottom-1 absolute">{props.phone}</Text>
                 </View>
                 <View className="flex-row py-1">
                     <Text>Địa chỉ</Text>

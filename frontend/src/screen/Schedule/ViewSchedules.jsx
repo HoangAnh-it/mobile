@@ -43,15 +43,15 @@ export const ScheduleItem = ({ data }) => {
             <View className="my-3">
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Họ tên</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.fullname}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.name}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Giới tính</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.sex}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.gender}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Ngày sinh</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.dateOfBirth}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.birthDay}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Mối quan hệ</Text>
@@ -59,7 +59,7 @@ export const ScheduleItem = ({ data }) => {
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Số điện thoại</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.numberphone}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.phone}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Chuyên khoa</Text>
@@ -154,11 +154,11 @@ export default function ViewSchedules({ navigation, route }) {
             .then(d => {
                 setSchedules(d.map(schedule => ({
                     id: schedule.appointmentId,
-                    fullname: schedule.medicalRecord.name,
-                    sex: schedule.medicalRecord.gender,
-                    dateOfBirth: getDate(new Date(schedule.medicalRecord.birthDay)),
+                    name: schedule.medicalRecord.name,
+                    gender: schedule.medicalRecord.gender,
+                    birthDay: getDate(new Date(schedule.medicalRecord.birthDay)),
                     relationship: schedule.medicalRecord.relationship,
-                    numberphone: schedule.medicalRecord.phone,
+                    phone: schedule.medicalRecord.phone,
                     address: schedule.medicalRecord.address,
                     hospital: schedule.department?.hospital.user.name || schedule.testPackage?.department.hospital.user.name,
                     department: schedule.department?.name || schedule.testPackage.department.name,

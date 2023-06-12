@@ -12,6 +12,15 @@ export const extractDate = (d) => {
     return extractDay(d) + " " + extractTime(d)
 }
 
+export const convertStringToDate = (date) => {
+    const [y, m, d] = date.split("-").map(item => Number(item))
+    const ans = new Date()
+    ans.setFullYear(y)
+    ans.setMonth(m - 1)
+    ans.setDate(d)
+    return ans;
+}
+
 export const dictionary = {
     PENDING: 'Đang chờ',
     ACCEPTED: 'Đã nhận',

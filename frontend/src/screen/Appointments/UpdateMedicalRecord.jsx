@@ -4,19 +4,15 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import React from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useAxios from "../../hooks/useAxios";
+import useConfirmModal from '../../hooks/useConfirmModal'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { convertStringToDate, extractDay } from "../../helpers/helpers";
+import useSocket from '../../hooks/useSocket'
 
 export default function UpdateMedicalRecord({navigation, route}) {
     const { prevProfile } = route.params;
-    console.log(prevProfile); 
 
-    const [data, setData] = React.useState({
-        name: prevProfile.fullname,
-        gender: prevProfile.sex,
-        birthDay: prevProfile.dateOfBirth,
-        relationship: prevProfile.relationship,
-        phone: prevProfile.numberphone,
-        address: prevProfile.address
-    })
+    const [data, setData] = React.useState({...prevProfile})
 
     const [checkData, setCheckData] = React.useState({
         name: true,
@@ -27,15 +23,12 @@ export default function UpdateMedicalRecord({navigation, route}) {
     })
 
     const axios = useAxios()
+    const { setTitle, setIsAlert, setVisible } = useConfirmModal()
+    const socket = useSocket();
 
-    const checkbirthDay = (val) => {
-        var d_reg = /^([0-9]{4})\/(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])$/;
-        if (d_reg.test(val)) {
-            console.log("Date follows mm/dd/yyyy format");
-        }
-        else {
-            console.log("Invalid date format");
-        }
+    const onChange = (event, selectedDate) => {
+        const newBirthDay = extractDay(new Date(selectedDate)).split("/").reverse().join("-")
+        setData(prev => ({...prev, birthDay: newBirthDay}))
     }
 
     const submit = (data) => {
@@ -43,11 +36,6 @@ export default function UpdateMedicalRecord({navigation, route}) {
             setCheckData({ ...data, name: false })
         } else {
             setCheckData({ ...data, name: true })
-        }
-        if (data.birthDay == null) {
-            setCheckData({ ...data, birthDay: false })
-        } else {
-            setCheckData({ ...data, birthDay: true })
         }
         if (data.relationship == null) {
             setCheckData({ ...data, relationship: false })
@@ -64,16 +52,21 @@ export default function UpdateMedicalRecord({navigation, route}) {
         } else {
             setCheckData({ ...data, address: true })
         }
-        checkbirthDay(data.birthDay)
-
-        // axios.post("/patient/medical_record", data)
-        //     .then(res => res.data.data)
-        //     .then((res) => {
-        //         console.log(res)
-        //         navigation.goBack(null)
-        //     }).catch(err => {
-        //         console.log(JSON.stringify(err))
-        //     })
+        const { onlyShow, selected, ...updatedData } = data
+        
+        axios.patch(`/patient/medical_record/${prevProfile.id}`, updatedData)
+            .then((res) => {
+                if (res.status === 200) {
+                    socket.emit("update medical record", updatedData)
+                }
+            }).then(() => {
+                navigation.goBack(null)
+            }).catch(err => {
+                console.log(JSON.stringify(err))
+                setTitle("Có lỗi. Vui lòng kiểm tra lại.")
+                setIsAlert(true)
+                setVisible(true)
+            })
     }
 
     return (
@@ -84,7 +77,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Nhập họ tên"
-                        value={prevProfile.fullname}
+                        value={data.name}
                         onChangeText={(val) => setData({ ...data, name: val })}
                     />
                     {!checkData.name && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -115,12 +108,13 @@ export default function UpdateMedicalRecord({navigation, route}) {
                 </View>
                 <View className="mt-2 mx-2">
                     <Text>Ngày sinh</Text>
-                    <TextInput
-                        className="rounded-lg border border-gray-400 p-3 my-1 px-3"
-                        placeholder="yyyy-MM-dd"
-                        value={prevProfile.dateOfBirth}
-                        onChangeText={(val) => setData({ ...data, birthDay: val })}
+                    <View
+                    className="flex-row mt-2">
+                    <DateTimePicker
+                        value={convertStringToDate(data.birthDay)}
+                        onChange={onChange}
                     />
+                </View>
                     {!checkData.birthDay && <Text className="text-red-500">Vui lòng điền trường này</Text>}
                 </View>
                 <View className="mt-2 mx-2">
@@ -128,7 +122,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Bố, Mẹ,..."
-                        value={prevProfile.relationship}
+                        value={data.relationship}
                         onChangeText={(val) => setData({ ...data, relationship: val })}
                     />
                     {!checkData.relationship && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -138,7 +132,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="0982xxxxxxx"
-                        value={prevProfile.numberphone}
+                        value={data.phone}
                         onChangeText={(val) => setData({ ...data, phone: val })}
                     />
                     {!checkData.phone && <Text className="text-red-500">Vui lòng điền trường này</Text>}
@@ -148,7 +142,7 @@ export default function UpdateMedicalRecord({navigation, route}) {
                     <TextInput
                         className="rounded-lg border border-gray-400 p-3 my-1 px-3"
                         placeholder="Số 19 ngõ 8 đường X, ...."
-                        value={prevProfile.address}
+                        value={data.address}
                         onChangeText={(val) => setData({ ...data, address: val })}
                     />
                     {!checkData.address && <Text className="text-red-500">Vui lòng điền trường này</Text>}

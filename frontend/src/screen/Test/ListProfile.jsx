@@ -24,11 +24,11 @@ export default function ListProfileTest({ navigation, route }) {
             .then(data => {
                 setProfiles(data.map(profile => ({
                     id: profile.medicalRecordId,
-                    fullname: profile.name,
-                    sex: profile.gender,
-                    dateOfBirth: profile.birthDay.split('T')[0],
+                    name: profile.name,
+                    gender: profile.gender,
+                    birthDay: profile.birthDay.split('T')[0],
                     relationship: profile.relationship,
-                    numberphone: profile.phone,
+                    phone: profile.phone,
                     address: profile.address
                 })))
             })
@@ -42,11 +42,11 @@ export default function ListProfileTest({ navigation, route }) {
                 <Profile
                     selected={selected != null && profile.id == selected.id}
                     id={profile.id}
-                    fullname={profile.fullname}
-                    sex={profile.sex}
-                    dateOfBirth={profile.dateOfBirth}
+                    name={profile.name}
+                    gender={profile.gender}
+                    birthDay={profile.birthDay}
                     relationship={profile.relationship}
-                    numberphone={profile.numberphone}
+                    phone={profile.phone}
                     address={profile.address}
                 />
             </TouchableOpacity>

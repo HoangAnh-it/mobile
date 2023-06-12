@@ -9,11 +9,11 @@ import useSocket from "../../hooks/useSocket";
 const toProfile = (profile) => {
     return {
         id: profile.medicalRecordId,
-        fullname: profile.name,
-        sex: profile.gender,
-        dateOfBirth: profile.birthDay.split('T')[0],
+        name: profile.name,
+        gender: profile.gender,
+        birthDay: profile.birthDay.split('T')[0],
         relationship: profile.relationship,
-        numberphone: profile.phone,
+        phone: profile.phone,
         address: profile.address
     }
 }
@@ -46,11 +46,29 @@ export default function ListProfile({ navigation, route }) {
             setProfiles(prev => [...prev, toProfile(data)])
         }
 
+        const updateMedicalRecordListener = (data) => {
+            console.log("on update medical record", data)
+            setProfiles(prev => {
+                const index = prev.findIndex(item => item.id === data.id)
+                console.log("index;::", index)
+                if (index >= 0) {
+                    prev[index] = {
+                        ...prev[index],
+                        ...data
+                    }
+                }
+                return [...prev]
+            })
+        }
+
         socket.on('delete medical record', deleteMedicalRecordListener)
         socket.on('medical record', newMedicalRecord)
+        socket.on('update medical record', updateMedicalRecordListener)
+
         return () => {
             socket.off('delete medical record', deleteMedicalRecordListener)
             socket.off('medical record', newMedicalRecord)
+            socket.off('update medical record', updateMedicalRecordListener)
         }
     }, [socket])
 
@@ -76,11 +94,11 @@ export default function ListProfile({ navigation, route }) {
                                     key={profile.id}
                                     selected={selected != null && profile.id == selected.id}
                                     id={profile.id}
-                                    fullname={profile.fullname}
-                                    sex={profile.sex}
-                                    dateOfBirth={profile.dateOfBirth}
+                                    name={profile.name}
+                                    gender={profile.gender}
+                                    birthDay={profile.birthDay}
                                     relationship={profile.relationship}
-                                    numberphone={profile.numberphone}
+                                    phone={profile.phone}
                                     address={profile.address}
                                     onlyShow={onlyShow}
                                 />
@@ -89,11 +107,11 @@ export default function ListProfile({ navigation, route }) {
                                     <Profile
                                         selected={selected != null && profile.id == selected.id}
                                         id={profile.id}
-                                        fullname={profile.fullname}
-                                        sex={profile.sex}
-                                        dateOfBirth={profile.dateOfBirth}
+                                        name={profile.name}
+                                        gender={profile.gender}
+                                        birthDay={profile.birthDay}
                                         relationship={profile.relationship}
-                                        numberphone={profile.numberphone}
+                                        phone={profile.phone}
                                         address={profile.address}
                                         onlyShow={onlyShow}
                                     />

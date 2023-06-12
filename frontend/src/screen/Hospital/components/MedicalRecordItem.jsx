@@ -21,7 +21,7 @@ export default function MedicalRecordItem({ data, className, style }) {
     }, [data])
 
     const reject = () => {
-        setTitle(`Bạn có chắc muốn hủy lịch của ${data.fullname}?`)
+        setTitle(`Bạn có chắc muốn hủy lịch của ${data.name}?`)
         setAction(() => {
             axios.put(`/hospital/appointment/${data.id}?status=REJECTED`)
                 .then(res => {
@@ -42,15 +42,15 @@ export default function MedicalRecordItem({ data, className, style }) {
             <View className="w-full">
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Họ tên</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.fullname}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.name}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Giới tính</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.sex}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.gender}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Ngày sinh</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.dateOfBirth}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.birthDay}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Mối quan hệ</Text>
@@ -58,7 +58,7 @@ export default function MedicalRecordItem({ data, className, style }) {
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Số điện thoại</Text>
-                    <Text className="right-0 bottom-1 absolute">{data.numberphone}</Text>
+                    <Text className="right-0 bottom-1 absolute">{data.phone}</Text>
                 </View>
                 <View className="flex-row py-1 border-b border-gray-200">
                     <Text>Chuyên khoa</Text>

@@ -22,11 +22,11 @@ import FilterMedicalRecord from "../components/FilterMedicalRecord";
 const toAppointment = (data) => {
   return {
     id: data.appointmentId,
-    fullname: data.medicalRecord.name,
-    sex: data.medicalRecord.gender,
-    dateOfBirth:  extractDay(new Date(data.medicalRecord.birthDay)),
+    name: data.medicalRecord.name,
+    gender: data.medicalRecord.gender,
+    birthDay:  extractDay(new Date(data.medicalRecord.birthDay)),
     relationship: data.medicalRecord.relationship,
-    numberphone: data.medicalRecord.phone,
+    phone: data.medicalRecord.phone,
     department: {
       id: data.department?.departmentId || data.testPackage.department.departmentId,
       name: data.department?.name || data.testPackage.department.name
@@ -78,7 +78,7 @@ export default function MedicalRecordManagement({ navigation }) {
   
   const filterSearch = (data) => {
     if(!search.inputSearch.trim()) return data
-    return data.filter(d => d.fullname.toLowerCase().includes(search.inputSearch.toLowerCase().trim())
+    return data.filter(d => d.name.toLowerCase().includes(search.inputSearch.toLowerCase().trim())
     )
   };
   
