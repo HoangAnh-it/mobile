@@ -46,7 +46,7 @@ export default function Confirm({ navigation, route }) {
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Ngày khám</Text>
-                        <Text className="right-0 bottom-1 absolute">{props.date.shortDate}</Text>
+                        <Text className="right-0 bottom-1 absolute">{props.date}</Text>
                     </View>
                     <View className="flex-row py-1 border-b border-gray-200">
                         <Text>Giờ khám</Text>

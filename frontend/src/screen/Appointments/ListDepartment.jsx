@@ -38,7 +38,7 @@ export default function ListDepartment({ route, navigation }) {
     }
 
     React.useEffect(() => {
-        axios.get(`/hospital/${hospital}/department`)
+        axios.get(`/hospital/${hospital.id}/department`)
             .then(res => res.data.data)
             .then(data => {
                 setDepartments(data.map(department => ({
