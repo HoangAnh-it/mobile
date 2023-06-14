@@ -5,8 +5,10 @@ import { FontAwesome5 } from "@expo/vector-icons"
 
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
+import useAxios from '../../hooks/useAxios';
 
 export default function Signup({ navigation }) {
+  const axios = useAxios()
   const [data, setData] = React.useState({
     username: '',
     email: '',
@@ -147,6 +149,21 @@ export default function Signup({ navigation }) {
   }
 
     const handleSignup = () => {
+      axios.post(`/auth/signup`, {
+        email: data.email,
+        password: data.password,
+        name: data.username,
+        birthDay: data.birthDay,
+        avatar: "",
+        phone: data.phone,
+        address: data.address,
+        role: data.role
+
+      }).then(res => {
+        if(res.status == 200) {
+          navigation.navigate("LoginScreen")
+        }
+      })
       // signup(username, password);
     }
 
