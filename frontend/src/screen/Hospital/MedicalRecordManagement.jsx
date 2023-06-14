@@ -140,14 +140,7 @@ export default function MedicalRecordManagement({ navigation }) {
   return (
     <>
       <StatusBar />
-      <View className="flex-row pt-10 pb-2 px-5 space-x-2 bg-white">
-        <FilterMedicalRecord
-          value={filter}
-          setValue={setFilter}
-          isShow={showFilterForm}
-          setIsShown={setShowFilterForm}
-          role="HOSPITAL"
-        />
+      <View className="flex-row pt-10 pb-2 px-4 space-x-2 bg-white">
         <View className="bg-gray-200 rounded-full px-3 py-2 w-11/12 flex-row items-center">
           {search.isSearch ? (
             <Ionicons name="search" size={20} color="black" />
@@ -166,6 +159,13 @@ export default function MedicalRecordManagement({ navigation }) {
           onPress={() => notification()}>
           <Ionicons name="notifications-outline" size={28} />
         </TouchableOpacity>
+        <FilterMedicalRecord
+          value={filter}
+          setValue={setFilter}
+          isShow={showFilterForm}
+          setIsShown={setShowFilterForm}
+          role="HOSPITAL"
+        />
       </View>
 
       {/** Filter */}
