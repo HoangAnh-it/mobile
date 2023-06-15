@@ -7,6 +7,7 @@ router.route("/posts")
 
 router.route("/profile/:id")
     .get(userController.profile)
+    .put(userController.updateProfile)
 
 router.route("/notification")
     .get(userController.allNotifications)

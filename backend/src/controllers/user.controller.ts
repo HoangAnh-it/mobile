@@ -3,6 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import ErrorWrapperHandler from "../utils/ErrorWrapperHandler";
 import { chatService, postService, userService } from '../services';
 import { CreateMessageDTO } from '../dtos/message.dto';
+import { validateUpdateUser } from '../validator/user';
+import { UpdateUserDTO } from '../dtos/user.dto';
 
 // [GET] /user/profile/:id
 export const profile = ErrorWrapperHandler(async (req: Request, res: Response) => {
@@ -11,7 +13,18 @@ export const profile = ErrorWrapperHandler(async (req: Request, res: Response) =
     return res.status(StatusCodes.OK).json({
         data: data
     });
-}) 
+})
+
+// [PUT] /user/profile/:id
+export const updateProfile = ErrorWrapperHandler(async (req: Request, res: Response) => {
+    const userId = req.params.id
+    const userDTO = validateUpdateUser(req.body as UpdateUserDTO)
+    const data = await userService.updateByID(userId, userDTO)
+    return res.status(StatusCodes.OK).json({
+        message: "Update profile successfully",
+        data: data
+    });
+})
 
 // [GET] /user/posts
 export const allPosts = ErrorWrapperHandler(async (req: Request, res: Response) => {
