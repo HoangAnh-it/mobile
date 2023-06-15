@@ -6,13 +6,14 @@ import ListDoctor from "../../../screen/Account/ListDoctor";
 import DoctorDetails from "../../../screen/Doctors/DoctorDetails";
 import ChangePassword from "../../../screen/Account/ChangePassword";
 import Account from "../../../screen/Tabs/Account";
+import EditInfomation from "../../../screen/Account/EditInfomation";
 
 const Stack = createStackNavigator();
 export default function AccountDoctorStack() {
     return (
-        <Stack.Navigator initialRoutName="AccountDoctor">
+        <Stack.Navigator initialRoutName="Account">
             <Stack.Screen
-                name="AccountDoctor"
+                name="Account"
                 component={Account}
                 options={{ headerShown: false }}
             />
@@ -66,7 +67,24 @@ export default function AccountDoctorStack() {
                 name="Đổi mật khẩu"
                 component={ChangePassword}
             />
-            
+            <Stack.Screen
+        name="Chỉnh sửa thông tin"
+        component={EditInfomation}
+        options={{
+          headerTintColor: "#1AD1FF",
+          headerTitleStyle: { color: "#000000" },
+          headerBackTitle: "Trở về"
+        }}
+        navigationOptions={({ navigation, route }) => ({
+          headerLeft: (
+            <Ionicons
+              labelVisible={false}
+              title="Trở về"
+              style={{ color: "#1AD1FF" }}
+            />
+          ),
+        })}
+      />
         </Stack.Navigator>
     )
 }
