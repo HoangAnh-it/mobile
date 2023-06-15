@@ -9,7 +9,7 @@ import { NotificationDTO } from '../dtos/notification.dto';
 import { validateNotification } from '../validator/notification';
 import { Sequelize } from 'sequelize-typescript';
 import { comparePassword } from '../utils/bcrypt';
-import { validatePassword } from '../validator/user';
+import { validatePassword, validateUpdateUser } from '../validator/user';
 
 export const createUser = async (createUserDTO: CreateUserDTO): Promise<User> => {
     const existingUser = await User.findOne({
@@ -41,12 +41,19 @@ export const findUserById = async(id: string) => {
     return user
 }
 
-export const updateByID = async (id: string, updateUser: UpdateUserDTO): Promise<string> => {
+export const updateByID = async (id: string, updateUser: UpdateUserDTO) => {
     await user_db.findByID(id)
-    await User.update(updateUser, {
-        where: {userId: id}
+    updateUser = validateUpdateUser(updateUser)
+    const {password, ...rest} = updateUser
+    await User.update({...rest}, {
+        where: { userId: id },
     })
-    return Promise.resolve(id)
+
+    return User.findByPk(id, {
+        attributes: {
+            exclude: ["createdAt", "updatedAt", "password"]
+        }
+    })
 }
 
 export const profile = async (id: string) => {
