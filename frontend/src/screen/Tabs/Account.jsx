@@ -43,7 +43,11 @@ export default function Account({ navigation }) {
             <View className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
                 <Text className="pt-24 text-center mb-2 text-slate-900 text-2xl font-bold">{user.name}</Text>
                 <View className="m-auto flex-row space-x-5">
-                    <TouchableOpacity style={styles.bg} className="p-3 rounded-lg flex-row items-center justify-center w-40">
+                    <TouchableOpacity 
+                        style={styles.bg} 
+                        className="p-3 rounded-lg flex-row items-center justify-center w-40"
+                        onPress={() => navigation.navigate("Chỉnh sửa thông tin", {user: user})}
+                    >
                         <Feather name="edit" size={24} color={"white"} />
                         <Text className="w-20 ml-3 font-bold text-white">Chỉnh sửa thông tin</Text>
                     </TouchableOpacity>
