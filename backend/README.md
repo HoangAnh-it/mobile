@@ -12,10 +12,10 @@ How to run?
     npm install
 
     # Migrate database
-    npx sequelize-cli db:migrate --config ./src/configs/db.json --migrations-path ./src/migrations
+    npm run migrate
 
     # Seed
-    npx sequelize-cli db:seed:all --config ./src/configs/db.json --seeders-path ./src/seeder
+    npm run seed
 
     #Run
     npm run dev
@@ -23,9 +23,9 @@ How to run?
     ---------------
     # More:
     # Undo migrate
-    npx sequelize-cli db:migrate:undo:all --config ./src/configs/db.json --migrations-path ./src/migrations
+    npm run undo-migrate
 
     # Undo seed
-    npx sequelize-cli db:seed:undo:all --config ./src/configs/db.json --seeders-path ./src/seeder
+    npm run undo-seed
     
 ```
