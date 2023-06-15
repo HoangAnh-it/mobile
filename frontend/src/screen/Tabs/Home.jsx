@@ -66,7 +66,7 @@ export default function Home({ navigation }) {
                     <Text className="font-semibold h-9" numberOfLines={2}>{props.name}</Text>
                     <Text className="text-gray-500 text-xs h-16" numberOfLines={3}>{props.address}</Text>
                     <TouchableOpacity className="rounded-full" style={{ backgroundColor: "#1AD1FF" }}
-                        onPress={() => { navigation.navigate("Hồ sơ", { hospital: props.id }) }}
+                        onPress={() => { navigation.navigate("Hồ sơ", { hospital: props }) }}
                     >
                         <Text className="font-semibold text-base text-center text-white p-1">Đặt khám</Text>
                     </TouchableOpacity>

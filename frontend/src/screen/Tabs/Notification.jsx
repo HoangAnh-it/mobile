@@ -182,7 +182,7 @@ export default function Notification({navigation}) {
                             return (
                                 <TouchableOpacity
                                     key={`noti-${index}-${noti.id}`}
-                                    className="px-2 py-1 h-16 flex-row items-center text-center rounded-lg m-2"
+                                    className="px-2 py-1 h-16 flex-row items-center text-center rounded-lg m-2 mb-1 shadow-sm"
                                     style={
                                         noti.isRead ? styles.read : styles.unRead
                                     }
