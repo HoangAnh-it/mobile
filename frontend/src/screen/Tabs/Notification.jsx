@@ -5,6 +5,28 @@ import { StatusBar } from "expo-status-bar";
 import useAxios from "../../hooks/useAxios";
 import useSocket from "../../hooks/useSocket";
 
+async function schedulePushNotification(data) {
+    let trigger = Date.now();
+    if (data.date == "Hôm nay") { 
+        trigger = Date.now();
+        trigger.setHours(data.time.split(":")[0]);
+        trigger.setMinutes(data.time.split(":")[1]);
+    } else {
+        trigger.setHours(data.time.split(":")[0]);
+        trigger.setMinutes(data.time.split(":")[1]);
+        trigger.setDate(data.date.split("/")[0]);
+        trigger.setMonth(data.date.split("/")[1]);
+    }
+    await Notifications.scheduleNotificationAsync({
+        content: {
+            title: data.name,
+            body: data.date == "Hôm nay" ? data.time : data.time + ",\n" + data.date,
+            data: { data: 'goes here' },
+        },
+        trigger: { seconds: 2 },
+    });
+}
+
 // const drugs = [
 //     {
 //         name: "2 viên bù nước",
@@ -39,37 +61,38 @@ import useSocket from "../../hooks/useSocket";
 const DrugNoti = (props) => {
     return (
         <>
-        <View className="h-0.5 w-full bg-gray-200" />
-        <TouchableOpacity className="px-2 py-1 h-16 w-full flex-row items-center text-center rounded-lg">
-            <View className="ml-2 border-gray-600 h-6 w-6 rounded-full items-center justify-center border">
-                {/* <Image alt="Overdue" source={require("../../assets/home-icon/past.png")} className='object-scale-down h-6 w-6 rounded-full'/> */}
-            </View>
-            <View className="left-3 w-full flex-row">
-                <Text className="w-2/3 h-fit my-auto text-left break-normal font-semibold justify-center">{props.name}</Text>
-                <View className="w-1/5 float-right mr-3">
-                    <Text className="text-right break-normal font-semibold justify-center">{props.date=="Hôm nay" ? props.time : props.time + ",\n" + props.date}</Text>
+            <View className="h-0.5 w-full bg-gray-200" />
+            <TouchableOpacity className="px-2 py-1 h-16 w-full flex-row items-center text-center rounded-lg">
+                <View className="ml-2 border-gray-600 h-6 w-6 rounded-full items-center justify-center border">
+                    {/* <Image alt="Overdue" source={require("../../assets/home-icon/past.png")} className='object-scale-down h-6 w-6 rounded-full'/> */}
                 </View>
-            </View>
-        </TouchableOpacity>
+                <View className="left-3 w-full flex-row">
+                    <Text className="w-2/3 h-fit my-auto text-left break-normal font-semibold justify-center">{props.name}</Text>
+                    <View className="w-1/5 float-right mr-3">
+                        <Text className="text-right break-normal font-semibold justify-center">{props.date == "Hôm nay" ? props.time : props.time + ",\n" + props.date}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
         </>
     )
 }
 
-const ScheduleNoti = ({data}) => {
+const ScheduleNoti = async ({ data }) => {   
+    schedulePushNotification(data);
     return (
         <>
-        <View className="h-0.5 w-full bg-gray-200" />
-        <TouchableOpacity className="px-2 py-1 h-16 w-full flex-row items-center text-center rounded-lg">
-            <View className="ml-2 border-gray-600 h-6 w-6 rounded-full items-center justify-center border">
-                {/* <Image alt="Overdue" source={require("../../assets/home-icon/past.png")} className='object-scale-down h-6 w-6 rounded-full'/> */}
-            </View>
-            <View className="left-3 w-full flex-row">
-                <Text className="w-2/3 h-fit my-auto text-left break-normal font-semibold justify-center">{data.name}</Text>
-                <View className="w-1/5 float-right mr-3">
-                    <Text className="text-right break-normal font-semibold justify-center">{data.date=="Hôm nay" ? data.time : data.time + ",\n" + data.date}</Text>
+            <View className="h-0.5 w-full bg-gray-200" />
+            <TouchableOpacity className="px-2 py-1 h-16 w-full flex-row items-center text-center rounded-lg">
+                <View className="ml-2 border-gray-600 h-6 w-6 rounded-full items-center justify-center border">
+                    {/* <Image alt="Overdue" source={require("../../assets/home-icon/past.png")} className='object-scale-down h-6 w-6 rounded-full'/> */}
                 </View>
-            </View>
-        </TouchableOpacity>
+                <View className="left-3 w-full flex-row">
+                    <Text className="w-2/3 h-fit my-auto text-left break-normal font-semibold justify-center">{data.name}</Text>
+                    <View className="w-1/5 float-right mr-3">
+                        <Text className="text-right break-normal font-semibold justify-center">{data.date == "Hôm nay" ? data.time : data.time + ",\n" + data.date}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
         </>
     )
 }
@@ -84,7 +107,8 @@ const formatNoti = (n) => {
     }
 }
 
-export default function Notification({navigation}) {
+
+export default function Notification({ navigation }) {
     const [notifications, setNotifications] = React.useState([])
     const axios = useAxios()
     const socket = useSocket()
@@ -138,12 +162,12 @@ export default function Notification({navigation}) {
 
         switch (noti.type) {
             case 'POST':
-                navigation.navigate("Post Detail", {post: noti.post})
+                navigation.navigate("Post Detail", { post: noti.post })
                 break;
-            
+
             case 'APPOINTMENT':
                 navigation.navigate("Xem lịch khám")
-                break;  
+                break;
             default:
                 return
         }
@@ -157,7 +181,7 @@ export default function Notification({navigation}) {
             </View> */}
             <KeyboardAwareScrollView>
                 <ScrollView pagingEnabled={true}>
-                
+
                     {/* <View className="mt-2 mx-2 pt-2 bg-white rounded-xl w-fit max-w-s shadow-sm">
                         <Text style={styles.textColor} className="ml-2.5 mb-1 text-slate-900 text-lg font-bold">
                             Lịch uống thuốc
@@ -179,6 +203,7 @@ export default function Notification({navigation}) {
 
                     {
                         notifications.map((noti, index) => {
+                            
                             return (
                                 <TouchableOpacity
                                     key={`noti-${index}-${noti.id}`}
@@ -202,14 +227,14 @@ export default function Notification({navigation}) {
                             )
                         })
                     }
-                
+
                 </ScrollView>
             </KeyboardAwareScrollView>
         </>
     )
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
     textColor: {
         color: "#1AD1FF",
         fontWeight: "bold"
@@ -226,4 +251,4 @@ const styles = StyleSheet.create({
     read: {
         backgroundColor: "#fff"
     }
-  });
+});

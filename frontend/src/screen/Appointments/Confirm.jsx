@@ -3,6 +3,7 @@ import Profile from "../../component/Utils/Profile";
 import React from "react";
 import useAxios from "../../hooks/useAxios";
 import useConfirmModal from "../../hooks/useConfirmModal";
+import * as Notifications from 'expo-notifications';
 
 export default function Confirm({ navigation, route }) {
     const { profile, hospital, department, date, hour } = route.params;
@@ -18,11 +19,19 @@ export default function Confirm({ navigation, route }) {
             time: hour,
             medicalRecordId: profile.id,
             departmentId: department.id
-        }).then(res => {
+        }).then(async res => {
             if (res.status === 200) {
                 setAppointmentStatus(true);
                 setModalVisible(true)
             }
+            await Notifications.scheduleNotificationAsync({
+                content: {
+                    title: "Cuộc hẹn",
+                    body: `Bạn vừa tạo thành công cuộc hẹn vào lúc ${hour} ngày ${date}`,
+                    data: { data: 'goes here' },
+                },
+                trigger: { seconds: 2 },
+            });
         })
             .catch(err => {
                 console.log(JSON.stringify(err))

@@ -3,6 +3,7 @@ import Profile from "../../component/Utils/Profile";
 import React from "react";
 import useAxios from "../../hooks/useAxios";
 import useConfirmModal from "../../hooks/useConfirmModal";
+import * as Notifications from 'expo-notifications';
 
 export default function ConfirmTest({ navigation, route }) {
     const { profile, testPackage, date, hour } = route.params;
@@ -19,10 +20,18 @@ export default function ConfirmTest({ navigation, route }) {
             medicalRecordId: profile.id
         }
         )
-            .then(res => {
+            .then(async res => {
                 if (res.status === 200) {
                     setAppointmentStatus(true);
                 }
+                await Notifications.scheduleNotificationAsync({
+                    content: {
+                        title: "Cuộc hẹn",
+                        body: `Bạn vừa tạo gói xét nghiệm vào lúc ${hour} ngày ${date.shortDate}`,
+                        data: { data: 'goes here' },
+                    },
+                    trigger: { seconds: 2 },
+                });
             })
             .catch(err => {
                 console.log(JSON.stringify(err.response.message))
