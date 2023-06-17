@@ -8,22 +8,29 @@ import useConfirmModal from "../../hooks/useConfirmModal";
 import useSocket from "../../hooks/useSocket";
 import { dictionary } from "../../helpers/helpers";
 import { useNavigation } from "@react-navigation/native";
+import useNotification from "../../hooks/useNotification";
 
 export const ScheduleItem = ({ data }) => {
     const { setTitle, setAction, setVisible, setIsAlert } = useConfirmModal()
     const axios = useAxios()
     const socket = useSocket()
     const navigation = useNavigation()
+    const {setSchedule} = useNotification()
 
     const cancelAppointment = () => {
         setTitle(`Hủy cuộc hẹn ${data.department?.name || ""}?`)
         setAction(() => {
             axios.put(`/patient/appointment/${data.id}?status=CANCELED`)
-                .then(res => {
+                .then(async res => {
                     if (res.status === 200) {
                         socket.emit("status appointment", {
                             id: res.data.id,
                             status: res.data.status
+                        })
+
+                        await setSchedule({
+                            title: "Hủy lịch",
+                            content: "Bạn đã hủy lịch hẹn"
                         })
                     }
                 }).catch(err => {

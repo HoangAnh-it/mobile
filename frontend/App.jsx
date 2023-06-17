@@ -5,16 +5,19 @@ import { AuthProvider } from './src/context/AuthProvider';
 import Routes from './src/routes/index';
 import { LogBox } from 'react-native';
 import { ConfirmModalProvider } from './src/context/ConfirmModalProvider';
+import { NotificationProvider } from './src/context/NotificaitonProvider';
 LogBox.ignoreLogs(['Sending']);
 
 export default function App() {
   return (
-    <AuthProvider>
-      <ConfirmModalProvider>
-        <NavigationContainer>
-          <Routes />
-        </NavigationContainer>
-      </ConfirmModalProvider>
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
+        <ConfirmModalProvider>
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
+        </ConfirmModalProvider>
+      </AuthProvider>
+    </NotificationProvider>
   );
 }
