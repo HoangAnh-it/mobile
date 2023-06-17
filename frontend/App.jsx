@@ -42,12 +42,12 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    //console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
 
-  return token;
+  return ""//token;
 }
 
 
@@ -74,7 +74,8 @@ export default function App() {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-  useEffect(async () => {
+  useEffect(() => {
+    async function pushNotifi() {
       await Notifications.scheduleNotificationAsync({
         content: {
             title: "Đi Ngủ",
@@ -83,6 +84,7 @@ export default function App() {
         },
         trigger: { seconds: 120 },
       });
+
       await Notifications.scheduleNotificationAsync({
         content: {
             title: "Hello",
@@ -91,6 +93,8 @@ export default function App() {
         },
         trigger: { seconds: 60 },
       });
+    }
+    pushNotifi();
   }, []);
 
   return (
