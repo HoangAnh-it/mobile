@@ -13,7 +13,7 @@ export default function Account({ navigation }) {
     const socket = useSocket()
 
     useEffect(() => {
-        if(!auth?.user.id) {
+        if (!auth?.user.id) {
             return
         }
         axios.get(`/user/profile/${auth?.user.id}`)
@@ -50,19 +50,33 @@ export default function Account({ navigation }) {
             </View>
             <View className="-mt-2 p-4 bg-white rounded-t-xl w-full max-w-s shadow-sm">
                 <Text className="pt-24 text-center mb-2 text-slate-900 text-2xl font-bold">{user.name}</Text>
-                <View className="m-auto flex-row space-x-5">
-                    <TouchableOpacity 
-                        style={styles.bg} 
-                        className="p-3 rounded-lg flex-row items-center justify-center w-40"
-                        onPress={() => navigation.navigate("Chỉnh sửa thông tin", {user: user})}
+                <View className="m-auto space-x-5">
+                    <TouchableOpacity
+                        style={styles.bg}
+                        className="p-3 rounded-lg flex-row items-center justify-center w-fit"
+                        onPress={() => navigation.navigate("Chỉnh sửa thông tin", { user: user })}
                     >
                         <Feather name="edit" size={24} color={"white"} />
-                        <Text className="w-20 ml-3 font-bold text-white">Chỉnh sửa thông tin</Text>
+                        <Text className="w-fit ml-3 font-bold text-white">Chỉnh sửa thông tin</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity style={styles.bg} className="p-3 rounded-lg flex-row items-center justify-center w-40">
                         <Feather name="eye" size={24} color={"white"} />
                         <Text className="w-20 ml-3 font-bold text-white">Xem trang cá nhân</Text>
                     </TouchableOpacity> */}
+                </View>
+                <View className="mt-5 pt-2 px-4 border-t border-gray-300">
+                    <View className="flex-row items-center border-b border-gray-300 py-2">
+                        <Ionicons name="mail" size={24} color="#aaa" />
+                        <Text className="ml-5 text-base">{user.email}</Text>
+                    </View>
+                    <View className="flex-row items-center pl-1 border-b border-gray-300 py-2">
+                        <FontAwesome name="phone" size={24} color="#aaa" />
+                        <Text className="ml-5 text-base">{user.phone}</Text>
+                    </View>
+                    <View className="flex-row items-center pt-2">
+                        <Ionicons name="ios-location-sharp" size={24} color="#aaa" />
+                        <Text className="ml-5 text-base">{user.address}</Text>
+                    </View>
                 </View>
             </View>
             <View className="top-28 p-1.5 w-56 h-56 rounded-full absolute items-center justify-center bg-white border-2 border-gray-50">
@@ -89,7 +103,7 @@ export default function Account({ navigation }) {
                         </TouchableOpacity>
                     </>
                 }
-                
+
                 {
                     auth?.user.role === 'DOCTOR' &&
                     <>
@@ -135,7 +149,7 @@ export default function Account({ navigation }) {
 
 const Item = (props) => {
     const { auth } = useAuth()._j
-    
+
     return (
         <View className="flex-row w-11/12 p-4 border-b border-gray-300 items-center">
             {
@@ -173,7 +187,7 @@ const Item = (props) => {
                         props.title == "Quản lý khoa"
                         && <FontAwesome name="calendar-plus-o" size={24} color="green" />
                     }
-                    
+
                 </View>
             }
             {

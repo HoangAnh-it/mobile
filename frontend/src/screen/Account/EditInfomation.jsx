@@ -3,15 +3,9 @@ import { Ionicons } from "@expo/vector-icons"
 import { ScrollView, TextInput } from "react-native-gesture-handler"
 import React, { useEffect } from "react"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
-import useAxios from "../../hooks/useAxios"
-import useConfirmModal from "../../hooks/useConfirmModal"
-import useSocket from "../../hooks/useSocket"
 
 export default function EditInfomation({ navigation, route }) {
     const { user } = route.params
-    const axios = useAxios()
-    const { setTitle, setIsAlert, setVisible } = useConfirmModal()
-    const socket = useSocket()
 
     const getFullDate = (d) => {
         let date = new Date(d)
@@ -27,7 +21,6 @@ export default function EditInfomation({ navigation, route }) {
         email: true,
         name: true,
         phone: true,
-        department: true,
     })
 
     const changeBirthday = (val) => {
@@ -37,52 +30,30 @@ export default function EditInfomation({ navigation, route }) {
     const checkBirthday = () => {
         let arrayDate = info.birthDay.split("/")
         let date = new Date(parseInt(arrayDate[2]), parseInt(arrayDate[1] - 1), parseInt(arrayDate[0]))
+        console.log(parseInt(arrayDate[2]), parseInt(arrayDate[1] - 1), parseInt(arrayDate[0]))
+        console.log(date)
         if (date !== "Invalid Date" && !isNaN(date)) {
-            setinfo({...info, birthDay: getFullDate(date)})
+            setinfo({ ...info, birthDay: getFullDate(date) })
         } else {
-            setCheckInfo({...checkInfo, birthDay: false})
+            setCheckInfo({ ...checkInfo, birthDay: false })
         }
     }
 
     const submit = () => {
         let checkValid = true
         for (var prop in checkInfo) {
-            if (prop != "department") {
-                if (info[prop] == null || info[prop] == "") {
-                    checkInfo[prop] = false
-                    setCheckInfo({ ...checkInfo })
-                    checkValid = false
-                } else {
-                    checkInfo[prop] = true
-                    setCheckInfo({ ...checkInfo })
-                }
+            if (info[prop] == null || info[prop] == "") {
+                checkInfo[prop] = false
+                setCheckInfo({ ...checkInfo })
+                checkValid = false
             } else {
-                if (info.role == "DOCTOR") {
-                    if (info.doctor.department.name == null || info.doctor.department.name == "") {
-                        setCheckInfo({ ...checkInfo, department: false })
-                        checkValid = false
-                    } else {
-                        setCheckInfo({ ...checkInfo, department: true })
-                    }
-                }
+                checkInfo[prop] = true
+                setCheckInfo({ ...checkInfo })
             }
         }
         checkBirthday()
-        info.birthDay = info.birthDay.split("/").reverse().join("-")
         if (checkValid) {
-            axios.patch(`/user/${user.userId}`, info)
-                .then(res => {
-                    if (res.status === 200) {
-                        socket.emit("update info user", res.data.data)
-                    }
-                }).then(() => {
-                    navigation.goBack(null)
-                }).catch (err => {
-                    console.log(JSON.stringify(err))
-                    setTitle("Lỗi")
-                    setIsAlert(true)
-                    setVisible(true)
-                })
+            // gửi api
         }
     }
 
@@ -166,20 +137,6 @@ export default function EditInfomation({ navigation, route }) {
                         </View>
                         {!checkInfo.phone && <Text>Vui lòng điền trường này</Text>}
                     </View>
-                    {
-                        info.role == "DOCTOR" &&
-                        <View className="mx-5 pt-3 border-b border-gray-400">
-                            <Text className="font-medium text-gray-400">CHUYÊN KHOA</Text>
-                            <View className="mt-2 mb-5">
-                                <TextInput
-                                    className="text-base"
-                                    value={info.doctor.department.name}
-                                    onChangeText={(val) => setinfo({ ...info, doctor: { ...info.doctor, department: { ...info.doctor.department, name: val } } })}
-                                />
-                            </View>
-                            {!checkInfo.department && <Text>Vui lòng điền trường này</Text>}
-                        </View>
-                    }
                     <View className="flex-row mb-5">
                         <TouchableOpacity
                             className="bg-[#1AD1FF] p-3 ml-5 rounded-lg items-center mt-5"
