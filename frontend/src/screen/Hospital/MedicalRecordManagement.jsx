@@ -95,7 +95,6 @@ export default function MedicalRecordManagement({ navigation }) {
 
   const fetch = () => {
     if (loading) return 
-    console.log({...filter, search: search.inputSearch})
     setLoading(true)
     axios.get(`/hospital/${auth.user.id}/appointment?status=${filter.status}&type=${filter.type}&search=${search.inputSearch}`)
       .then(res => {

@@ -52,17 +52,17 @@ export default function Scheduling({ navigation, route }) {
     const hours = [
         { hour: "7:00", available: true },
         { hour: "7:30", available: true },
-        { hour: "8:00", available: false },
+        { hour: "8:00", available: true },
         { hour: "8:30", available: true },
-        { hour: "9:00", available: false },
+        { hour: "9:00", available: true },
         { hour: "9:30", available: true },
         { hour: "10:00", available: true },
         { hour: "11:30", available: true },
-        { hour: "14:00", available: false },
+        { hour: "14:00", available: true },
         { hour: "14:30", available: true },
-        { hour: "15:00", available: false },
-        { hour: "15:30", available: false },
-        { hour: "16:00", available: false },
+        { hour: "15:00", available: true },
+        { hour: "15:30", available: true },
+        { hour: "16:00", available: true },
         { hour: "16:30", available: true },
     ]
     const HourBox = (props) => {
