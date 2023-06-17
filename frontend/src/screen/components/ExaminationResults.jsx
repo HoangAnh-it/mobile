@@ -119,9 +119,10 @@ export default function ExaminationResults({ navigation, route }) {
                     {
                         result.medicines.map((medicine, index) => {
                             return (
-                                <View className="flex-row items-center">
-                                    <View
+                                <View className="flex-row items-center"
                                         key={`result-item-medicine-${medicine.tempId}-${index}`}
+                                >
+                                    <View
                                         className='rounded-lg px-3 py-2.5 flex-row items-center border border-gray-400'
                                         style={(!isFreeze && result.medicines.length > 1) ? styles.width_90 : styles.width_fit}>
                                         <Ionicons name="medkit-outline" size={20} color="gray" />

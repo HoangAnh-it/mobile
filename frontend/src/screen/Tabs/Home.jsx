@@ -156,7 +156,7 @@ const items = [
 
                 <TextInput
                     className="pl-2" placeholder='Nhập tên bác sĩ/bệnh viện'
-                    value=""
+                    value={search.inputSearch}
                     onChangeText={(val) => searchChange(val)}
                     onEndEditing={() => searchInfo(search)}
                 />

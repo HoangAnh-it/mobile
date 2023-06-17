@@ -69,6 +69,7 @@ export default function EditInfomation({ navigation, route }) {
         }
         checkBirthday()
         info.birthDay = info.birthDay.split("/").reverse().join("-")
+        console.log(info.birthDay)
         if (checkValid) {
             axios.patch(`/user/${user.userId}`, info)
                 .then(res => {
