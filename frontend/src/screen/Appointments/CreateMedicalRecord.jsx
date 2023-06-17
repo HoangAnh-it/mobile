@@ -56,6 +56,8 @@ export default function CreateMedicalRecord({ navigation }) {
         } else {
             setCheckData({ ...data, address: true })
         }
+        console.log(data)
+        // return
         axios.post("/patient/medical_record", data)
             .then(res => {
                 if (res.status === 200) {
