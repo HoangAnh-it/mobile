@@ -4,7 +4,18 @@ import { Application, NextFunction, Request, Response } from 'express'
 import { chatService, userService } from "../services";
 import { CreateMessageDTO } from "../dtos/message.dto";
 
-export let uid: {[key:string]: string} = {}
+export let uid: { [key: string]: string } = {}
+
+const EVENTS: string[] = [
+    "delete medical record",
+    "status appointment",
+    "reject appointment",
+    "update medical record",
+    "create department",
+    "medical result",
+    "update info user",
+    "reload"
+]
 
 export const socketSetup = (io: any, app: Application) => {
     io.on("connection", (socket: any) => {
@@ -18,33 +29,10 @@ export const socketSetup = (io: any, app: Application) => {
             console.log("JOIN: ", userId, socketId)
         })
 
-        socket.on('delete medical record', (id: string) => {
-            socket.emit('delete medical record', id)
-        })
-
-        socket.on('status appointment', (data: {[key:string]: any}) => {
-            socket.emit('status appointment', data)
-        })
-        
-        socket.on('reject appointment', (id: string) => {
-            socket.emit('reject appointment', id)
-        })
-
-        socket.on('update medical record', (data: {[key:string]: any}) => {
-            socket.emit('update medical record', data)
-        })
-
-        socket.on('create department', (data: { [key: string]: any }) => {
-            socket.emit('create department', data)
-        })
-
-        socket.on("medical result", (data: { [key: string]: any }) => {
-            socket.emit("medical result", data)
-        })
-
-        socket.on('reload', (data: boolean) => {
-            console.log("reload")
-            socket.emit('reload', data)
+        EVENTS.forEach(event => {
+            socket.on(event, (data: any) => {
+                socket.emit(event, data)
+            })
         })
 
         socket.on("disconnect", () => {

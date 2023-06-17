@@ -3,9 +3,15 @@ import { Ionicons } from "@expo/vector-icons"
 import { ScrollView, TextInput } from "react-native-gesture-handler"
 import React, { useEffect } from "react"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
+import useAxios from "../../hooks/useAxios"
+import useConfirmModal from "../../hooks/useConfirmModal"
+import useSocket from "../../hooks/useSocket"
 
 export default function EditInfomation({ navigation, route }) {
     const { user } = route.params
+    const axios = useAxios()
+    const { setTitle, setIsAlert, setVisible } = useConfirmModal()
+    const socket = useSocket()
 
     const getFullDate = (d) => {
         let date = new Date(d)
@@ -31,8 +37,6 @@ export default function EditInfomation({ navigation, route }) {
     const checkBirthday = () => {
         let arrayDate = info.birthDay.split("/")
         let date = new Date(parseInt(arrayDate[2]), parseInt(arrayDate[1] - 1), parseInt(arrayDate[0]))
-        console.log(parseInt(arrayDate[2]), parseInt(arrayDate[1] - 1), parseInt(arrayDate[0]))
-        console.log(date)
         if (date !== "Invalid Date" && !isNaN(date)) {
             setinfo({...info, birthDay: getFullDate(date)})
         } else {
@@ -64,8 +68,21 @@ export default function EditInfomation({ navigation, route }) {
             }
         }
         checkBirthday()
+        info.birthDay = info.birthDay.split("/").reverse().join("-")
         if (checkValid) {
-            // gửi api
+            axios.patch(`/user/${user.userId}`, info)
+                .then(res => {
+                    if (res.status === 200) {
+                        socket.emit("update info user", res.data.data)
+                    }
+                }).then(() => {
+                    navigation.goBack(null)
+                }).catch (err => {
+                    console.log(JSON.stringify(err))
+                    setTitle("Lỗi")
+                    setIsAlert(true)
+                    setVisible(true)
+                })
         }
     }
 

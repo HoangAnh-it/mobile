@@ -3,27 +3,35 @@ import React, { useEffect, useRef } from "react";
 import { Ionicons, FontAwesome, Feather, AntDesign, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+import useSocket from "../../hooks/useSocket";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Account({ navigation }) {
     const [user, setUser] = React.useState({})
     const axios = useAxios()
     const { auth, authDispatch } = useAuth()._j
+    const socket = useSocket()
 
     useEffect(() => {
         if(!auth?.user.id) {
             return
         }
         axios.get(`/user/profile/${auth?.user.id}`)
-            .then(res => res.data.data)
-            .then(info => {
-                console.log(info)
-                setUser(info)
+            .then(res => {
+                if (res.status === 200) {
+                    setUser(res.data.data)
+                }
             })
             .catch(err => {
                 console.log(err.response.data.message)
             })
     }, [auth]);
+
+    useEffect(() => {
+        socket.on("update info user", data => {
+            setUser(data)
+        })
+    }, [socket])
 
     const logout = async () => {
         AsyncStorage.removeItem("token")
