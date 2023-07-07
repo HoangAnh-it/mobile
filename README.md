@@ -1,5 +1,7 @@
 # Bài tập lớn Mobile
 
+Hehe Chuc mung A+
+
 ## Developers
 
 - [Vũ Hoàng Anh](https://github.com/HoangAnh-it)
